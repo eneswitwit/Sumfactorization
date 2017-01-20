@@ -17,24 +17,6 @@ class Polynomial{
         degree = deg;
     }  
 
-    // Getter functions
-    /*std::array<double> getCoefficients() const {
-        return coefficients;
-    }
-
-    std::array<double> getSample_values() const {
-        return sample_values;
-    }
-
-    double getSample_points() const {
-        return sample_points;
-    }
-    
-    int getDegree() const {
-        return degree;
-    }
-    */
-
     void sample_points (){}
 
     double evaluation(){}
