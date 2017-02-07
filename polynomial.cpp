@@ -1,13 +1,19 @@
 #include <iostream>
 #include <vector>
-using namespace std;
+
 
 class Polynomial{
+	public:
+
 
 };
 
 
 
+
+
 int main(){
 
+
+	return 0;
 }
