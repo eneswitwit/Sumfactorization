@@ -40,6 +40,7 @@ double f(std::vector<double> coefficients, std::vector<double> point){
         }
         val = val + coefficients[i] * product;
     }
+    return val;
 }
 
 // Define function for calculating new coefficient depenending on the previous coefficients
@@ -64,6 +65,6 @@ int main(){
         std::cout << Coefficient_vector[i] << "\n" ;
     }
 
-    std::cout << "\n" << f(Coefficient_vector,{1,1}) << "\n" ;
+    std::cout << "\n" << f(Coefficient_vector,{0,0}) << "\n" ;
     return 0;
 }
