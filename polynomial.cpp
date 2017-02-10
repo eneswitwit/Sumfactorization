@@ -8,11 +8,13 @@
 class Polynomial
 {
     // Coefficient Matrix for Newton Basis
-	std::vector<std::vector<double>> coefficient_matrix;
+	std::vector<double> coefficient;
 
 	// Sample points
-	std::vector<double> knots_x;
-	std::vector<double> knots_y;
+	//std::vector<double> knots_x;
+	//std::vector<double> knots_y;
+	std::vector<double> X;
+	std::vector<double> y;
 
 	// Degree
 	int degree;
@@ -22,9 +24,6 @@ class Polynomial
 
 	// Constructor
     Polynomial()
-    : coefficient_matrix{}
-	, knots_x{}
-	, knots_y{}
     {}
 
     /*Polynomial(int n)

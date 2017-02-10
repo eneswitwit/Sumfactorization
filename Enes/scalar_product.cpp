@@ -24,7 +24,7 @@ std::vector<double> y={
 };
 
 // Define direction vector from datapoint i to datapoint j
-double u(int i, int j, std::vector<double> point){
+double u(int i, int j, std::vector<double> point, std::vector<std::vector<double>> X ){
     double x_1 = (X[j][0]-X[i][0])*(point[0]-X[i][0]);
     double x_2 = (X[j][1]-X[i][1])*(point[1]-X[i][1]);
     return x_1+x_2;
@@ -36,7 +36,7 @@ double f(std::vector<double> coefficients, std::vector<double> point){
     double product = 1;
     for(int i=1; i < coefficients.size() ; i++){
         for(int j=0; j < i; j++){
-            product = product * u(j,i,point);
+            product = product * u(j,i,point, X);
         }
         val = val + coefficients[i] * product;
     }
@@ -51,7 +51,7 @@ std::vector<double> compute_coefficients(std::vector<std::vector<double>> X_data
     for(int i=1; i < y_data.size(); i++){
         double c_i = y[i] - f(coefficients,X_data[i]);
         for(int j=0; j < i; j++){
-            c_i = c_i / u(j,i,X_data[i]);
+            c_i = c_i / u(j,i,X_data[i],X_data);
         }
         coefficients.push_back(c_i);
     }
