@@ -1,17 +1,14 @@
-#include <iostream>
-#include <array>
-#include <array>
+#ifndef __POLYNOMIAL_INCLUDED__
+#define __POLYNOMIAL_INCLUDED__
 
 template <int order, typename y_type >
 class Polynomial {
-private:
+public:
     std::array < y_type, order + 1 > knots;
     std::array < y_type, order + 1 > weights;
     std::array < std::array < y_type, order + 1 >, order + 1 > u;
     std::array < std::array < y_type, order + 1 >, order + 1 > y;
 
-
-public:
 
     // Constructor
 
@@ -66,16 +63,16 @@ public:
                             y_type val_j = 0;
                             for (int j = 0; j <= order; j++)
                             {
-                                val_j += eval_lagr(j, knots[qy], order) * u[i][j];
+                                val_j += eval_lagr(j, knots[qy]) * u[i][j];
                             }
-                            val_qy += val_j * weights[qy] * eval_lagr(l, knots[qy], order);
+                            val_qy += val_j * weights[qy] * eval_lagr(l, knots[qy]);
                             counter++;
                             counter++;
                         }
                         val_i += val_qy * eval_lagr(i, knots[qx], order);
                         counter++;
                     }
-                    val_qx += val_i * weights[qx] * eval_lagr(k, knots[qx], order);
+                    val_qx += val_i * weights[qx] * eval_lagr(k, knots[qx]);
                     counter++;
                     counter++;
                 }
@@ -86,8 +83,4 @@ public:
     };
 };
 
-int main()
-{
-    Polynomial<3, double> p;
-    return 0;
-}
+#endif
