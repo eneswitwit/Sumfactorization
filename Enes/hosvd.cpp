@@ -18,6 +18,7 @@ using namespace std;
 using namespace TensorsLib;
 using namespace Eigen;
 
+// Lagrange Basis Evaluation for specific x
 double eval_lagr(int i, double x, array<double, 2> nodes ) {
     double val = 1;
     for (int j = 0; j <= 1; j++) {
@@ -30,23 +31,22 @@ double eval_lagr(int i, double x, array<double, 2> nodes ) {
 
 int main() {
 
+    // Hardcoded Nodes and Weight for Quadrature
     array<double, 2> nodes = {0.78868, 0.21132};
 
     array<double, 2> weights = {0.5 , 0.5};
 
-
-    Polynomial<1, double> shape_function;
-    shape_function.knots = nodes;
-
+    // Initialize Tensor
     Tensor4<double, 2> M;
 
+    // Calculate Tensor Entries
     for (int i1 = 0 ; i1 < 2 ; ++i1 ) {
         for (int i2 = 0 ; i2 < 2 ; ++i2 ) {
             for (int j1 = 0 ; j1 < 2 ; ++j1 ) {
                 for (int j2 = 0 ; j2 < 2 ; ++j2) {
                     double sum = 0;
-                    for (int k = 0; k < 2 ; ++k) { // Sum for Quadrature Points in x
-                        for (int l = 0; l < 2; ++l) { // Sum for Quadrature Points in y
+                    for (int k = 0; k < 2 ; ++k) { // Sum for Quadrature Points
+                        for (int l = 0; l < 2; ++l) { // Sum for Quadrature Points
                             int sum_l = 0;
                             sum_l = weights[l] * eval_lagr(i2, nodes[l], nodes) * eval_lagr(j2, nodes[l], nodes);
                         }
