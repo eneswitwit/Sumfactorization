@@ -2,7 +2,12 @@
 #include <iomanip>
 #include <sstream>
 #include <array>
-#include "polynomial.h"
+#include <vector>
+#include <limits>
+#include <cmath>
+
+#include "Quadrature.h"
+#include "Polynomial.h"
 
 // Tensor Library
 #include "Tensor/tensors/tensor1.h"
@@ -19,8 +24,9 @@ using namespace TensorsLib;
 using namespace Eigen;
 
 // Lagrange Basis Evaluation for specific x
-double eval_lagr(int i, double x, array<double, 2> nodes ) {
-    double val = 1;
+double eval_lagr(int i, double x, array<double, 2> nodes )
+{
+    double val = 1.;
     for (int j = 0; j <= 1; j++) {
         if (i != j) {
             val *= (x - nodes[j]) / (nodes[i] - nodes[j]);
@@ -60,11 +66,13 @@ int main() {
         }
     }
 
+
+
     cout << M;
 
 
 
-    // Test SVD
+// Test SVD
     /*MatrixXf m = MatrixXf::Random(3, 2);
     cout << "Here is the matrix m:" << endl << m << endl;
     JacobiSVD<MatrixXf> svd(m, ComputeFullU | ComputeFullV);

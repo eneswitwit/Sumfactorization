@@ -28,7 +28,7 @@ constexpr std::array<std::array<double, size>, size> create_array()
 }
 
 
-template <int order, typename y_type, template<int order_p, typename y_type_p> class Polynomial >
+template <int order, typename y_type, template<int, typename> class Polynomial >
 class Integrate {
 
 public:
@@ -89,6 +89,6 @@ int main()
   Integrate<3, double, Polynomial > lagrange;
   constexpr std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
   constexpr std::array < std::array < double, order + 1 >, order + 1 > y = create_array < order + 1 > ();
-  lagrange.integrate_lagrange(&y,&u);
+  lagrange.integrate_lagrange(&y, &u);
   return count;
 }
