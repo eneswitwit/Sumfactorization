@@ -1,13 +1,13 @@
 #ifndef __QUADRATURE_H__
 #define __QUADRATURE_H__
 
-std::array<long double,int> compute_quadrature_points(const unsigned int q,
+std::vector<long double> compute_quadrature_points(const unsigned int q,
     const int alpha,
     const int beta)
 {
   const unsigned int m = q - 2; // no. of inner points
   const double PI = 3.14159265359;
-  std::array<long double> x(m);
+  std::vector<long double> x(m);
 
   // compute quadrature points with
   // a Newton algorithm.
