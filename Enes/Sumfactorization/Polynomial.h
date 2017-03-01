@@ -2,19 +2,18 @@
 #define __POLYNOMIAL_H__
 
 template <int order, typename y_type>
-class Integrate {
+class Polynomial {
 private:
     std::array < y_type, order + 1 > knots;
     std::array < y_type, order + 1 > weights;
 
 public:
     // Constructor
-    constexpr Polynomial(
-        const std::array < y_type, order + 1 > &knots_ = {1.},
-        const std::array < y_type, order + 1 > &weights_ = {1.})
-        : knots(knots_),
-          weights(weights_)
-    {};
+    constexpr Polynomial(const std::array < y_type, order + 1 > &knots_ = {1.})
+    {
+        knots = knots_ ;
+        weights = compute_quadrature_weights(knots_, 0, 0) ;
+    };
 
     constexpr y_type eval_lagr(int i, y_type x) const {
         y_type val = 1.;
@@ -28,4 +27,4 @@ public:
 
 };
 
-endif
+#endif

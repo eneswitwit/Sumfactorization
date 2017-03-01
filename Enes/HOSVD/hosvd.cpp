@@ -32,6 +32,8 @@ double eval_lagr(int i, double x, array<double, 2> nodes ) {
 int main() {
 
     // Hardcoded Nodes and Weight for Quadrature
+    array<double, 2> vertex = {0, 1};
+
     array<double, 2> nodes = {0.78868, 0.21132};
 
     array<double, 2> weights = {0.5 , 0.5};
@@ -48,9 +50,9 @@ int main() {
                     for (int k = 0; k < 2 ; ++k) { // Sum for Quadrature Points
                         for (int l = 0; l < 2; ++l) { // Sum for Quadrature Points
                             int sum_l = 0;
-                            sum_l = weights[l] * eval_lagr(i2, nodes[l], nodes) * eval_lagr(j2, nodes[l], nodes);
+                            sum_l = weights[l] * eval_lagr(i2, nodes[l], vertex) * eval_lagr(j2, nodes[l], vertex);
                         }
-                        sum += weights[k] * eval_lagr(i1, nodes[k], nodes) * eval_lagr(j1, nodes[k], nodes);
+                        sum += weights[k] * eval_lagr(i1, nodes[k], vertex) * eval_lagr(j1, nodes[k], vertex);
                     }
                     M[i1, i2, j1, j2] = sum;
                 }
