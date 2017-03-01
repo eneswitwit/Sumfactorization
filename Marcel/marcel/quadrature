@@ -75,12 +75,20 @@ std::vector<long double> compute_quadrature_points(const unsigned int q,
   // add boundary points:
   x.insert(x.begin(), -1.L);
   x.push_back(+1.L);
+  for (unsigned int j=0;j<x.size();j++) {
+      x[j]*=0.5;
+      x[j]+=0.5;
+    }
 
   return x;
 }
 
-std::vector<long double> compute_quadrature_weights(const std::vector<long double> &x,const int alpha,const int beta)
+std::vector<long double> compute_quadrature_weights(std::vector<long double> x,const int alpha,const int beta)
 {
+  for (unsigned int j=0;j<x.size();j++) {
+      x[j]*=2;
+      x[j]+=-1;
+    }
   long double gamma(const unsigned int n);
   long double JacobiP(const long double x,const int alpha,const int beta,const unsigned int n);
   const unsigned int q = x.size();
