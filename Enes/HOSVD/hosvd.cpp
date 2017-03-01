@@ -35,6 +35,76 @@ double eval_lagr(int i, double x, array<double, 2> nodes )
     return val;
 };
 
+// Compute Entries of Mass Matrix Tensor
+template<typename y_type, int order>
+Tensor4 < y_type , order + 1 > computeTensor(array < y_type, order + 1 > nodes, array < y_type, order + 1 > weights, array < y_type, order + 1 > vertex) {
+    Tensor4 < y_type , order + 1 > M;
+    // Calculate Tensor Entries
+    for (int i1 = 0 ; i1 < order + 1 ; ++i1 ) {
+        for (int i2 = 0 ; i2 < order + 1 ; ++i2 ) {
+            for (int j1 = 0 ; j1 < order + 1 ; ++j1 ) {
+                for (int j2 = 0 ; j2 < order + 1 ; ++j2) {
+                    double sum = 0;
+                    for (int k = 0; k < order + 1 ; ++k) { // Sum for Quadrature Points
+                        for (int l = 0; l < order + 1; ++l) { // Sum for Quadrature Points
+                            int sum_l = 0;
+                            sum_l = weights[l] * eval_lagr(i2, nodes[l], vertex) * eval_lagr(j2, nodes[l], vertex);
+                        }
+                        sum += weights[k] * eval_lagr(i1, nodes[k], vertex) * eval_lagr(j1, nodes[k], vertex);
+                    }
+                    M[i1][i2][j1][j2] = sum;
+                }
+            }
+        }
+    }
+    return M;
+};
+
+// Transform number of 2D function to numbers of the corresponding 1D functions
+std::array<int,2> transform(int k, int order){
+    int n = order+1;
+    // Find row 
+    int row = k/n;
+    // Find Column
+    int column = k-row*n;
+
+    std::array<int,2> index={row,column};
+    return index;
+};
+
+// Transform number of 1D functions to numbers of the corresponding 2D function
+int transform(int row,int column, int order){
+    int k = row*(order+1)+column;
+    return k;
+};
+
+std::array<int,2> transform(int i1,int i2, int j1, int j2, int order){
+    int k1 = transform(i1,i2,order);
+    int k2 = transform(j1,j2,order);
+    std::array<int,2> k = {k1,k2};
+    return k;
+};
+
+
+
+// Transform Mass Matrix Tensor to Mass Matrix
+template<typename y_type, int order>
+Tensor2<y_type,(order+1)*(order+1)> tensorToMatrix(Tensor4<y_type,order+1> & M){
+    Tensor2<y_type,(order+1)*(order+1)> MM;
+    for (int i1=0;i1<order+1;++i1){
+        for (int i2=0;i2<order+1;++i2){
+            for (int j1=0;j1<order+1;++j1){
+                for (int j2=0;j2<order+1;++j2){
+                    std::array<int,2> k=transform(i1,i2,j1,j2,order);
+                    MM[k[0]][k[1]] = M[i1][i2][j1][j2];
+                }
+            }
+        }
+    }
+    return MM;
+};
+
+
 int main() {
 
     // Hardcoded Nodes and Weight for Quadrature
@@ -48,34 +118,15 @@ int main() {
     Tensor4<double, 2> M;
 
     // Calculate Tensor Entries
-    for (int i1 = 0 ; i1 < 2 ; ++i1 ) {
-        for (int i2 = 0 ; i2 < 2 ; ++i2 ) {
-            for (int j1 = 0 ; j1 < 2 ; ++j1 ) {
-                for (int j2 = 0 ; j2 < 2 ; ++j2) {
-                    double sum = 0;
-                    for (int k = 0; k < 2 ; ++k) { // Sum for Quadrature Points
-                        for (int l = 0; l < 2; ++l) { // Sum for Quadrature Points
-                            int sum_l = 0;
-                            sum_l = weights[l] * eval_lagr(i2, nodes[l], vertex) * eval_lagr(j2, nodes[l], vertex);
-                        }
-                        sum += weights[k] * eval_lagr(i1, nodes[k], vertex) * eval_lagr(j1, nodes[k], vertex);
-                    }
-                    M[i1, i2, j1, j2] = sum;
-                }
-            }
-        }
-    }
+    M = computeTensor<double, 1>(nodes,weights,vertex);
 
-    cout << M;
+    // Transform Tensor to Matrix
+    Tensor2<double, 4> MM;
+    MM = tensorToMatrix<double, 1>(M);
 
-    // Compute Mass Matrix
-    Tensor2<double, 2> MM;
-    MM[1,1] = M[1,1,1,1];
-    MM[1,2] = M[1,1,2,1];
-    MM[2,1] = M[2,1,1,1];
-    MM[2,2] = M[2,1,2,1];
+    cout << "Tensor" << "\n" << M << endl << "\n\n";
+    cout << "Mass Matrix derived from Tensor" << "\n" << MM << endl;
 
-    cout << MM;
 
 // Test SVD
     /*MatrixXf m = MatrixXf::Random(3, 2);
