@@ -1,5 +1,10 @@
 #include <iostream>
 #include <array>
+#include <vector>
+#include <limits>
+#include <cmath>
+#include "Quadrature.h"
+#include "Polynomial.h"
 
 template <size_t size>
 constexpr std::array<double, size> create_vector()
@@ -26,7 +31,9 @@ class Integrate {
 
 public:
 
-  constexpr int integrate(std::array < std::array < y_type, order + 1 >, order + 1 > &y, const std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
+  Polynomial <order, y_type> lagr;
+  
+  constexpr int integrate_lagrange(std::array < std::array < y_type, order + 1 >, order + 1 > &y, const std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
     int counter = 0;
     for (int k = 0; k <= order; k++)
     {
