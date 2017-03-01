@@ -66,11 +66,16 @@ int main() {
         }
     }
 
-
-
     cout << M;
 
+    // Compute Mass Matrix
+    Tensor2<double, 2> MM;
+    MM[1,1] = M[1,1,1,1];
+    MM[1,2] = M[1,1,2,1];
+    MM[2,1] = M[2,1,1,1];
+    MM[2,2] = M[2,1,2,1];
 
+    cout << MM;
 
 // Test SVD
     /*MatrixXf m = MatrixXf::Random(3, 2);

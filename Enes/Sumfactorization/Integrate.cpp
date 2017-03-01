@@ -8,6 +8,17 @@
 
 using namespace std;
 
+
+template<typename y_type, int order>
+std::array<y_type, order> vec_to_arr(std::vector<long double> vec) {
+  std::array<y_type, order> arr;
+  for (unsigned int i = 0; i < order ; ++i) {
+    arr[i] = vec[i];
+  }
+  return arr;
+}
+
+
 template <size_t size>
 constexpr std::array<double, size> create_vector()
 {
@@ -23,7 +34,7 @@ constexpr std::array<std::array<double, size>, size> create_array()
   std::array<std::array<double, size>, size> arr{1.};
   for (unsigned int i = 0; i < size; ++i)
     for (unsigned int j = 0; j < size; ++j)
-      arr[i][j] = i + j;
+      arr[i][j] = 1;
   return arr;
 }
 
@@ -35,7 +46,13 @@ public:
 
 
   constexpr int integrate_lagrange(std::array < std::array < y_type, order + 1 >, order + 1 > &y, const std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
-    Polynomial <order, y_type> lagr(compute_quadrature_points(order, 0, 0));
+    std::array<y_type, order+1> knots;
+    knots = vec_to_arr<y_type, order+1>(compute_quadrature_points(order+1, 1, 1));
+    std::array<y_type, order+1> weights;
+    weights = vec_to_arr<y_type, order+1>(compute_quadrature_weights(compute_quadrature_points(order+1, 1, 1), 0, 0));
+
+
+    Polynomial <order, y_type> lagr(knots, weights);
     int counter = 0;
     for (int k = 0; k <= order; k++)
     {
@@ -85,10 +102,17 @@ int main()
   constexpr Polynomial<order, double> p(u, knots, weights);
   constexpr int count = p.integrate();*/
 
-  constexpr int order = 3;
-  Integrate<3, double, Polynomial > lagrange;
-  constexpr std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
-  constexpr std::array < std::array < double, order + 1 >, order + 1 > y = create_array < order + 1 > ();
-  lagrange.integrate_lagrange(&y, &u);
-  return count;
+  constexpr int order = 2;
+  Integrate<order, double, Polynomial > lagrange;
+  const std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
+  std::array < std::array < double, order + 1 >, order + 1 > y = create_array < order + 1 > ();
+  lagrange.integrate_lagrange(y, u);
+  
+
+  for (int i=0;i<order+1;i++){
+    for (int j=0;j<order+1;j++){
+      std::cout << "y[" << i  <<"," << j << "] = " << y[i][j] << endl; 
+    }
+  }
+  return 0;
 }

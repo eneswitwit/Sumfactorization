@@ -1,18 +1,20 @@
 #ifndef __POLYNOMIAL_H__
 #define __POLYNOMIAL_H__
 
+// Define function that transforms a vector to an array
+
+
 template <int order, typename y_type>
 class Polynomial {
-private:
+public:
     std::array < y_type, order + 1 > knots;
     std::array < y_type, order + 1 > weights;
 
-public:
     // Constructor
-    constexpr Polynomial(const std::array < y_type, order + 1 > &knots_ = {1.})
+    constexpr Polynomial(const std::array < y_type, order + 1 > &knots_ = {1.}, const std::array < y_type, order + 1 > &weights_ = {1.})
     {
         knots = knots_ ;
-        weights = compute_quadrature_weights(knots_, 0, 0) ;
+        weights = weights_ ;
     };
 
     constexpr y_type eval_lagr(int i, y_type x) const {
