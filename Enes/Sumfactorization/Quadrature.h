@@ -33,7 +33,6 @@ public:
          :
          double_eps * 5
         );
-    y_type JacobiP(const y_type x, const int alpha, const int beta, const unsigned int n);
     for (unsigned int i = 0; i < m; ++i)
       x[i] = - std::cos( (y_type) (2 * i + 1) / (2 * m) * PI );
     y_type s, J_x, f, delta;
@@ -77,8 +76,6 @@ public:
       x[j] *= 2;
       x[j] += -1;
     }
-    y_type gamma(const unsigned int n);
-    y_type JacobiP(const y_type x, const int alpha, const int beta, const unsigned int n);
     const unsigned int q = x.size();
     std::vector<y_type> w(q);
     y_type s = 0.L;
@@ -102,7 +99,6 @@ public:
 
     weights = vec_to_arr<y_type,order+1>(w);
   }
-
 
   y_type JacobiP(const y_type x, const int alpha, const int beta, const unsigned int n)
   {
@@ -136,7 +132,5 @@ public:
       result *= i;
     return result;
   }
-
-
 };
 #endif
