@@ -23,7 +23,7 @@ constexpr std::array<std::array<double, size>, size> create_array()
   std::array<std::array<double, size>, size> arr{1.};
   for (unsigned int i = 0; i < size; ++i)
     for (unsigned int j = 0; j < size; ++j)
-      arr[i][j] = i + j;
+      arr[i][j] = 1;
   return arr;
 }
 
@@ -90,7 +90,7 @@ int main()
   constexpr Polynomial<order, double> p(u, knots, weights);
   constexpr int count = p.integrate();*/
 
-  constexpr int order = 2;
+  constexpr int order = 1;
   Integrate<order, double, Polynomial ,Quadrature> lagrange;
   const std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
   std::array < std::array < double, order + 1 >, order + 1 > y = create_array < order + 1 > ();
