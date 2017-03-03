@@ -38,5 +38,5 @@ DEAL_II_INVOKE_AUTOPILOT()
 
 # Enable testing and descent into tests/ subdirectory:
 ENABLE_TESTING()
-ADD_SUBDIRECTORY(Tests)
+ADD_SUBDIRECTORY(tests)
 
