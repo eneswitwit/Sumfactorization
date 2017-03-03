@@ -27,8 +27,8 @@ public:
     long_double_eps = static_cast<y_type>(std::numeric_limits<long double>::epsilon()),
     double_eps      = static_cast<y_type>(std::numeric_limits<double>::epsilon());
     volatile y_type runtime_one = 1.0;
-    const y_type tolerance
-      = (runtime_one + long_double_eps != runtime_one ? std::max (double_eps / 100, long_double_eps * 5) : double_eps * 5 );
+    const y_type tolerance = (runtime_one + long_double_eps != runtime_one ? std::max (double_eps / 100, long_double_eps * 5) : double_eps * 5 );
+
     for (unsigned int i = 0; i < m; ++i)
     {
       x[i] = - std::cos( (y_type) (2 * i + 1) / (2 * m) * PI );
@@ -95,7 +95,6 @@ public:
     weights = vec_to_arr < y_type, order + 1 > (w);
   }
 
-
   y_type JacobiP(const y_type x, const int alpha, const int beta, const unsigned int n)
   {
     std::vector<y_type> p(n + 1);
@@ -124,7 +123,5 @@ public:
       result *= i;
     return result;
   }
-
-
 };
 #endif

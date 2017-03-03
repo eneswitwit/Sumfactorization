@@ -3,8 +3,8 @@
 #include <vector>
 #include <limits>
 #include <cmath>
-#include "Quadrature.h"
-#include "Polynomial.h"
+#include <Quadrature.h>
+#include <Polynomial.h>
 
 using namespace std;
 
@@ -33,7 +33,7 @@ class Integrate {
 public:
 
   constexpr int integrate_lagrange(std::array < std::array < y_type, order + 1 >, order + 1 > &y, const std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
-    Quadrature<order, y_type> quad;
+    Quadrature<order, y_type> quad={1.};
     quad.compute_quadrature_points(order+1,1,1);
     quad.compute_quadrature_weights(quad.knots,0,0);
 
