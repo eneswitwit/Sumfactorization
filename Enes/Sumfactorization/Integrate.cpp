@@ -3,8 +3,8 @@
 #include <vector>
 #include <limits>
 #include <cmath>
-#include <Quadrature.h>
-#include <Polynomial.h>
+#include "Quadrature.h"
+#include "Polynomial.h"
 
 using namespace std;
 
