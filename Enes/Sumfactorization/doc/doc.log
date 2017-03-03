@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.4)  10 FEB 2017 03:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.4)  3 MAR 2017 17:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -234,29 +234,23 @@ toc)
 
 [1
 
-]
-Chapter 1.
-[2
-
 ] (./doc.aux) ) 
 Here is how much of TeX's memory you used:
- 2525 strings out of 493089
- 33851 string characters out of 6134843
- 96830 words of memory out of 5000000
- 5973 multiletter control sequences out of 15000+600000
- 11031 words of font info for 39 fonts, out of 8000000 for 9000
+ 2481 strings out of 493089
+ 33390 string characters out of 6134843
+ 95830 words of memory out of 5000000
+ 5946 multiletter control sequences out of 15000+600000
+ 5150 words of font info for 19 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,33p,236b,122s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,4n,33p,236b,122s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-17.pfb>
-Output written on doc.pdf (3 pages, 54649 bytes).
+m/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr17.pfb>
+Output written on doc.pdf (2 pages, 29283 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 23 PDF objects out of 1000 (max. 8388607)
+ 15 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
