@@ -71,5 +71,7 @@ int main()
 
   // Testing for correct complexity
 
+  cout << "Testing was succesful." << endl;
+  
   return 0;
 }

@@ -1,0 +1,19 @@
+Start testing: Mar 06 13:24 CET
+----------------------------------------------------------
+Unable to find executable: Sumfactorization
+1/1 Testing: SumfactorizationRuns
+1/1 Test: SumfactorizationRuns
+Command: ""
+Directory: /Users/Witwit/Github/polynomialspace/Enes/Sumfactorization
+"SumfactorizationRuns" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SumfactorizationRuns" end time: Mar 06 13:24 CET
+"SumfactorizationRuns" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 06 13:24 CET
