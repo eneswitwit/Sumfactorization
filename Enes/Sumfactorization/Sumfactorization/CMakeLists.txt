@@ -14,4 +14,4 @@ add_executable(Integrate integrate.cpp)
 enable_testing ()
 
 # does the application run
-add_test (IntegrationRuns Integrate)
+add_test (IntegrationRuns    Integrate)
