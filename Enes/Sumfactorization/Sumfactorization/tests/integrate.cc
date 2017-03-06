@@ -47,7 +47,7 @@ int main()
   Integrate<order, long double, Polynomial , Quadrature> lagrange;
   std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
   std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
-  unsigned int count = lagrange.integrate_lagrange(y, u);
+  unsigned int count = lagrange.vmult_mass(y, u);
 
   // Output resulting vector y.
   for (unsigned int i = 0; i < order + 1; i++) {

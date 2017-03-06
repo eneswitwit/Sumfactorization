@@ -53,7 +53,7 @@ public:
                                     val_i += val_qy * eval_poly[i][qx];
                                     counter++;
                                 }
-                            val_qx += val_i * quad.weights[qx] * evalpoly[k][qx];
+                            val_qx += val_i * quad.weights[qx] * eval_poly[k][qx];
                             counter++;
                             counter++;
                         }
@@ -119,7 +119,7 @@ public:
                                               val_i += val_qy * eval_poly[i][qx][d];
                                               counter++;
                                           }
-                                      val_qx += val_i * quad.weights[qx] * evalpoly[k][qx][d];
+                                      val_qx += val_i * quad.weights[qx] * eval_poly[k][qx][d];
                                       counter++;
                                       counter++;
                                   }
