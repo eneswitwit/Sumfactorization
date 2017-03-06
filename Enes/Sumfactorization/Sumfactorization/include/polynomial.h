@@ -5,10 +5,9 @@
 template <int order, typename y_type>
 class Polynomial {
 public:
-    
     // Write function for defining nodes equidistant dependent from order
 
-    constexpr y_type eval_lagr(int i, y_type x, std::array<y_type,order+1> & knots) const {
+    constexpr y_type eval_lagr(int i, y_type x, const std::array<y_type,order+1> & knots) const {
         y_type val = 1.;
         for (int j = 0; j <= order; j++) {
             if (i != j) {

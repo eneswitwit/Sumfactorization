@@ -1,32 +1,5 @@
-#include <iostream>
-#include <array>
-#include <vector>
-#include <limits>
-#include <cmath>
-#include "include/Quadrature.h"
-#include "include/Polynomial.h"
-
-using namespace std;
-
-template <size_t size>
-constexpr std::array<double, size> create_vector()
-{
-  std::array<double, size> arr{1.};
-  for (unsigned int i = 0; i < size; ++i)
-    arr[i] = i;
-  return arr;
-}
-
-template <size_t size>
-constexpr std::array<std::array<double, size>, size> create_array()
-{
-  std::array<std::array<double, size>, size> arr{1.};
-  for (unsigned int i = 0; i < size; ++i)
-    for (unsigned int j = 0; j < size; ++j)
-      arr[i][j] = 1;
-  return arr;
-}
-
+#ifndef __INTEGRATE_H__
+#define __INTEGRATE_H__
 
 template <int order, typename y_type, template<int, typename> class Polynomial, template<int, typename> class Quadrature >
 class Integrate {
@@ -78,35 +51,4 @@ public:
   };
 };
 
-int main()
-{
-  /*constexpr int order = 3;
-  constexpr std::array < double, order + 1 > weights = create_vector < order + 1 > ();
-  constexpr std::array < double, order + 1 > knots = create_vector < order + 1 > ();
-  constexpr std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
-  std::cout << u[order][order] << std::endl;
-  static_assert(u[order][order] == 2 * order);
-
-  constexpr Polynomial<order, double> p(u, knots, weights);
-  constexpr int count = p.integrate();*/
-
-  constexpr int order = 1;
-  Integrate<order, double, Polynomial , Quadrature> lagrange;
-  const std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
-  std::array < std::array < double, order + 1 >, order + 1 > y = create_array < order + 1 > ();
-  int count = lagrange.integrate_lagrange(y, u);
-
-
-  for (int i = 0; i < order + 1; i++) {
-    for (int j = 0; j < order + 1; j++) {
-      std::cout << "y[" << i  << "," << j << "] = " << y[i][j] << endl;
-    }
-  }
-
-  // Testing
-
-  // Compare it to our solution
-  Quadrature<order, double> quad;
-
-  return 0;
-}
+#endif
