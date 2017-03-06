@@ -1,12 +1,13 @@
 #ifndef __POLYNOMIAL_H__
 #define __POLYNOMIAL_H__
+#include <algorithm>
+#include <cmath>
 
-// Define function that transforms a vector to an array
+
 template <int order, typename y_type>
 class Polynomial {
 public:
     
-    // Write function for defining nodes equidistant dependent from order
 
     constexpr y_type eval_lagr(int i, y_type x, std::array<y_type,order+1> & knots) const {
         y_type val = 1.;
@@ -18,6 +19,13 @@ public:
         return val;
     }
 
-};
+    constexpr y_type approx_gradient(int i, y_type x, std::array<y_type,order+1> & knots) const {
+        y_type h=0;
+        h=sqrt(std::nextafter(h, h));
+        if (x!=0) {
+                h*=x;
+            }
+        val=(eval_lagr(i,x+h,& knots)-eval_lagr(i,x+h,& knots))/(2*h);
+}
 
 #endif
