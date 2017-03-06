@@ -22,7 +22,10 @@ public:
             h *= x;
         }
         y_type val = (eval_lagr(i, x + h, & knots) - eval_lagr(i, x + h, & knots)) / (2 * h);
+
+        return val;
     }
+
 
 };
 
