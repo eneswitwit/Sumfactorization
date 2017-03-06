@@ -3,13 +3,16 @@
 #include <vector>
 #include <limits>
 #include <cmath>
-#include "include/Quadrature.h"
-#include "include/Polynomial.h"
+#include <cassert>
+#include "../include/quadrature.h"
+#include "../include/polynomial.h"
+#include "../include/integrate.h"
 
 using namespace std;
 
 // Hardcode solution
-std::vector<std::vector<long double>> lagrange_nodes(std::vector<std::vector<long double>> u, std::vector<long double> q_weights) {
+template <typename y_type, size_t order>
+array < array < y_type, order + 1 >, order + 1 > lagrange_nodes(array < array < y_type, order + 1 >, order + 1 > u, array < y_type, order + 1 > q_weights) {
   for (unsigned int i = 0; i < q_weights.size(); i++) {
     for (unsigned int j = 0; j < q_weights.size(); j++) {
       u[i][j] *= q_weights[i] * q_weights[j];
@@ -18,19 +21,19 @@ std::vector<std::vector<long double>> lagrange_nodes(std::vector<std::vector<lon
   return u;
 }
 
-template <size_t size>
-constexpr std::array<double, size> create_vector()
+template <typename y_type, size_t size>
+constexpr std::array<y_type, size> create_vector()
 {
-  std::array<double, size> arr{1.};
+  std::array<y_type, size> arr{1.};
   for (unsigned int i = 0; i < size; ++i)
     arr[i] = i;
   return arr;
 }
 
-template <size_t size>
-constexpr std::array<std::array<double, size>, size> create_array()
+template <typename y_type, size_t size>
+constexpr std::array<std::array<y_type, size>, size> create_array()
 {
-  std::array<std::array<double, size>, size> arr{1.};
+  std::array<std::array<y_type, size>, size> arr{1.};
   for (unsigned int i = 0; i < size; ++i)
     for (unsigned int j = 0; j < size; ++j)
       arr[i][j] = 1;
@@ -38,85 +41,35 @@ constexpr std::array<std::array<double, size>, size> create_array()
 }
 
 
-template <int order, typename y_type, template<int, typename> class Polynomial, template<int, typename> class Quadrature >
-class Integrate {
-public:
-
-  constexpr int integrate_lagrange(std::array < std::array < y_type, order + 1 >, order + 1 > &y, const std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
-    Quadrature<order, y_type> quad = {1.};
-    quad.compute_quadrature_points(order + 1, 1, 1);
-    quad.compute_quadrature_weights(quad.knots, 0, 0);
-
-    std::array < y_type, order + 1 > knots = quad.knots;
-    std::array < y_type, order + 1 > weights = quad.weights;
-
-    Polynomial <order, y_type> lagr;
-    int counter = 0;
-    for (int k = 0; k <= order; k++)
-    {
-      for (int l = 0; l <= order; l++)
-      {
-        y_type val_qx = 0;
-        for (int qx = 0; qx <= order; qx++)
-        {
-          y_type val_i = 0;
-          for (int i = 0; i <= order; i++)
-          {
-            y_type val_qy = 0;
-            for (int qy = 0; qy <= order; qy++)
-            {
-              y_type val_j = 0;
-              for (int j = 0; j <= order; j++)
-              {
-                val_j += lagr.eval_lagr(j, quad.knots[qy], quad.knots) * u[i][j];
-              }
-              val_qy += val_j * quad.weights[qy] * lagr.eval_lagr(l, quad.knots[qy], quad.knots);
-              counter++;
-              counter++;
-            }
-            val_i += val_qy * lagr.eval_lagr(i, quad.knots[qx], quad.knots);
-            counter++;
-          }
-          val_qx += val_i * quad.weights[qx] * lagr.eval_lagr(k, quad.knots[qx], quad.knots);
-          counter++;
-          counter++;
-        }
-        y[k][l] = val_qx;
-      }
-    }
-    return counter;
-  };
-};
-
 int main()
 {
-  /*constexpr int order = 3;
-  constexpr std::array < double, order + 1 > weights = create_vector < order + 1 > ();
-  constexpr std::array < double, order + 1 > knots = create_vector < order + 1 > ();
-  constexpr std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
-  std::cout << u[order][order] << std::endl;
-  static_assert(u[order][order] == 2 * order);
+  constexpr unsigned int order = 1;
+  Integrate<order, long double, Polynomial , Quadrature> lagrange;
+  std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
+  std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
+  unsigned int count = lagrange.integrate_lagrange(y, u);
 
-  constexpr Polynomial<order, double> p(u, knots, weights);
-  constexpr int count = p.integrate();*/
-
-  constexpr int order = 1;
-  Integrate<order, double, Polynomial , Quadrature> lagrange;
-  const std::array < std::array < double, order + 1 >, order + 1 > u = create_array < order + 1 > ();
-  std::array < std::array < double, order + 1 >, order + 1 > y = create_array < order + 1 > ();
-  int count = lagrange.integrate_lagrange(y, u);
-
-
-  for (int i = 0; i < order + 1; i++) {
-    for (int j = 0; j < order + 1; j++) {
+  // Output resulting vector y.
+  for (unsigned int i = 0; i < order + 1; i++) {
+    for (unsigned int j = 0; j < order + 1; j++) {
       std::cout << "y[" << i  << "," << j << "] = " << y[i][j] << endl;
     }
   }
 
-  // Testing
+  // Hardcode solution
+  Quadrature<order, long double> quad;
+  quad.compute_quadrature_points(order + 1, 1, 1);
+  quad.compute_quadrature_weights(quad.knots, 0, 0);
+  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u, quad.weights);
 
-  // Compare it to our solution
-  Quadrature<order, double> quad;
+  // Testing for correctness
+  for (unsigned int i = 0; i < order + 1; i++) {
+    for (unsigned int j = 0; j < order + 1; j++) {
+      assert(y[i][j] == y_hard[i][j]);
+    }
+  }
+
+  // Testing for correct complexity
 
   return 0;
 }
