@@ -49,6 +49,7 @@ headsep=10mm, footskip=12mm}
 
 \begin{document}
 \pagestyle{empty}
+\pagenumbering{Roman} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -102,6 +103,11 @@ whole, nor in parts, for a degree at this or any university. \\[2ex]
 \today \hspace*{1cm}  Heidelberg \hspace*{5cm} Signature\\[5ex]
 % Unterschrift (handgeschrieben)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+Summary
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +116,39 @@ whole, nor in parts, for a degree at this or any university. \\[2ex]
 \newpage
 \tableofcontents
 
+
  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+\section*{Notation}
+\addcontentsline{toc}{section}{Notation}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\newpage
+\listoffigures
+\section*{List of figures}
+\addcontentsline{toc}{section}{List of figures}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newpage
+\section*{List of tables}
+\addcontentsline{toc}{section}{List of tables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 % Ab sofort Seitenzahl in Fußzeile
 \newpage
 \pagestyle{plain}
@@ -118,8 +156,8 @@ whole, nor in parts, for a degree at this or any university. \\[2ex]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
+\pagenumbering{arabic} 
+\setcounter{page}{1}
 %Einleitung und Motivation
 \section{Introduction}
 
@@ -134,20 +172,32 @@ whole, nor in parts, for a degree at this or any university. \\[2ex]
 
 % Chapter 1
 \section{Theory}
-\subsection{Partial Differential Equations}
+\subsection{Partial Differential Equation}
 \subsection{Finite Element Method}
-\subsection{Higher order singular value decomposition}
+\subsection{Numerical linear solver}
+\subsection{Tensor Decompositions}
+\subsubsection{Fundamentals}
+\subsubsection{Tucker Decomposition}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Chapter 2
+\section{Preconditioner for cell-based finite element operator }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % Chapter 3
+\section{Numerical Investigations}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Chapter 4
+\section{Results}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

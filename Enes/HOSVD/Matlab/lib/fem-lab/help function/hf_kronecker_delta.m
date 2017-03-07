@@ -1,0 +1,1 @@
+function solution = hf_kronecker_delta(i,j)    % We need an implementation of the Kronecker Delta.    % solution is either 1 for the case when i=j, otherwise it should be 0.        solution=0;    if(i==j)        solution=1;    endif    endfunction
