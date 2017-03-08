@@ -8,6 +8,10 @@ function main(order)
 
     MASS_TENSOR = mass_tensor(order,weights,nodes,vertices);
     MASS_MATRIX = tensor_to_matrix(MASS_TENSOR,order)
+    
+    LAPLACE_TENSOR = laplace_tensor(order,weights,nodes,vertices);
+    LAPLACE_MATRIX = tensor_to_matrix(LAPLACE_TENSOR,order)
+    
     [U, S, sv] = mlsvd(MASS_TENSOR);
     U_inverse = transpose(U);
     
@@ -30,10 +34,13 @@ function main(order)
     MASS_MATRIX_PSEUDOINVERSE = tensor_to_matrix(MASS_TENSOR_INVERSE,order)
 
     % Solve linear system
+    A = MASS_MATRIX;
+    M = MASS_MATRIX_PSEUDOINVERSE;
     maxit = 10000;
-    tol = 10^-25;
+    tol = 10^-10;
     restart = 1;
     b= rand((order+1)^2,1)
    
-    gmres(MASS_MATRIX,b,restart,tol,maxit,MASS_MATRIX_PSEUDOINVERSE);    
+    %pcg(A,b,tol,maxit,M)
+    %gmres(A,b,restart,tol,maxit,M);    
 end
