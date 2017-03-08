@@ -1,0 +1,1 @@
+function vertex = equidistant_points(order)    necessary_vertices = order+1;    inner_vertices = necessary_vertices - 2;        if(inner_vertices <= 0)        vertex=[0;1];    else         h = 1/(inner_vertices+1);        vertex(1)=0;        for i=1:inner_vertices            vertex(1+i)=i*h;        endfor        vertex(inner_vertices+2)=1;    endifendfunction

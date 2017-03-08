@@ -1,0 +1,1 @@
+function LAPLACE_TENSOR = laplace_tensor(order)endfunction
