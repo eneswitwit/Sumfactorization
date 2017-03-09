@@ -91,14 +91,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Witwit/Github/sumfactorization/build/CMakeFiles /Users/Witwit/Github/sumfactorization/build/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /Users/Witwit/Github/sumfactorization/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/Witwit/Github/sumfactorization/build/CMakeFiles /Users/Witwit/Github/sumfactorization/build/tests/CMakeFiles/progress.marks
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f CMakeFiles/Makefile2 tests/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Witwit/Github/sumfactorization/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f CMakeFiles/Makefile2 tests/clean
 .PHONY : clean
 
 # The main clean target
@@ -108,58 +108,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/Witwit/Github/sumfactorization/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named testvmult
+# Convenience name for target.
+tests/CMakeFiles/testvmult.dir/rule:
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/testvmult.dir/rule
+.PHONY : tests/CMakeFiles/testvmult.dir/rule
 
-# Build rule for target.
-testvmult: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 testvmult
+# Convenience name for target.
+testvmult: tests/CMakeFiles/testvmult.dir/rule
+
 .PHONY : testvmult
 
 # fast build rule for target.
 testvmult/fast:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/build
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f tests/CMakeFiles/testvmult.dir/build.make tests/CMakeFiles/testvmult.dir/build
 .PHONY : testvmult/fast
 
-tests/integrate.o: tests/integrate.cc.o
+integrate.o: integrate.cc.o
 
-.PHONY : tests/integrate.o
+.PHONY : integrate.o
 
 # target to build an object file
-tests/integrate.cc.o:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.o
-.PHONY : tests/integrate.cc.o
+integrate.cc.o:
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f tests/CMakeFiles/testvmult.dir/build.make tests/CMakeFiles/testvmult.dir/integrate.cc.o
+.PHONY : integrate.cc.o
 
-tests/integrate.i: tests/integrate.cc.i
+integrate.i: integrate.cc.i
 
-.PHONY : tests/integrate.i
+.PHONY : integrate.i
 
 # target to preprocess a source file
-tests/integrate.cc.i:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.i
-.PHONY : tests/integrate.cc.i
+integrate.cc.i:
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f tests/CMakeFiles/testvmult.dir/build.make tests/CMakeFiles/testvmult.dir/integrate.cc.i
+.PHONY : integrate.cc.i
 
-tests/integrate.s: tests/integrate.cc.s
+integrate.s: integrate.cc.s
 
-.PHONY : tests/integrate.s
+.PHONY : integrate.s
 
 # target to generate assembly for a file
-tests/integrate.cc.s:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.s
-.PHONY : tests/integrate.cc.s
+integrate.cc.s:
+	cd /Users/Witwit/Github/sumfactorization/build && $(MAKE) -f tests/CMakeFiles/testvmult.dir/build.make tests/CMakeFiles/testvmult.dir/integrate.cc.s
+.PHONY : integrate.cc.s
 
 # Help Target
 help:
@@ -171,9 +173,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... testvmult"
-	@echo "... tests/integrate.o"
-	@echo "... tests/integrate.i"
-	@echo "... tests/integrate.s"
+	@echo "... integrate.o"
+	@echo "... integrate.i"
+	@echo "... integrate.s"
 .PHONY : help
 
 
@@ -185,6 +187,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/Witwit/Github/sumfactorization/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

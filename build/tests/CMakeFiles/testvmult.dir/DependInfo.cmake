@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/Witwit/Github/sumfactorization/tests/integrate.cc" "/Users/Witwit/Github/sumfactorization/build/CMakeFiles/testvmult.dir/tests/integrate.cc.o"
+  "/Users/Witwit/Github/sumfactorization/tests/integrate.cc" "/Users/Witwit/Github/sumfactorization/build/tests/CMakeFiles/testvmult.dir/integrate.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 

@@ -1,3 +1,4 @@
-/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/build/CMakeFiles/rebuild_cache.dir
-/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/build/CMakeFiles/edit_cache.dir
-/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/build/CMakeFiles/testvmult.dir
+/Users/Witwit/Github/sumfactorization/build/CMakeFiles/rebuild_cache.dir
+/Users/Witwit/Github/sumfactorization/build/CMakeFiles/edit_cache.dir
+/Users/Witwit/Github/sumfactorization/build/CMakeFiles/test.dir
+/Users/Witwit/Github/sumfactorization/build/CMakeFiles/testvmult.dir

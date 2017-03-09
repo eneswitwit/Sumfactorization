@@ -1,0 +1,19 @@
+Start testing: Mar 09 21:24 CET
+----------------------------------------------------------
+1/1 Testing: testvmult
+1/1 Test: testvmult
+Command: "/Users/Witwit/Github/sumfactorization/bin/testvmult"
+Directory: /Users/Witwit/Github/sumfactorization/build
+"testvmult" start time: Mar 09 21:24 CET
+Output:
+----------------------------------------------------------
+Just testing
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"testvmult" end time: Mar 09 21:24 CET
+"testvmult" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 09 21:24 CET

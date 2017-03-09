@@ -13,6 +13,13 @@ include_directories("${PROJECT_SORUCE_DIR}/include")
 # add executable
 add_executable(testvmult ${PROJECT_SOURCE_DIR}/tests/integrate.cc)
 
+# Put all tests in the test directory, where the sources also are
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests)
+
+# testing
+enable_testing()
+add_test(testvmult ${PROJECT_SOURCE_DIR}/bin/testvmult)
+
 
 
 
