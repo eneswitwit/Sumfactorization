@@ -1,4 +1,0 @@
-IntegrationRuns 0 0
-SumfactorizationRuns 0 0
----
-SumfactorizationRuns

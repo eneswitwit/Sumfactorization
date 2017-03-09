@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/include/integrate.h
+
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/include/polynomial.h
+
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/include/quadrature.h
+
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/tests/integrate.cc
+iostream
+-
+array
+-
+vector
+-
+limits
+-
+cmath
+-
+cassert
+-
+../include/quadrature.h
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/include/quadrature.h
+../include/polynomial.h
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/include/polynomial.h
+../include/integrate.h
+/Users/Witwit/Github/polynomialspace/Enes/Sumfactorization/Sumfactorization/include/integrate.h
+
