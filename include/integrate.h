@@ -61,6 +61,7 @@ public:
                 }
         }
     return counter;
+
   }
 
   constexpr int vmult_laplacian(std::array < std::array < y_type, order + 1 >, order + 1 > &y, const std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {

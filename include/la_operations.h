@@ -2,7 +2,7 @@
 #define __LA_OPERATIONS_H__
 
 template <int A_rows, int A_columns,int B_rows, int B_columns,int C_rows, int C_columns,typename y_type>
-constexpr void multiply_matrices(std::array<std::array<y_type, A_rows>, A_columns> &A,std::array<std::array<y_type, B_rows>, B_columns> &B,std::array<std::array<y_type, C_rows>, C_columns> &C, bool transpose_B=0) {
+void multiply_matrices(std::array<std::array<y_type, A_rows>, A_columns> &A,std::array<std::array<y_type, B_rows>, B_columns> &B,std::array<std::array<y_type, C_rows>, C_columns> &C, bool transpose_B=0) {
     // Check if matrix dimensions match for multiplication
     if (A_columns!=B_rows) {
         std::cout << "Matrices not compatible for multiplication!" << std::endl;
