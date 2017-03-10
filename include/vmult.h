@@ -17,25 +17,102 @@ public:
 
         // Build Matrix N and NW
         std::array < std::array < y_type, order + 1 >, order + 1 > N;
-        std::array < std::array < y_type, order + 1 >, order + 1 > NW;
+        std::array < std::array < y_type, order + 1 >, order + 1 > NW_transposed;
         for (unsigned int i = 0; i < order + 1; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                N[i][j] = poly.eval_lagrange(j, knots[i], knots);
-                NW[j][i] = weights[i] * N[i][j];
+                for (unsigned int j = 0; j < order + 1; j++) {
+                        N[i][j] = poly.eval_lagrange(j, knots[i], knots);
+                        NW_transposed[j][i] = weights[i] * N[i][j];
+                    }
             }
-        }
 
-   
+
         // Calculate N_w^T * N
         std::array < std::array < y_type, order + 1 >, order + 1 > C_1;
         std::array < std::array < y_type, order + 1 >, order + 1 > C_2;
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NW, N, C_1);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NW_transposed, N, C_1);
         multiply_matrices<order+1,order+1,order+1,order+1,order+1,order+1,y_type>(C_1,u,C_2);
         multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (C_2, C_1, y);
 
     }
 
+    constexpr void vmult_gradient(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
+        Quadrature<order, y_type> quad = {1.};
+        quad.compute_quadrature_points(order + 1, 1, 1);
+        quad.compute_quadrature_weights(quad.knots, 0, 0);
 
+        Quadrature<order,y_type> interpolation = {1.};
+        interpolation.compute_quadrature_points(order+1,1,1);
+
+        // Polynomial Basis
+        Polynomial <order, y_type> poly;
+
+        // Build Matrix N and NW
+        std::array < std::array < y_type, order + 1 >, order + 1 > N;
+        std::array < std::array < y_type, order + 1 >, order + 1 > NW_transposed;
+        std::array < std::array < y_type, order + 1 >, order + 1 > Ndx;
+        std::array < std::array < y_type, order + 1 >, order + 1 > NWdx_transposed;
+        for (unsigned int i = 0; i < order + 1; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                        N[i][j] = poly.eval_lagrange(j, quad.knots[i], interpolation.knots);
+                        NW_transposed[j][i] = quad.weights[i] * N[i][j];
+                        Ndx[i][j] = poly.eval_1st_derivative(j,quad.knots[i], interpolation.knots);
+                        NWdx_transposed[j][i] = quad.weights[i] * Ndx[i][j];
+                    }
+            }
+        std::array < std::array < y_type, order + 1 >, order + 1 > P;
+        std::array < std::array < y_type, order + 1 >, order + 1 > Pdx;
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NW_transposed, N, P);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NWdx_transposed, Ndx, Pdx);
+
+        std::array < std::array < y_type, order + 1 >, order + 1 > S_1;
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Pdx, u, y);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (y, P, S_1, 1);
+
+        std::array < std::array < y_type, order + 1 >, order + 1 > S_2;
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (P, u, y);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (y, Pdx, S_2, 1);
+
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (S_1, S_2, y);
+    }
+
+    constexpr void vmult_laplacian(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
+        Quadrature<order, y_type> quad = {1.};
+        quad.compute_quadrature_points(order + 1, 1, 1);
+        quad.compute_quadrature_weights(quad.knots, 0, 0);
+
+        Quadrature<order,y_type> interpolation = {1.};
+        interpolation.compute_quadrature_points(order+1,1,1);
+
+        // Polynomial Basis
+        Polynomial <order, y_type> poly;
+
+        // Build Matrix N and NW
+        std::array < std::array < y_type, order + 1 >, order + 1 > N;
+        std::array < std::array < y_type, order + 1 >, order + 1 > NW_transposed;
+        std::array < std::array < y_type, order + 1 >, order + 1 > Ndx;
+        std::array < std::array < y_type, order + 1 >, order + 1 > NWdx_transposed;
+        for (unsigned int i = 0; i < order + 1; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                        N[i][j] = poly.eval_lagrange(j, quad.knots[i], interpolation.knots);
+                        NW_transposed[j][i] = quad.weights[i] * N[i][j];
+                        Ndx[i][j] = poly.eval_2nd_derivative(j,quad.knots[i], interpolation.knots);
+                    }
+            }
+        std::array < std::array < y_type, order + 1 >, order + 1 > P;
+        std::array < std::array < y_type, order + 1 >, order + 1 > Pdx;
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NW_transposed, N, P);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NW_transposed, Ndx, Pdx);
+
+        std::array < std::array < y_type, order + 1 >, order + 1 > S_1;
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Pdx, u, y);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (y, P, S_1, 1);
+
+        std::array < std::array < y_type, order + 1 >, order + 1 > S_2;
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (P, u, y);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (y, Pdx, S_2, 1);
+
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (S_1, S_2, y);
+    }
 
 };
 
