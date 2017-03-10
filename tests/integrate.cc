@@ -61,7 +61,7 @@ int main()
   // Output resulting vector y.
   for (unsigned int i = 0; i < order + 1; i++) {
     for (unsigned int j = 0; j < order + 1; j++) {
-      std::cout << "y[" << i  << "," << j << "] = " << y[i][j] << endl;
+      std::cout << "y[" << i  << "," << j << "] = " << y_2[i][j] << endl;
     }
   }
 
