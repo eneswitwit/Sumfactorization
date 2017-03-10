@@ -46,7 +46,7 @@ constexpr std::array<std::array<y_type, size>, size> create_array()
 int main()
 {
   // Calculate with old method
-  constexpr unsigned int order = 1;
+  constexpr unsigned int order = 100;
   //Integrate<order, long double, Polynomial , Quadrature> lagrange;
   //std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
   //std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
@@ -69,7 +69,7 @@ int main()
   Quadrature<order, long double> quad;
   quad.compute_quadrature_points(order + 1, 1, 1);
   quad.compute_quadrature_weights(quad.knots, 0, 0);
-  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u, quad.weights);
+  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, quad.weights);
 
   // Testing for correctness
   for (unsigned int i = 0; i < order + 1; i++) {
