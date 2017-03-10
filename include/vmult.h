@@ -15,22 +15,17 @@ public:
         // Polynomial Basis
         Polynomial <order, y_type> poly;
 
-        // Build Matrix N
+        // Build Matrix N and NW
         std::array < std::array < y_type, order + 1 >, order + 1 > N;
-        for (unsigned int i = 0; i < order + 1; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                N[i][j] = poly.eval_lagrange(j, knots[i], knots);
-            }
-        }
-
-        // Build Matrix N_w
         std::array < std::array < y_type, order + 1 >, order + 1 > NW;
         for (unsigned int i = 0; i < order + 1; i++) {
             for (unsigned int j = 0; j < order + 1; j++) {
-                NW[j][i] = weights[i] * poly.eval_lagrange(j, knots[i], knots);
+                N[i][j] = poly.eval_lagrange(j, knots[i], knots);
+                NW[j][i] = weights[i] * N[i][j];
             }
         }
 
+   
         // Calculate N_w^T * N
         std::array < std::array < y_type, order + 1 >, order + 1 > C_1;
         std::array < std::array < y_type, order + 1 >, order + 1 > C_2;
