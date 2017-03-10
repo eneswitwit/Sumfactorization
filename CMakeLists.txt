@@ -18,6 +18,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests)
 
 # testing
 enable_testing()
+
+# check if test runs and exits without error
 add_test(testvmult ${PROJECT_SOURCE_DIR}/bin/testvmult)
 
 

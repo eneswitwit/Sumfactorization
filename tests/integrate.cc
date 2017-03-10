@@ -65,7 +65,7 @@ int main()
   // Testing for correctness
   for (unsigned int i = 0; i < order + 1; i++) {
     for (unsigned int j = 0; j < order + 1; j++) {
-      assert(y[i][j] == y_hard[i][j]);
+      static_assert(y[i][j] == y_hard[i][j]);
     }
   }
 
