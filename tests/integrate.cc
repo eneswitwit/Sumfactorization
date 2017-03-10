@@ -4,6 +4,7 @@
 #include <limits>
 #include <cmath>
 #include <cassert>
+#include "../include/la_operations.h"
 #include "../include/quadrature.h"
 #include "../include/polynomial.h"
 #include "../include/integrate.h"
