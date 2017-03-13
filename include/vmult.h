@@ -7,10 +7,10 @@ public:
     constexpr void vmult_mass(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
         // Quadrature Properties
         Quadrature<order, y_type> quad = {1.};
-        quad.compute_quadrature_points(order + 1, 1, 1);
-        quad.compute_quadrature_weights(quad.knots, 0, 0);
-        std::array < y_type, order + 1 > knots = quad.knots;
-        std::array < y_type, order + 1 > weights = quad.weights;
+        constexpr std::array < y_type, order + 1 > knots = quad.compute_quadrature_points();
+        std::array < y_type, order + 1 > weights  = quad.compute_quadrature_weights(knots);
+        //std::array < y_type, order + 1 > knots = quad.knots;
+        //std::array < y_type, order + 1 > weights = quad.weights;
 
         // Polynomial Basis
         Polynomial <order, y_type> poly;
@@ -31,7 +31,7 @@ public:
         std::array < std::array < y_type, order + 1 >, order + 1 > C_2;
         multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (NW_transposed, N, C_1);
         multiply_matrices<order+1,order+1,order+1,order+1,order+1,order+1,y_type>(C_1,u,C_2);
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (C_2, C_1, y);
+        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (C_2, C_1, y,1);
 
     }
 

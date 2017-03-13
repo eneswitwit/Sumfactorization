@@ -1,6 +1,8 @@
 #ifndef __QUADRATURE_H__
 #define __QUADRATURE_H__
 
+#define PI 3.14159265359
+
 // Helper function for transforming vector to array
 template<typename y_type, int order>
 std::array<y_type, order> vec_to_arr(std::vector<y_type> vec) {
@@ -11,41 +13,43 @@ std::array<y_type, order> vec_to_arr(std::vector<y_type> vec) {
   return arr;
 }
 
+constexpr int alpha = 1;
+constexpr int beta = 1;
+
 // Template class Quadrature for computing knots and weights of the quadrature.
 template<int order, typename y_type>
 class Quadrature {
 public:
-  std::array < y_type, order + 1 > knots;
+  //std::array < y_type, order + 1 > knots;
   std::array < y_type, order + 1 > weights;
 
-  void compute_quadrature_points(const unsigned int q, const int alpha, const int beta)
+  constexpr std::array < y_type, order + 1 > compute_quadrature_points()
   {
-    const unsigned int m = q - 2;
-    const double PI = 3.14159265359;
-    std::vector<y_type> x(m);
+    std::array < y_type, order + 1 > knots{1.};
+    const unsigned int m = order - 1;
     const long double
     long_double_eps = static_cast<y_type>(std::numeric_limits<long double>::epsilon()),
     double_eps      = static_cast<y_type>(std::numeric_limits<double>::epsilon());
-    volatile y_type runtime_one = 1.0;
+    const y_type runtime_one = 1.0;
     const y_type tolerance = (runtime_one + long_double_eps != runtime_one ? std::max (double_eps / 100, long_double_eps * 5) : double_eps * 5 );
 
     for (unsigned int i = 0; i < m; ++i)
     {
-      x[i] = - std::cos( (y_type) (2 * i + 1) / (2 * m) * PI );
+      knots[i + 1] = - std::cos( (y_type) (2 * i + 1) / (2 * m) * PI );
     }
     y_type s, J_x, f, delta;
 
-    for (unsigned int k = 0; k < m; ++k)
+    for (unsigned int k = 1; k < m; ++k)
     {
-      y_type r = x[k];
-      if (k > 0)
-        r = (r + x[k - 1]) / 2;
+      y_type r = knots[k];
+      if (k > 1)
+        r = (r + knots[k - 1]) / 2;
 
       do
       {
         s = 0.;
-        for (unsigned int i = 0; i < k; ++i)
-          s += 1. / (r - x[i]);
+        for (unsigned int i = 1; i < k; ++i)
+          s += 1. / (r - knots[i]);
 
         J_x   =  0.5 * (alpha + beta + m + 1) * JacobiP(r, alpha + 1, beta + 1, m - 1);
         f     = JacobiP(r, alpha, beta, m);
@@ -54,38 +58,40 @@ public:
       }
       while (std::fabs(delta) >= tolerance);
 
-      x[k] = r;
+      knots[k] = r;
     }
-    x.insert(x.begin(), -1.L);
-    x.push_back(+1.L);
-    for (unsigned int j = 0; j < x.size(); j++) {
-      x[j] *= 0.5;
-      x[j] += 0.5;
+    knots[0] = -1.L;
+    knots[order] = +1.L;
+    for (unsigned int j = 0; j < order + 1; j++) {
+      knots[j] *= 0.5;
+      knots[j] += 0.5;
     }
-    knots = vec_to_arr < y_type, order + 1 > (x);
+    return knots;
   }
 
-  void compute_quadrature_weights(std::array < y_type, order + 1 > x, const int alpha, const int beta)
+  void compute_quadrature_weights(std::array < y_type, order + 1 > & knots)
   {
-    for (unsigned int j = 0; j < x.size(); j++) {
-      x[j] *= 2;
-      x[j] += -1;
+    const int alpha = 1;
+    const int beta = 1;
+
+    for (unsigned int j = 0; j < knots.size(); j++) {
+      knots[j] *= 2;
+      knots[j] += -1;
     }
-    const unsigned int q = x.size();
-    std::vector<y_type> w(q);
+    std::vector<y_type> w(order + 1);
     y_type s = 0.L;
 
     const y_type factor = std::pow(2., alpha + beta + 1) *
-                          gamma(alpha + q) *
-                          gamma(beta + q) /
-                          ((q - 1) * gamma(q) * gamma(alpha + beta + q + 1));
-    for (unsigned int i = 0; i < q; ++i)
+                          gamma(alpha + order + 1) *
+                          gamma(beta + order + 1) /
+                          ((order + 1 - 1) * gamma(order + 1) * gamma(alpha + beta + order + 1 + 1));
+    for (unsigned int i = 0; i < order + 1; ++i)
     {
-      s = JacobiP(x[i], alpha, beta, q - 1);
+      s = JacobiP(knots[i], alpha, beta, order + 1 - 1);
       w[i] = factor / (s * s);
     }
     w[0]   *= (beta + 1);
-    w[q - 1] *= (alpha + 1);
+    w[order] *= (alpha + 1);
 
     for (unsigned int i = 0; i < w.size(); ++i)
     {

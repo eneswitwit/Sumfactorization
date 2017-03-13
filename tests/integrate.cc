@@ -6,6 +6,7 @@
 #include <cassert>
 #include "../include/la_operations.h"
 #include "../include/quadrature.h"
+#include "../include/quadrature_nonclass.h"
 #include "../include/polynomial.h"
 #include "../include/vmult.h"
 #include "../include/integrate.h"
@@ -46,7 +47,7 @@ constexpr std::array<std::array<y_type, size>, size> create_array()
 int main()
 {
   // Calculate with old method
-  constexpr unsigned int order = 100;
+  constexpr unsigned int order = 10;
   //Integrate<order, long double, Polynomial , Quadrature> lagrange;
   //std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
   //std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
@@ -67,9 +68,9 @@ int main()
 
   // Hardcode solution
   Quadrature<order, long double> quad;
-  quad.compute_quadrature_points(order + 1, 1, 1);
-  quad.compute_quadrature_weights(quad.knots, 0, 0);
-  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, quad.weights);
+  constexpr std::array < y_type, order + 1 > knots = quad.compute_quadrature_points();
+  std::array < y_type, order + 1 > weights  = quad.compute_quadrature_weights(knots);
+  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, weights);
 
   // Testing for correctness
   for (unsigned int i = 0; i < order + 1; i++) {
