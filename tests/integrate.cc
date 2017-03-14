@@ -6,7 +6,7 @@
 #include <cassert>
 #include "../include/la_operations.h"
 #include "../include/quadrature.h"
-#include "../include/quadrature_nonclass.h"
+//#include "../include/quadrature_nonclass.h"
 #include "../include/polynomial.h"
 #include "../include/vmult.h"
 #include "../include/integrate.h"
@@ -68,8 +68,8 @@ int main()
 
   // Hardcode solution
   Quadrature<order, long double> quad;
-  constexpr std::array < y_type, order + 1 > knots = quad.compute_quadrature_points();
-  std::array < y_type, order + 1 > weights  = quad.compute_quadrature_weights(knots);
+  std::array < long double, order + 1 > knots = quad.knots;
+  std::array < long double, order + 1 > weights  = quad.weights;
   array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, weights);
 
   // Testing for correctness

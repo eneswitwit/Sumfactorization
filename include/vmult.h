@@ -6,9 +6,9 @@ class VMULT {
 public:
     constexpr void vmult_mass(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
         // Quadrature Properties
-        Quadrature<order, y_type> quad = {1.};
-        constexpr std::array < y_type, order + 1 > knots = quad.compute_quadrature_points();
-        std::array < y_type, order + 1 > weights  = quad.compute_quadrature_weights(knots);
+        Quadrature<order, y_type> quad;
+        std::array < y_type, order + 1 > knots = quad.knots;
+        std::array < y_type, order + 1 > weights  = quad.weights;
         //std::array < y_type, order + 1 > knots = quad.knots;
         //std::array < y_type, order + 1 > weights = quad.weights;
 
@@ -36,12 +36,8 @@ public:
     }
 
     constexpr void vmult_gradient(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
-        Quadrature<order, y_type> quad = {1.};
-        quad.compute_quadrature_points(order + 1, 1, 1);
-        quad.compute_quadrature_weights(quad.knots, 0, 0);
-
-        Quadrature<order,y_type> interpolation = {1.};
-        interpolation.compute_quadrature_points(order+1,1,1);
+        Quadrature<order, y_type> quad;
+        Quadrature<order,y_type> interpolation;
 
         // Polynomial Basis
         Polynomial <order, y_type> poly;
@@ -76,12 +72,8 @@ public:
     }
 
     constexpr void vmult_laplacian(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
-        Quadrature<order, y_type> quad = {1.};
-        quad.compute_quadrature_points(order + 1, 1, 1);
-        quad.compute_quadrature_weights(quad.knots, 0, 0);
-
-        Quadrature<order,y_type> interpolation = {1.};
-        interpolation.compute_quadrature_points(order+1,1,1);
+        Quadrature<order, y_type> quad;
+        Quadrature<order,y_type> interpolation;
 
         // Polynomial Basis
         Polynomial <order, y_type> poly;
