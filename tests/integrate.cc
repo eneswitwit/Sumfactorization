@@ -25,7 +25,7 @@ array < array < y_type, order + 1 >, order + 1 > lagrange_nodes(array < array < 
 }
 
 template <typename y_type, size_t size>
-constexpr std::array<y_type, size> create_vector()
+std::array<y_type, size> create_vector()
 {
   std::array<y_type, size> arr{1.};
   for (unsigned int i = 0; i < size; ++i)
@@ -34,9 +34,9 @@ constexpr std::array<y_type, size> create_vector()
 }
 
 template <typename y_type, size_t size>
-constexpr std::array<std::array<y_type, size>, size> create_array()
+std::array<std::array<y_type, size>, size> create_array()
 {
-  std::array<std::array<y_type, size>, size> arr{1.};
+  std::array<std::array<y_type, size>, size> arr;
   for (unsigned int i = 0; i < size; ++i)
     for (unsigned int j = 0; j < size; ++j)
       arr[i][j] = 1;
@@ -47,7 +47,7 @@ constexpr std::array<std::array<y_type, size>, size> create_array()
 int main()
 {
   // Calculate with old method
-  constexpr unsigned int order = 10;
+  constexpr unsigned int order = 3;
   constexpr unsigned int q_order = order+1;
   //Integrate<order, long double, Polynomial , Quadrature> lagrange;
   //std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
@@ -55,7 +55,7 @@ int main()
   //unsigned int count = lagrange.vmult_mass(y, u);
 
   // Calculate with new method
-  VMULT<order,q_order,5, long double, Polynomial , Quadrature> vmult;
+  VMULT<order, q_order, 5, long double, Polynomial , Quadrature> vmult;
   std::array < std::array < long double, order + 1 >, order + 1 > u_2 = create_array < long double, order + 1 > ();
   std::array < std::array < long double, order + 1 >, order + 1 > y_2 = create_array < long double, order + 1 > ();
   vmult.vmult_mass(y_2, u_2);
@@ -69,9 +69,10 @@ int main()
 
   // Hardcode solution
   Quadrature<order, long double> quad;
-  std::array < long double, order + 1 > knots = quad.knots;
-  std::array < long double, order + 1 > weights  = quad.weights;
-  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, weights);
+  for (int i=0;i<order +1;i++) {
+          std::cout << "quad.knots[" << i << "] = " << quad.knots[i] << std::endl;
+      }
+  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, quad.weights);
 
   // Testing for correctness
   for (unsigned int i = 0; i < order + 1; i++) {
