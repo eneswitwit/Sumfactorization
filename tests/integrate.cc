@@ -48,13 +48,14 @@ int main()
 {
   // Calculate with old method
   constexpr unsigned int order = 10;
+  constexpr unsigned int q_order = order+1;
   //Integrate<order, long double, Polynomial , Quadrature> lagrange;
   //std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
   //std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
   //unsigned int count = lagrange.vmult_mass(y, u);
 
   // Calculate with new method
-  VMULT<order, long double, Polynomial , Quadrature> vmult;
+  VMULT<order,q_order,5, long double, Polynomial , Quadrature> vmult;
   std::array < std::array < long double, order + 1 >, order + 1 > u_2 = create_array < long double, order + 1 > ();
   std::array < std::array < long double, order + 1 >, order + 1 > y_2 = create_array < long double, order + 1 > ();
   vmult.vmult_mass(y_2, u_2);
