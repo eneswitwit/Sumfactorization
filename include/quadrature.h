@@ -3,7 +3,9 @@
 
 #define PI 3.14159265359
 
-// Helper function for transforming vector to array
+constexpr int alpha = 1;
+constexpr int beta = 1;
+
 template<typename y_type, int order>
 std::array<y_type, order> vec_to_arr(std::vector<y_type> vec) {
   std::array<y_type, order> arr;
@@ -13,25 +15,27 @@ std::array<y_type, order> vec_to_arr(std::vector<y_type> vec) {
   return arr;
 }
 
-constexpr int alpha = 1;
-constexpr int beta = 1;
 
 // Template class Quadrature for computing knots and weights of the quadrature.
 template<int order, typename y_type>
 class Quadrature {
 public:
-  //std::array < y_type, order + 1 > knots;
+  std::array < y_type, order + 1 > knots;
   std::array < y_type, order + 1 > weights;
 
-  constexpr std::array < y_type, order + 1 > compute_quadrature_points()
+  Quadrature(){
+    compute_quadrature_points();
+    compute_quadrature_weights(knots);
+  }
+
+  void compute_quadrature_points()
   {
-    std::array < y_type, order + 1 > knots{1.};
-    const unsigned int m = order - 1;
-    const long double
+    unsigned int m = order - 1;
+    long double
     long_double_eps = static_cast<y_type>(std::numeric_limits<long double>::epsilon()),
     double_eps      = static_cast<y_type>(std::numeric_limits<double>::epsilon());
-    const y_type runtime_one = 1.0;
-    const y_type tolerance = (runtime_one + long_double_eps != runtime_one ? std::max (double_eps / 100, long_double_eps * 5) : double_eps * 5 );
+    y_type runtime_one = 1.0;
+    y_type tolerance = (runtime_one + long_double_eps != runtime_one ? std::max (double_eps / 100, long_double_eps * 5) : double_eps * 5 );
 
     for (unsigned int i = 0; i < m; ++i)
     {
@@ -66,7 +70,6 @@ public:
       knots[j] *= 0.5;
       knots[j] += 0.5;
     }
-    return knots;
   }
 
   void compute_quadrature_weights(std::array < y_type, order + 1 > & knots)
