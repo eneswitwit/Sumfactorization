@@ -11,13 +11,13 @@ constexpr long double PI = 3.14159265358979323846;
 constexpr long double PI_HALF = 1.57079632679489661923;
 
 
-// Template function for calculating the input as constexpr for sinus for the compute quadrature points function
+// Template constexpr function for calculating the input as constexpr for the constexpr sinus
 template<typename y_type>
 constexpr y_type sin_input(int i, int m) {
     return (((2 * i + 1) / (2 * m) * PI) - PI_HALF);
 }
 
-// Template function for calculating fabs as constexpr
+// Template constexpr function for calculating fabs as constexpr
 template<typename y_type>
 constexpr y_type fabs(y_type val) {
     if (val < 0) {
@@ -28,6 +28,8 @@ constexpr y_type fabs(y_type val) {
     }
 }
 
+
+// Template constexpr function for computing the Jacobi Polynomial
 template<typename y_type, size_t size_>
 constexpr y_type JacobiP(y_type x, int alpha, int beta)
 {
@@ -51,24 +53,23 @@ constexpr y_type JacobiP(y_type x, int alpha, int beta)
 }
 
 // Template class Quadrature for computing knots and weights of the quadrature.
-template<typename y_type, constexpr int order >
+template<typename y_type, size_t order >
 class Quadrature {
 private:
     const constexpr_array < y_type, order + 1 > knots_;
 public:
-    constexpr Quadrature(const constexpr_array < y_type, order > & quad_sin_vec):
-        knots_ ( compute_quadrature_points(quad_sin_vec)) {}
+    constexpr Quadrature():
+        knots_ ( compute_quadrature_points()) {}
 
 
-    constexpr constexpr_array < y_type, order + 1 > compute_quadrature_points(const constexpr_array < y_type, order > & quad_sin_vec) const
+    constexpr constexpr_array < y_type, order + 1 > compute_quadrature_points() const
     {
         constexpr_array < y_type, order + 1 > knots;
         constexpr unsigned int m = order - 1;
         for (unsigned int i = 0; i < m; ++i)
         {
-            knots[i + 1] = quad_sin_vec[i] ;
+            knots[i + 1] = -math::sin( sin_input<y_type>(i, m) ) ;
         }
-
         for (unsigned int k = 1; k < m; ++k)
         {
             knots[k] = compute_kth_entry(k, knots);
@@ -109,8 +110,8 @@ public:
                 s += 1. / (r - knots[i]);
             }
 
-            J_x   =  0.5 * (m + 3) * JacobiP <y_type, m - 1 > (r, alpha_2, beta_2);
-            f     = JacobiP<y_type,m>(r, alpha, beta);
+            J_x   =  0.5 * (m + 3) * JacobiP < y_type, m - 1 > (r, alpha_2, beta_2);
+            f     = JacobiP<y_type, m>(r, alpha, beta);
             delta = f / (f * s - J_x);
             r += delta;
         }
