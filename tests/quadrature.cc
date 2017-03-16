@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <array>
 #include <vector>
+#include <limits>
 #include <type_traits>
 #include <iostream>
 
@@ -14,20 +15,20 @@
 
 
 
-constexpr static int order = 7;
+constexpr static int order = 4;
 
 
 int main() {
-	/*std::vector<long double> vec = compute_quadrature_points(order,1,1);
+	std::vector<long double> vec = compute_quadrature_points(order,1,1);
 	for (int i = 0; i < order + 1; i++)
 	{
 		std::cout << "vec[" << i << "] = " << vec[i] << std::endl;
-	}*/
+	}
 
-	constexpr Quadrature<double, order> quad;
+	constexpr Quadrature<long double, order> quad;
 	for (int i = 0; i < order + 1; i++)
 	{
-		//std::cout << "quad[" << i << "] = " << quad[i] << std::endl;
+		std::cout << "quad[" << i << "] = " << quad[i] << std::endl;
 	}
 
 	return 0;

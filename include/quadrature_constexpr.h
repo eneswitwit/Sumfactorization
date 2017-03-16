@@ -61,11 +61,15 @@ public:
     constexpr Quadrature():
         knots_ ( compute_quadrature_points()) {}
 
-    /*constexpr const y_type & operator[](size_t n) const {
+    constexpr const y_type & operator[](size_t n) const {
         return knots_[n];
     }
-    */
-        
+
+    constexpr const y_type & operator= () const {
+        return knots_;
+    }
+    
+
     constexpr constexpr_array < y_type, order + 1 > compute_quadrature_points() const
     {
         constexpr_array < y_type, order + 1 > knots;
