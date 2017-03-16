@@ -5,6 +5,8 @@
 
 constexpr int alpha = 1;
 constexpr int beta = 1;
+constexpr int alpha_2 = 2;
+constexpr int beta_2 = 2;
 constexpr long double PI = 3.14159265358979323846;
 constexpr long double PI_HALF = 1.57079632679489661923;
 
@@ -26,6 +28,27 @@ constexpr y_type fabs(y_type val) {
     }
 }
 
+template<typename y_type, size_t size_>
+constexpr y_type JacobiP(y_type x, int alpha, int beta)
+{
+    constexpr_array < y_type, size_ + 1 > p;
+    p[0] = 1.0L;
+    if (size_ == 0) return p[0];
+    p[1] = ((alpha + beta + 2) * x + (alpha - beta)) / 2;
+    if (size_ == 1) return p[1];
+
+    for (unsigned int i = 1; i <= (size_ - 1); ++i)
+    {
+        const int v  = 2 * i + alpha + beta;
+        const int a1 = 2 * (i + 1) * (i + alpha + beta + 1) * v;
+        const int a2 = (v + 1) * (alpha * alpha - beta * beta);
+        const int a3 = v * (v + 1) * (v + 2);
+        const int a4 = 2 * (i + alpha) * (i + beta) * (v + 2);
+
+        p[i + 1] = static_cast<y_type>( (a2 + a3 * x) * p[i] - a4 * p[i - 1]) / a1;
+    }
+    return p[size_];
+}
 
 // Template class Quadrature for computing knots and weights of the quadrature.
 template<typename y_type, constexpr int order >
@@ -70,7 +93,10 @@ public:
         constexpr y_type runtime_one = 1.0;
         constexpr y_type tolerance = (runtime_one + long_double_eps != runtime_one ? std::max (double_eps / 100, long_double_eps * 5) : double_eps * 5 );
         constexpr unsigned int m = order - 1;
-        y_type s, J_x, f, delta;
+        y_type s{1.};
+        y_type J_x{1.};
+        y_type f{1.};
+        y_type delta{1.};
         y_type r = knots[k];
         if (k > 1) {
             r = (r + knots[k - 1]) / 2;
@@ -83,8 +109,8 @@ public:
                 s += 1. / (r - knots[i]);
             }
 
-            J_x   =  0.5 * (m + 3) * JacobiP(r, 2, 2, m - 1);
-            f     = JacobiP(r, alpha, beta, m);
+            J_x   =  0.5 * (m + 3) * JacobiP <y_type, m - 1 > (r, alpha_2, beta_2);
+            f     = JacobiP<y_type,m>(r, alpha, beta);
             delta = f / (f * s - J_x);
             r += delta;
         }
@@ -99,15 +125,6 @@ public:
         val += 0.5L;
         return val;
     }
-
-
-    constexpr double JacobiP(double r, double alpha, double beta, double m) const
-    {
-        return 1;
-    }
-
-
-
 
 };
 
