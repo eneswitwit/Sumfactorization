@@ -65,10 +65,6 @@ public:
         return knots_[n];
     }
 
-    constexpr const y_type & operator= () const {
-        return knots_;
-    }
-    
 
     constexpr constexpr_array < y_type, order + 1 > compute_quadrature_points() const
     {
