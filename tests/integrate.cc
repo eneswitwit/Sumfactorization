@@ -72,6 +72,10 @@ int main()
   for (int i=0;i<order +1;i++) {
           std::cout << "quad.knots[" << i << "] = " << quad.knots[i] << std::endl;
       }
+  quad.compute_quadrature_points();
+  for (int i=0;i<order +1;i++) {
+          std::cout << "quad.knots[" << i << "] = " << quad.knots[i] << std::endl;
+      }
   array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, quad.weights);
 
   // Testing for correctness

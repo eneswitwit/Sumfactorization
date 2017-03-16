@@ -5,7 +5,7 @@ template <int order, int q_order, int c, typename y_type, template<int, typename
 class VMULT {
 public:
 
-    Quadrature<q_order, y_type> quad;
+    Quadrature <q_order, y_type> quad;
     Polynomial <order, y_type> poly;
 
     std::array < std::array <y_type, q_order>, order + 1 > N_Transposed;
@@ -41,6 +41,13 @@ public:
                     }
             }
         multiply_matrices < order + 1, q_order, q_order, order + 1, order + 1, order + 1, y_type > (NW, N_Transposed, N_Product);
+
+        for (int i=0;i<order+1;i++) {
+                for (int j=0;j<order + 1;j++) {
+                        std::cout << "N_Transposed[" << i << "][" << j << "] = " << N_Transposed[i][j] << std::endl;
+                    }
+            }
+
     }
 
     void compute_for_gradient() {
@@ -62,7 +69,7 @@ public:
         multiply_matrices < order + 1, q_order, q_order, order + 1, order + 1, order + 1, y_type > (NW, Ndxdx_Transposed, Ndxdx_Product);
     }
 
-    void vmult_mass(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
+    void vmult_mass(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) {
 
         if (c==0) {
                 compute_basis_matrix();
@@ -77,7 +84,7 @@ public:
 
     }
 
-    void vmult_gradient(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
+    void vmult_gradient(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) {
         if (c==0) {
                 compute_basis_matrix();
                 compute_for_gradient();
@@ -99,7 +106,7 @@ public:
         add_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sum_1, Sum_2, y);
     }
 
-    constexpr void vmult_laplacian(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) const {
+    constexpr void vmult_laplacian(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) {
         if (c==0) {
                 compute_basis_matrix();
             }

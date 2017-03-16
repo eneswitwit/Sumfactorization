@@ -24,6 +24,7 @@ public:
   std::array < y_type, order + 1 > weights;
 
   Quadrature(){
+    knots = {1.};
     compute_quadrature_points();
     compute_quadrature_weights(knots);
   }
