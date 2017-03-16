@@ -19,12 +19,12 @@ constexpr constexpr_array< y_type , order> quadrature_sin_vector() {
     return quad_sin_vec;
 };
 
+constexpr static int order = 4;
+constexpr static constexpr_array< double , order> quad_sin_vec = quadrature_sin_vector<double,order>();
+
 
 int main() {
-    constexpr int order = 4;
-    constexpr constexpr_array< double , order> quad_sin_vec = quadrature_sin_vector<double,order>();
-    Quadrature<double, order> quad(quad_sin_vec);
-    constexpr constexpr_array < double, order + 1 > quad_points = quad.compute_quadrature_points(quad_sin_vec);
+    constexpr Quadrature<double, order> quad(quad_sin_vec);
 
     // Hardcode inputs for quadrature
     constexpr double val = math::sin(0.0);
