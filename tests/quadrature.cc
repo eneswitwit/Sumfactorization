@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <array>
 #include <type_traits>
+#include <iostream>
 
 #include "../include/constexpr_sin.h"
 #include "../include/constexpr_array.h"
@@ -15,10 +16,11 @@ constexpr static int order = 4;
 
 
 int main() {
-    constexpr Quadrature<double, order> quad;
+	constexpr Quadrature<double, order> quad;
+	for (int i = 0; i < order + 1; i++)
+	{
+		std::cout << "quad[" << i << "] = " << quad[i] << std::endl;
+	}
 
-    // Hardcode inputs for quadrature
-    constexpr double val = math::sin(0.0);
-
-    return 0;
+	return 0;
 }

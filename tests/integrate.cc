@@ -48,7 +48,7 @@ int main()
 {
   // Calculate with old method
   constexpr unsigned int order = 3;
-  constexpr unsigned int q_order = order+1;
+  constexpr unsigned int q_order = order + 1;
   //Integrate<order, long double, Polynomial , Quadrature> lagrange;
   //std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
   //std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
@@ -69,9 +69,9 @@ int main()
 
   // Hardcode solution
   Quadrature<order, long double> quad;
-  for (int i=0;i<order +1;i++) {
-          std::cout << "quad.knots[" << i << "] = " << quad.knots[i] << std::endl;
-      }
+  for (int i = 0; i < order + 1; i++) {
+    std::cout << "quad.knots[" << i << "] = " << quad.knots[i] << std::endl;
+  }
   array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, quad.weights);
 
   // Testing for correctness
@@ -84,6 +84,6 @@ int main()
   // Testing for correct complexity
 
   cout << "Testing was succesful." << endl;
-  
+
   return 0;
 }
