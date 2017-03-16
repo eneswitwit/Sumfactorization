@@ -15,12 +15,12 @@
 
 
 
-constexpr static int order = 4;
+constexpr static int order = 6;
 
 
 int main() {
-	std::vector<long double> vec = compute_quadrature_points(order,1,1);
-	for (int i = 0; i < order + 1; i++)
+	std::vector<long double> vec = compute_quadrature_points(order+1,1,1);
+	for (int i = 0; i < order+1 ; i++)
 	{
 		std::cout << "vec[" << i << "] = " << vec[i] << std::endl;
 	}
