@@ -5,7 +5,7 @@ template <int order, typename y_type>
 class Polynomial {
 public:
 
-    std::vector <y_type, order+1> knots;
+    std::array <y_type, order+1> knots;
 
     Polynomial() {
         compute_interpolation_points();
@@ -53,6 +53,27 @@ public:
         knots[j] *= 0.5;
         knots[j] += 0.5;
       }
+    }
+
+    y_type JacobiP(const y_type x, const int alpha, const int beta, const unsigned int n)
+    {
+      std::vector<y_type> p(n + 1);
+      p[0] = 1.0L;
+      if (n == 0) return p[0];
+      p[1] = ((alpha + beta + 2) * x + (alpha - beta)) / 2;
+      if (n == 1) return p[1];
+
+      for (unsigned int i = 1; i <= (n - 1); ++i)
+      {
+        const int v  = 2 * i + alpha + beta;
+        const int a1 = 2 * (i + 1) * (i + alpha + beta + 1) * v;
+        const int a2 = (v + 1) * (alpha * alpha - beta * beta);
+        const int a3 = v * (v + 1) * (v + 2);
+        const int a4 = 2 * (i + alpha) * (i + beta) * (v + 2);
+
+        p[i + 1] = static_cast<y_type>( (a2 + a3 * x) * p[i] - a4 * p[i - 1]) / a1;
+      }
+      return p[n];
     }
 
     y_type eval_lagrange(int i, y_type x) const {

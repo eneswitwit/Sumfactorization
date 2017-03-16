@@ -78,6 +78,14 @@ std::vector<long double> compute_quadrature_points(const unsigned int q,
 
 std::vector<long double> compute_quadrature_weights(const std::vector<long double> &x,const int alpha,const int beta)
 {
+<<<<<<< HEAD
+=======
+  for (unsigned int j = 0; j < x.size(); j++) {
+    x[j] *= 2;
+    x[j] += -1;
+>>>>>>> 77839126ce8ae5776f20392e49690812158b165b
+  }
+>>>>>>> origin/master
   long double gamma(const unsigned int n);
   long double JacobiP(const long double x,const int alpha,const int beta,const unsigned int n);
   const unsigned int q = x.size();
