@@ -1,16 +1,21 @@
 #include <iostream>
+#include <type_traits>
+#include <cstdlib>
+#include <cstdint>
 #include <array>
 #include <vector>
 #include <limits>
 #include <cmath>
 #include <cassert>
+#include "../include/constexpr_sin.h"
+#include "../include/constexpr_array.h"
+#include "../include/quadrature_constexpr.h"
 #include "../include/polynomial.h"
-#include "../include/quadrature.h"
 
 int main() {
     constexpr unsigned int order = 3;
-    Polynomial<order, long double> poly;
-    Quadrature<order, long double> quad;
+    Polynomial<order, long double,Quadrature> poly;
+   /* Quadrature<order, long double> quad;
     quad.compute_quadrature_points(order+1,1,1);
     quad.compute_quadrature_weights(quad.knots,0,0);
 
@@ -31,7 +36,7 @@ int main() {
     for (int i=0;i<order+1;i++) {
             std::cout << poly.eval_2nd_derivative(0,quad.knots[i],quad.knots) << "       " << poly.eval_2nd_derivative(1,quad.knots[i],quad.knots) << "       "
                       << poly.eval_2nd_derivative(2,quad.knots[i],quad.knots) << "       " << poly.eval_2nd_derivative(3,quad.knots[i],quad.knots) << std::endl;
-        }
+        }*/
 
     return 0;
 }

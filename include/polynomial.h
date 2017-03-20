@@ -1,17 +1,24 @@
 #ifndef __POLYNOMIAL_H__
 #define __POLYNOMIAL_H__
 
-template <int order, typename y_type>
+template <size_t order, typename y_type, template<typename, size_t> class Quadrature>
 class Polynomial {
 public:
 
-    std::array <y_type, order+1> knots;
+   const std::array <y_type, order+1> knots;
 
-    Polynomial() {
-        compute_interpolation_points();
+   constexpr  Polynomial() : knots(compute_knots) {}
+
+    constexpr constexpr_array <y_type, order + 1> compute_knots() const {
+        constexpr_array <y_type,order+1> knots_;
+        constexpr Quadrature<y_type,order+1> quad;
+        for (int i;i<order+1;i++) {
+            knots_[i]=quad[i];
+        }
+        return knots_;
     }
 
-    void compute_interpolation_points()
+    /*void compute_interpolation_points()
     {
       const unsigned int m = order - 1;
       const long double
@@ -74,7 +81,7 @@ public:
         p[i + 1] = static_cast<y_type>( (a2 + a3 * x) * p[i] - a4 * p[i - 1]) / a1;
       }
       return p[n];
-    }
+    }*/
 
     y_type eval_lagrange(int i, y_type x) const {
         y_type val = 1.;
