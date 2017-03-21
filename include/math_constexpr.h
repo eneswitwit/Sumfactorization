@@ -1,5 +1,16 @@
 namespace math{
 
+    // Template constexpr function for calculating fabs as constexpr
+    template<typename y_type>
+    constexpr y_type fabs(y_type val) {
+        if (val < 0) {
+            return -val;
+        }
+        else {
+            return val;
+        }
+    }
+
     template<class T,class dcy = std::decay_t<T>>
     constexpr inline std::enable_if_t<std::is_floating_point<T>::value,dcy> inverse(T value){
         return (value == 0) ? 0.0 : 1.0 / value;

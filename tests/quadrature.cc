@@ -8,7 +8,7 @@
 #include <type_traits>
 #include <iostream>
 
-#include "../include/constexpr_sin.h"
+#include "../include/math_constexpr.h"
 #include "../include/constexpr_array.h"
 #include "../include/quadrature_constexpr.h"
 //#include "../include/quadrature.h"

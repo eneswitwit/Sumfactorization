@@ -7,7 +7,7 @@
 #include <limits>
 #include <cmath>
 #include <cassert>
-#include "../include/constexpr_sin.h"
+#include "../include/math_constexpr.h"
 #include "../include/constexpr_array.h"
 #include "../include/quadrature_constexpr.h"
 #include "../include/polynomial.h"

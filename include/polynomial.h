@@ -12,7 +12,7 @@ public:
     constexpr constexpr_array <y_type, order + 1> compute_knots() const {
         constexpr_array <y_type,order+1> knots_;
         constexpr Quadrature<y_type,order+1> quad;
-        for (int i;i<order+1;i++) {
+        for (int i=0;i<order+1;i++) {
             knots_[i]=quad[i];
         }
         return knots_;
