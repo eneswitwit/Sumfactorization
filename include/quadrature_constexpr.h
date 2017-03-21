@@ -2,6 +2,7 @@
 #define __QUADRATURE_CONSTEXPR_H__
 
 
+
 // Template class Quadrature for computing knots and weights of the quadrature.
 template<typename y_type, size_t order >
 class Quadrature {
@@ -28,7 +29,7 @@ public:
     template<size_t n>
     constexpr y_type JacobiP(y_type x, int alpha, int beta) const
     {
-        constexpr_array < y_type, n+1 > p;
+        constexpr_array < y_type, n+3 > p;
         p[0] = 1.0L;
         if (order == 0) return p[0];
         p[1] = ((alpha + beta + 2) * x + (alpha - beta)) / 2;
@@ -101,7 +102,7 @@ public:
             delta = f / (f * s - J_x);
             r += delta;
         }
-        while (std::fabs(delta) >= tolerance);
+        while (math::fabs<y_type>(delta) >= tolerance);
         return r;
     }
 
