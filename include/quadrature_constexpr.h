@@ -7,10 +7,13 @@
 template<typename y_type, size_t order >
 class Quadrature {
 private:
-    const constexpr_array < y_type, order + 1 > knots_;
+
 public:
+    const constexpr_array < y_type, order + 1 > knots_;
+    const constexpr_array < y_type, order + 1 > weights_;
     constexpr Quadrature():
-        knots_ ( compute_quadrature_points()) {}
+        knots_ ( compute_quadrature_points()),
+        weights_ ( compute_quadrature_weights()){}
 
     constexpr const y_type & operator[](size_t n) const {
         return knots_[n];
@@ -90,7 +93,7 @@ public:
         for (unsigned int i=0; i<order+1; ++i)
           {
             s = JacobiP<order>(weights[i], 0, 0);
-            weights[i] = factor/(s*s);
+            weights[i] = 0.5*factor/(s*s);
           }
 
         return weights;
@@ -99,10 +102,10 @@ public:
     template<size_t n>
     constexpr y_type gamma() const
     {
-      constexpr_array < y_type, n-3 > result;
+      constexpr_array < y_type, n-2 > result;
       result[0] = n - 1;
       for (int i=2; i<n-1; i++)
-        result[i-1] *= result[i-2]*i;
+        result[i-1] = result[i-2]*i;
       return result[n-3];
     }
 

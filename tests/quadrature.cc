@@ -15,7 +15,7 @@
 
 
 
-constexpr static int order = 3;
+constexpr static int order = 4;
 
 
 int main() {
@@ -28,7 +28,7 @@ int main() {
 	constexpr Quadrature<long double, order> quad;
         for (int i = 0; i < order+1; i++)
 	{
-		std::cout << "quad[" << i << "] = " << quad[i] << std::endl;
+                std::cout << "quad[" << i << "] = " << quad.knots_[i] << "              " << quad.weights_[i] << std::endl;
 	}
 
 	return 0;
