@@ -1,0 +1,136 @@
+\hypertarget{class_quadrature}{}\section{Quadrature$<$ y\+\_\+type, order $>$ Class Template Reference}
+\label{class_quadrature}\index{Quadrature$<$ y\+\_\+type, order $>$@{Quadrature$<$ y\+\_\+type, order $>$}}
+
+
+{\ttfamily \#include $<$quadrature\+\_\+constexpr.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \hyperlink{class_quadrature_a0856d3ef4be07d572fd94d34f60ae6cb}{Quadrature} ()
+\item 
+constexpr const y\+\_\+type \& \hyperlink{class_quadrature_a99f64a4cef3011cbf0df06a4e8eec0c0}{operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t n) const
+\item 
+constexpr y\+\_\+type \hyperlink{class_quadrature_a58f654e4f2cc08855dfed52d65b35c04}{sin\+\_\+input} (int i, int m) const
+\item 
+{\footnotesize template$<$size\+\_\+t n$>$ }\\constexpr y\+\_\+type \hyperlink{class_quadrature_a14035efb920cf6ab00fae290e5bbe4bf}{JacobiP} (y\+\_\+type x, int alpha, int beta) const
+\item 
+constexpr \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \hyperlink{class_quadrature_a9c99c8f4086eec3e94e0eae8a50506ff}{compute\+\_\+quadrature\+\_\+points} () const
+\item 
+constexpr \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \hyperlink{class_quadrature_a904e3b1cad3b304b500701354b30e194}{compute\+\_\+quadrature\+\_\+weights} () const
+\item 
+{\footnotesize template$<$size\+\_\+t n$>$ }\\constexpr y\+\_\+type \hyperlink{class_quadrature_ad361ff7a9bfdb5721a107341abfb37d4}{gamma} () const
+\item 
+constexpr y\+\_\+type \hyperlink{class_quadrature_a924d121900f371d20e84fb3d5277ba4d}{compute\+\_\+kth\+\_\+entry} (const unsigned int k, const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \&knots) const
+\item 
+constexpr y\+\_\+type \hyperlink{class_quadrature_a760b6b2c4560afa7218533136a00d0ed}{transform\+\_\+kth\+\_\+entry} (const unsigned int k, const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \&knots) const
+\item 
+constexpr y\+\_\+type \hyperlink{class_quadrature_a98b32f58c1a69d2430e2ed14283b07e9}{inv\+\_\+transform\+\_\+kth\+\_\+entry} (const unsigned int k, const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \&knots) const
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \hyperlink{class_quadrature_ac953b6311f9120fd2c0d8e5bc0d47a8a}{knots\+\_\+}
+\item 
+const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \hyperlink{class_quadrature_a333f9daea5b493b74ded779ae4a7c8c9}{weights\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_quadrature_a0856d3ef4be07d572fd94d34f60ae6cb}\label{class_quadrature_a0856d3ef4be07d572fd94d34f60ae6cb}} 
+\index{Quadrature@{Quadrature}!Quadrature@{Quadrature}}
+\index{Quadrature@{Quadrature}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{Quadrature()}{Quadrature()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::\hyperlink{class_quadrature}{Quadrature} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_quadrature_a924d121900f371d20e84fb3d5277ba4d}\label{class_quadrature_a924d121900f371d20e84fb3d5277ba4d}} 
+\index{Quadrature@{Quadrature}!compute\+\_\+kth\+\_\+entry@{compute\+\_\+kth\+\_\+entry}}
+\index{compute\+\_\+kth\+\_\+entry@{compute\+\_\+kth\+\_\+entry}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{compute\+\_\+kth\+\_\+entry()}{compute\_kth\_entry()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr y\+\_\+type \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::compute\+\_\+kth\+\_\+entry (\begin{DoxyParamCaption}\item[{const unsigned int}]{k,  }\item[{const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \&}]{knots }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a9c99c8f4086eec3e94e0eae8a50506ff}\label{class_quadrature_a9c99c8f4086eec3e94e0eae8a50506ff}} 
+\index{Quadrature@{Quadrature}!compute\+\_\+quadrature\+\_\+points@{compute\+\_\+quadrature\+\_\+points}}
+\index{compute\+\_\+quadrature\+\_\+points@{compute\+\_\+quadrature\+\_\+points}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{compute\+\_\+quadrature\+\_\+points()}{compute\_quadrature\_points()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order + 1 $>$ \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::compute\+\_\+quadrature\+\_\+points (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a904e3b1cad3b304b500701354b30e194}\label{class_quadrature_a904e3b1cad3b304b500701354b30e194}} 
+\index{Quadrature@{Quadrature}!compute\+\_\+quadrature\+\_\+weights@{compute\+\_\+quadrature\+\_\+weights}}
+\index{compute\+\_\+quadrature\+\_\+weights@{compute\+\_\+quadrature\+\_\+weights}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{compute\+\_\+quadrature\+\_\+weights()}{compute\_quadrature\_weights()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$y\+\_\+type, order + 1$>$ \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::compute\+\_\+quadrature\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_ad361ff7a9bfdb5721a107341abfb37d4}\label{class_quadrature_ad361ff7a9bfdb5721a107341abfb37d4}} 
+\index{Quadrature@{Quadrature}!gamma@{gamma}}
+\index{gamma@{gamma}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{gamma()}{gamma()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+template$<$size\+\_\+t n$>$ \\
+constexpr y\+\_\+type \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::gamma (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a98b32f58c1a69d2430e2ed14283b07e9}\label{class_quadrature_a98b32f58c1a69d2430e2ed14283b07e9}} 
+\index{Quadrature@{Quadrature}!inv\+\_\+transform\+\_\+kth\+\_\+entry@{inv\+\_\+transform\+\_\+kth\+\_\+entry}}
+\index{inv\+\_\+transform\+\_\+kth\+\_\+entry@{inv\+\_\+transform\+\_\+kth\+\_\+entry}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{inv\+\_\+transform\+\_\+kth\+\_\+entry()}{inv\_transform\_kth\_entry()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr y\+\_\+type \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::inv\+\_\+transform\+\_\+kth\+\_\+entry (\begin{DoxyParamCaption}\item[{const unsigned int}]{k,  }\item[{const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \&}]{knots }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a14035efb920cf6ab00fae290e5bbe4bf}\label{class_quadrature_a14035efb920cf6ab00fae290e5bbe4bf}} 
+\index{Quadrature@{Quadrature}!JacobiP@{JacobiP}}
+\index{JacobiP@{JacobiP}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{Jacobi\+P()}{JacobiP()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+template$<$size\+\_\+t n$>$ \\
+constexpr y\+\_\+type \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::JacobiP (\begin{DoxyParamCaption}\item[{y\+\_\+type}]{x,  }\item[{int}]{alpha,  }\item[{int}]{beta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a99f64a4cef3011cbf0df06a4e8eec0c0}\label{class_quadrature_a99f64a4cef3011cbf0df06a4e8eec0c0}} 
+\index{Quadrature@{Quadrature}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr const y\+\_\+type\& \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a58f654e4f2cc08855dfed52d65b35c04}\label{class_quadrature_a58f654e4f2cc08855dfed52d65b35c04}} 
+\index{Quadrature@{Quadrature}!sin\+\_\+input@{sin\+\_\+input}}
+\index{sin\+\_\+input@{sin\+\_\+input}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{sin\+\_\+input()}{sin\_input()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr y\+\_\+type \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::sin\+\_\+input (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{m }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_quadrature_a760b6b2c4560afa7218533136a00d0ed}\label{class_quadrature_a760b6b2c4560afa7218533136a00d0ed}} 
+\index{Quadrature@{Quadrature}!transform\+\_\+kth\+\_\+entry@{transform\+\_\+kth\+\_\+entry}}
+\index{transform\+\_\+kth\+\_\+entry@{transform\+\_\+kth\+\_\+entry}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{transform\+\_\+kth\+\_\+entry()}{transform\_kth\_entry()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+constexpr y\+\_\+type \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::transform\+\_\+kth\+\_\+entry (\begin{DoxyParamCaption}\item[{const unsigned int}]{k,  }\item[{const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order+1 $>$ \&}]{knots }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_quadrature_ac953b6311f9120fd2c0d8e5bc0d47a8a}\label{class_quadrature_ac953b6311f9120fd2c0d8e5bc0d47a8a}} 
+\index{Quadrature@{Quadrature}!knots\+\_\+@{knots\+\_\+}}
+\index{knots\+\_\+@{knots\+\_\+}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{knots\+\_\+}{knots\_}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order + 1 $>$ \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::knots\+\_\+}
+
+\mbox{\Hypertarget{class_quadrature_a333f9daea5b493b74ded779ae4a7c8c9}\label{class_quadrature_a333f9daea5b493b74ded779ae4a7c8c9}} 
+\index{Quadrature@{Quadrature}!weights\+\_\+@{weights\+\_\+}}
+\index{weights\+\_\+@{weights\+\_\+}!Quadrature@{Quadrature}}
+\subsubsection{\texorpdfstring{weights\+\_\+}{weights\_}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type, size\+\_\+t order$>$ \\
+const \hyperlink{classconstexpr__array}{constexpr\+\_\+array}$<$ y\+\_\+type, order + 1 $>$ \hyperlink{class_quadrature}{Quadrature}$<$ y\+\_\+type, order $>$\+::weights\+\_\+}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{quadrature__constexpr_8h}{quadrature\+\_\+constexpr.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,179 @@
+\hypertarget{class_v_m_u_l_t}{}\section{V\+M\+U\+LT$<$ order, q\+\_\+order, c, y\+\_\+type, Polynomial, Quadrature $>$ Class Template Reference}
+\label{class_v_m_u_l_t}\index{V\+M\+U\+L\+T$<$ order, q\+\_\+order, c, y\+\_\+type, Polynomial, Quadrature $>$@{V\+M\+U\+L\+T$<$ order, q\+\_\+order, c, y\+\_\+type, Polynomial, Quadrature $>$}}
+
+
+{\ttfamily \#include $<$vmult.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_v_m_u_l_t_a31d73a0a561c27c4443a167950a9c852}{V\+M\+U\+LT} ()
+\item 
+void \hyperlink{class_v_m_u_l_t_a0d60b90e214cf4e5d35e3b3c1402ccec}{compute\+\_\+basis\+\_\+matrix} ()
+\item 
+void \hyperlink{class_v_m_u_l_t_a51170ad231bce36f2be50c5198a2aec0}{compute\+\_\+for\+\_\+gradient} ()
+\item 
+void \hyperlink{class_v_m_u_l_t_add49b6c92921149a92830f2930074aab}{compute\+\_\+for\+\_\+laplacian} ()
+\item 
+void \hyperlink{class_v_m_u_l_t_ab903e1707daffaf5480c481281f419db}{vmult\+\_\+mass} (std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&y, std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&u)
+\item 
+void \hyperlink{class_v_m_u_l_t_a722ef0ecb53e27931993425f5514ea8a}{vmult\+\_\+gradient} (std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&y, std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&u)
+\item 
+constexpr void \hyperlink{class_v_m_u_l_t_a51c70b05d1f6d934470b1f11526cbc80}{vmult\+\_\+laplacian} (std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&y, std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&u)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_quadrature}{Quadrature}$<$ q\+\_\+order, y\+\_\+type $>$ \hyperlink{class_v_m_u_l_t_a4395585e5102243b07c33abc001d1a7a}{quad}
+\item 
+\hyperlink{class_polynomial}{Polynomial}$<$ order, y\+\_\+type $>$ \hyperlink{class_v_m_u_l_t_ad9e2a7049062262eee02a278aca1da14}{poly}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, q\+\_\+order $>$, order+1 $>$ \hyperlink{class_v_m_u_l_t_a6a9fd7d80d98b790caae6cb72bb6db05}{N\+\_\+\+Transposed}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, q\+\_\+order $>$ \hyperlink{class_v_m_u_l_t_ad06ca1f3f261548524b59bd1a6dbe80d}{NW}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \hyperlink{class_v_m_u_l_t_a1997e77da014ab5ee4b2c13670845599}{N\+\_\+\+Product}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, q\+\_\+order $>$, order+1 $>$ \hyperlink{class_v_m_u_l_t_a317e137345aaeb4967db30ca7e479435}{Ndx\+\_\+\+Transposed}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, q\+\_\+order $>$ \hyperlink{class_v_m_u_l_t_a4fb623e96001cbc01d7289c3465544ec}{N\+Wdx}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \hyperlink{class_v_m_u_l_t_a9b41e56739c33dfa1a547b8b0b757d42}{Ndx\+\_\+\+Product}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, q\+\_\+order $>$, order+1 $>$ \hyperlink{class_v_m_u_l_t_a11fec13d3ecba614678ce07a466bdcb1}{Ndxdx\+\_\+\+Transposed}
+\item 
+std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \hyperlink{class_v_m_u_l_t_a74d462b33c24fb447dc7267be3725720}{Ndxdx\+\_\+\+Product}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_v_m_u_l_t_a31d73a0a561c27c4443a167950a9c852}\label{class_v_m_u_l_t_a31d73a0a561c27c4443a167950a9c852}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{V\+M\+U\+L\+T()}{VMULT()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+\hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::\hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_v_m_u_l_t_a0d60b90e214cf4e5d35e3b3c1402ccec}\label{class_v_m_u_l_t_a0d60b90e214cf4e5d35e3b3c1402ccec}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!compute\+\_\+basis\+\_\+matrix@{compute\+\_\+basis\+\_\+matrix}}
+\index{compute\+\_\+basis\+\_\+matrix@{compute\+\_\+basis\+\_\+matrix}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{compute\+\_\+basis\+\_\+matrix()}{compute\_basis\_matrix()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+void \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::compute\+\_\+basis\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a51170ad231bce36f2be50c5198a2aec0}\label{class_v_m_u_l_t_a51170ad231bce36f2be50c5198a2aec0}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!compute\+\_\+for\+\_\+gradient@{compute\+\_\+for\+\_\+gradient}}
+\index{compute\+\_\+for\+\_\+gradient@{compute\+\_\+for\+\_\+gradient}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{compute\+\_\+for\+\_\+gradient()}{compute\_for\_gradient()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+void \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::compute\+\_\+for\+\_\+gradient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_add49b6c92921149a92830f2930074aab}\label{class_v_m_u_l_t_add49b6c92921149a92830f2930074aab}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!compute\+\_\+for\+\_\+laplacian@{compute\+\_\+for\+\_\+laplacian}}
+\index{compute\+\_\+for\+\_\+laplacian@{compute\+\_\+for\+\_\+laplacian}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{compute\+\_\+for\+\_\+laplacian()}{compute\_for\_laplacian()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+void \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::compute\+\_\+for\+\_\+laplacian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a722ef0ecb53e27931993425f5514ea8a}\label{class_v_m_u_l_t_a722ef0ecb53e27931993425f5514ea8a}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!vmult\+\_\+gradient@{vmult\+\_\+gradient}}
+\index{vmult\+\_\+gradient@{vmult\+\_\+gradient}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{vmult\+\_\+gradient()}{vmult\_gradient()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+void \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::vmult\+\_\+gradient (\begin{DoxyParamCaption}\item[{std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&}]{y,  }\item[{std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a51c70b05d1f6d934470b1f11526cbc80}\label{class_v_m_u_l_t_a51c70b05d1f6d934470b1f11526cbc80}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!vmult\+\_\+laplacian@{vmult\+\_\+laplacian}}
+\index{vmult\+\_\+laplacian@{vmult\+\_\+laplacian}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{vmult\+\_\+laplacian()}{vmult\_laplacian()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+constexpr void \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::vmult\+\_\+laplacian (\begin{DoxyParamCaption}\item[{std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&}]{y,  }\item[{std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_ab903e1707daffaf5480c481281f419db}\label{class_v_m_u_l_t_ab903e1707daffaf5480c481281f419db}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!vmult\+\_\+mass@{vmult\+\_\+mass}}
+\index{vmult\+\_\+mass@{vmult\+\_\+mass}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{vmult\+\_\+mass()}{vmult\_mass()}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+void \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::vmult\+\_\+mass (\begin{DoxyParamCaption}\item[{std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&}]{y,  }\item[{std\+::array$<$ std\+::array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_v_m_u_l_t_a1997e77da014ab5ee4b2c13670845599}\label{class_v_m_u_l_t_a1997e77da014ab5ee4b2c13670845599}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!N\+\_\+\+Product@{N\+\_\+\+Product}}
+\index{N\+\_\+\+Product@{N\+\_\+\+Product}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{N\+\_\+\+Product}{N\_Product}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, order +1$>$, order + 1$>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::N\+\_\+\+Product}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a6a9fd7d80d98b790caae6cb72bb6db05}\label{class_v_m_u_l_t_a6a9fd7d80d98b790caae6cb72bb6db05}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!N\+\_\+\+Transposed@{N\+\_\+\+Transposed}}
+\index{N\+\_\+\+Transposed@{N\+\_\+\+Transposed}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{N\+\_\+\+Transposed}{N\_Transposed}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, q\+\_\+order$>$, order + 1 $>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::N\+\_\+\+Transposed}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a9b41e56739c33dfa1a547b8b0b757d42}\label{class_v_m_u_l_t_a9b41e56739c33dfa1a547b8b0b757d42}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!Ndx\+\_\+\+Product@{Ndx\+\_\+\+Product}}
+\index{Ndx\+\_\+\+Product@{Ndx\+\_\+\+Product}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{Ndx\+\_\+\+Product}{Ndx\_Product}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, order +1$>$, order + 1$>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::Ndx\+\_\+\+Product}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a317e137345aaeb4967db30ca7e479435}\label{class_v_m_u_l_t_a317e137345aaeb4967db30ca7e479435}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!Ndx\+\_\+\+Transposed@{Ndx\+\_\+\+Transposed}}
+\index{Ndx\+\_\+\+Transposed@{Ndx\+\_\+\+Transposed}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{Ndx\+\_\+\+Transposed}{Ndx\_Transposed}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, q\+\_\+order$>$, order + 1 $>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::Ndx\+\_\+\+Transposed}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a74d462b33c24fb447dc7267be3725720}\label{class_v_m_u_l_t_a74d462b33c24fb447dc7267be3725720}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!Ndxdx\+\_\+\+Product@{Ndxdx\+\_\+\+Product}}
+\index{Ndxdx\+\_\+\+Product@{Ndxdx\+\_\+\+Product}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{Ndxdx\+\_\+\+Product}{Ndxdx\_Product}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, order +1$>$, order + 1$>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::Ndxdx\+\_\+\+Product}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a11fec13d3ecba614678ce07a466bdcb1}\label{class_v_m_u_l_t_a11fec13d3ecba614678ce07a466bdcb1}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!Ndxdx\+\_\+\+Transposed@{Ndxdx\+\_\+\+Transposed}}
+\index{Ndxdx\+\_\+\+Transposed@{Ndxdx\+\_\+\+Transposed}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{Ndxdx\+\_\+\+Transposed}{Ndxdx\_Transposed}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, q\+\_\+order$>$, order + 1 $>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::Ndxdx\+\_\+\+Transposed}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_ad06ca1f3f261548524b59bd1a6dbe80d}\label{class_v_m_u_l_t_ad06ca1f3f261548524b59bd1a6dbe80d}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!NW@{NW}}
+\index{NW@{NW}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{NW}{NW}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, order + 1$>$, q\+\_\+order $>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::NW}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a4fb623e96001cbc01d7289c3465544ec}\label{class_v_m_u_l_t_a4fb623e96001cbc01d7289c3465544ec}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!N\+Wdx@{N\+Wdx}}
+\index{N\+Wdx@{N\+Wdx}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{N\+Wdx}{NWdx}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+std\+::array$<$ std\+::array $<$y\+\_\+type, order + 1$>$, q\+\_\+order $>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::N\+Wdx}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_ad9e2a7049062262eee02a278aca1da14}\label{class_v_m_u_l_t_ad9e2a7049062262eee02a278aca1da14}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!poly@{poly}}
+\index{poly@{poly}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{poly}{poly}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+\hyperlink{class_polynomial}{Polynomial}$<$order, y\+\_\+type$>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::poly}
+
+\mbox{\Hypertarget{class_v_m_u_l_t_a4395585e5102243b07c33abc001d1a7a}\label{class_v_m_u_l_t_a4395585e5102243b07c33abc001d1a7a}} 
+\index{V\+M\+U\+LT@{V\+M\+U\+LT}!quad@{quad}}
+\index{quad@{quad}!V\+M\+U\+LT@{V\+M\+U\+LT}}
+\subsubsection{\texorpdfstring{quad}{quad}}
+{\footnotesize\ttfamily template$<$int order, int q\+\_\+order, int c, typename y\+\_\+type , template$<$ int, typename $>$ class Polynomial, template$<$ int, typename $>$ class Quadrature$>$ \\
+\hyperlink{class_quadrature}{Quadrature}$<$q\+\_\+order, y\+\_\+type$>$ \hyperlink{class_v_m_u_l_t}{V\+M\+U\+LT}$<$ order, q\+\_\+order, c, y\+\_\+type, \hyperlink{class_polynomial}{Polynomial}, \hyperlink{class_quadrature}{Quadrature} $>$\+::quad}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{vmult_8h}{vmult.\+h}\end{DoxyCompactItemize}

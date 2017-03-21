@@ -1,0 +1,54 @@
+\hypertarget{integrate_8cc}{}\section{tests/integrate.cc File Reference}
+\label{integrate_8cc}\index{tests/integrate.\+cc@{tests/integrate.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include \char`\"{}../include/la\+\_\+operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/quadrature.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/polynomial.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/vmult.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/integrate.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename y\+\_\+type , size\+\_\+t order$>$ }\\array$<$ array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ \hyperlink{integrate_8cc_a69cf6a9c6fd43ec895a9297a4dcd78dc}{lagrange\+\_\+nodes} (array$<$ array$<$ y\+\_\+type, order+1 $>$, order+1 $>$ u, array$<$ y\+\_\+type, order+1 $>$ q\+\_\+weights)
+\item 
+{\footnotesize template$<$typename y\+\_\+type , size\+\_\+t size$>$ }\\std\+::array$<$ y\+\_\+type, size $>$ \hyperlink{integrate_8cc_a407ed25df82b92a8977da707613c6167}{create\+\_\+vector} ()
+\item 
+{\footnotesize template$<$typename y\+\_\+type , size\+\_\+t size$>$ }\\std\+::array$<$ std\+::array$<$ y\+\_\+type, size $>$, size $>$ \hyperlink{integrate_8cc_a417f8518accdeb49f4b3ccf75e40a9c8}{create\+\_\+array} ()
+\item 
+int \hyperlink{integrate_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{integrate_8cc_a417f8518accdeb49f4b3ccf75e40a9c8}\label{integrate_8cc_a417f8518accdeb49f4b3ccf75e40a9c8}} 
+\index{integrate.\+cc@{integrate.\+cc}!create\+\_\+array@{create\+\_\+array}}
+\index{create\+\_\+array@{create\+\_\+array}!integrate.\+cc@{integrate.\+cc}}
+\subsubsection{\texorpdfstring{create\+\_\+array()}{create\_array()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type , size\+\_\+t size$>$ \\
+std\+::array$<$std\+::array$<$y\+\_\+type, size$>$, size$>$ create\+\_\+array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{integrate_8cc_a407ed25df82b92a8977da707613c6167}\label{integrate_8cc_a407ed25df82b92a8977da707613c6167}} 
+\index{integrate.\+cc@{integrate.\+cc}!create\+\_\+vector@{create\+\_\+vector}}
+\index{create\+\_\+vector@{create\+\_\+vector}!integrate.\+cc@{integrate.\+cc}}
+\subsubsection{\texorpdfstring{create\+\_\+vector()}{create\_vector()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type , size\+\_\+t size$>$ \\
+std\+::array$<$y\+\_\+type, size$>$ create\+\_\+vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{integrate_8cc_a69cf6a9c6fd43ec895a9297a4dcd78dc}\label{integrate_8cc_a69cf6a9c6fd43ec895a9297a4dcd78dc}} 
+\index{integrate.\+cc@{integrate.\+cc}!lagrange\+\_\+nodes@{lagrange\+\_\+nodes}}
+\index{lagrange\+\_\+nodes@{lagrange\+\_\+nodes}!integrate.\+cc@{integrate.\+cc}}
+\subsubsection{\texorpdfstring{lagrange\+\_\+nodes()}{lagrange\_nodes()}}
+{\footnotesize\ttfamily template$<$typename y\+\_\+type , size\+\_\+t order$>$ \\
+array$<$ array $<$ y\+\_\+type, order + 1 $>$, order + 1 $>$ lagrange\+\_\+nodes (\begin{DoxyParamCaption}\item[{array$<$ array$<$ y\+\_\+type, order+1 $>$, order+1 $>$}]{u,  }\item[{array$<$ y\+\_\+type, order+1 $>$}]{q\+\_\+weights }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{integrate_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{integrate_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{integrate.\+cc@{integrate.\+cc}!main@{main}}
+\index{main@{main}!integrate.\+cc@{integrate.\+cc}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
