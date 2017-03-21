@@ -1,10 +1,13 @@
 #ifndef __POLYNOMIAL_H__
 #define __POLYNOMIAL_H__
 
+
+// A class for handling polynomials with lagrangian basis.
+
 template <size_t order, typename y_type, template<typename, size_t> class Quadrature>
 class Polynomial {
 public:
-
+ 
    const constexpr_array <y_type, order+1> knots;
 
    constexpr  Polynomial() : knots(compute_knots()) {}
