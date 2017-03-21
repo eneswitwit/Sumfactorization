@@ -5,17 +5,13 @@ template <size_t order, typename y_type, template<typename, size_t> class Quadra
 class Polynomial {
 public:
 
-   const std::array <y_type, order+1> knots;
+   const constexpr_array <y_type, order+1> knots;
 
-   constexpr  Polynomial() : knots(compute_knots) {}
+   constexpr  Polynomial() : knots(compute_knots()) {}
 
     constexpr constexpr_array <y_type, order + 1> compute_knots() const {
-        constexpr_array <y_type,order+1> knots_;
-        constexpr Quadrature<y_type,order+1> quad;
-        for (int i=0;i<order+1;i++) {
-            knots_[i]=quad[i];
-        }
-        return knots_;
+        constexpr Quadrature<y_type,order> quad;
+        return quad.compute_quadrature_points();
     }
 
     /*void compute_interpolation_points()
