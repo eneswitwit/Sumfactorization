@@ -86,10 +86,7 @@ public:
 
         y_type s = 0.L;
 
-        const y_type factor = std::pow(2., 1) *
-                                   gamma<order+1>() *
-                                   gamma<order+1>() /
-                                   ((order)*gamma<order+1>()*gamma<order+2>());
+        const y_type factor = 2 * gamma<order+1>() * gamma<order+1>() / ((order)*gamma<order+1>()*gamma<order+2>());
         for (unsigned int i=0; i<order+1; ++i)
           {
             s = JacobiP<order>(weights[i], 0, 0);
