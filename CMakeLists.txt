@@ -27,6 +27,8 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 # add executable
 add_executable(testvmult ${PROJECT_SOURCE_DIR}/tests/integrate.cc)
+add_executable(polynomial ${PROJECT_SOURCE_DIR}/tests/polynomial.cc)
+add_executable(quadrature ${PROJECT_SOURCE_DIR}/tests/quadrature.cc)
 
 # Put all tests in the test directory, where the sources also are
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests)
@@ -36,6 +38,8 @@ enable_testing()
 
 # check if test runs and exits without error
 add_test(testvmult ${PROJECT_SOURCE_DIR}/bin/testvmult)
+add_test(polynomial ${PROJECT_SOURCE_DIR}/bin/polynomial)
+add_test(quadrature ${PROJECT_SOURCE_DIR}/bin/quadrature)
 
 
 
