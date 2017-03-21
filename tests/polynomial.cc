@@ -8,14 +8,14 @@
 #include <type_traits>
 #include <iostream>
 
-#include "../include/math_constexpr.h"
+#include "../include/constexpr_math.h"
 #include "../include/constexpr_array.h"
-#include "../include/quadrature_constexpr.h"
-#include "../include/polynomial.h"
+#include "../include/constexpr_quadrature.h"
+#include "../include/polynomialbasis/constexpr_lagrange.h"
 
 int main() {
     constexpr unsigned int order = 3;
-    Polynomial<order, long double,Quadrature> poly;
+    Lagrange<order, long double,Quadrature> lagr;
    /* Quadrature<order, long double> quad;
     quad.compute_quadrature_points(order+1,1,1);
     quad.compute_quadrature_weights(quad.knots,0,0);

@@ -12,6 +12,7 @@ include_directories("${PROJECT_SORUCE_DIR}/include")
 
 # check for a sufficiently recent compiler
 INCLUDE(CheckCXXCompilerFlag)
+
 CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
 CHECK_CXX_COMPILER_FLAG("-std=c++1y" COMPILER_SUPPORTS_CXX1Y)
 IF(COMPILER_SUPPORTS_CXX14)
@@ -31,6 +32,7 @@ add_executable(polynomial ${PROJECT_SOURCE_DIR}/tests/polynomial.cc)
 add_executable(quadrature ${PROJECT_SOURCE_DIR}/tests/quadrature.cc)
 
 # Put all tests in the test directory, where the sources also are
+set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests)
 
 # testing

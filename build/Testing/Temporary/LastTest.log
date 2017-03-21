@@ -1,19 +1,55 @@
-Start testing: Mar 09 21:24 CET
+Start testing: Mar 21 16:23 CET
 ----------------------------------------------------------
-1/1 Testing: testvmult
-1/1 Test: testvmult
-Command: "/Users/Witwit/Github/sumfactorization/bin/testvmult"
-Directory: /Users/Witwit/Github/sumfactorization/build
-"testvmult" start time: Mar 09 21:24 CET
+1/3 Testing: testvmult
+1/3 Test: testvmult
+Command: "/Users/eneswitwit/Github/Sumfactorization/bin/testvmult"
+Directory: /Users/eneswitwit/Github/Sumfactorization/build
+"testvmult" start time: Mar 21 16:23 CET
 Output:
 ----------------------------------------------------------
-Just testing
+/Users/eneswitwit/Github/Sumfactorization/bin/testvmult: /Users/eneswitwit/Github/Sumfactorization/bin/testvmult: cannot execute binary file
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Failed.
+"testvmult" end time: Mar 21 16:23 CET
+"testvmult" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /Users/eneswitwit/Github/Sumfactorization/bin/polynomial
+2/3 Testing: polynomial
+2/3 Test: polynomial
+Command: ""
+Directory: /Users/eneswitwit/Github/Sumfactorization/build
+"polynomial" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"polynomial" end time: Mar 21 16:23 CET
+"polynomial" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: quadrature
+3/3 Test: quadrature
+Command: "/Users/eneswitwit/Github/Sumfactorization/bin/quadrature"
+Directory: /Users/eneswitwit/Github/Sumfactorization/build
+"quadrature" start time: Mar 21 16:23 CET
+Output:
+----------------------------------------------------------
+quad[0] = 0              0.05
+quad[1] = 0.172673              0.272222
+quad[2] = 0.5              0.355556
+quad[3] = 0.827327              0.272222
+quad[4] = 1              0.05
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"testvmult" end time: Mar 09 21:24 CET
-"testvmult" time elapsed: 00:00:00
+"quadrature" end time: Mar 21 16:23 CET
+"quadrature" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Mar 09 21:24 CET
+End testing: Mar 21 16:23 CET

@@ -1,5 +1,5 @@
-#ifndef __ARRAY_CONSTEXPR_H__
-#define __ARRAY_CONSTEXPR_H__
+#ifndef __CONSTEXPR_ARRAY_H__
+#define __CONSTEXPR_ARRAY_H__
 
 template<typename T, size_t N>
 class constexpr_array{

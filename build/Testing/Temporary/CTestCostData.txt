@@ -1,3 +1,6 @@
-TESTVMULT 0 0
-testvmult 2 0.00376999
+testvmult 0 0
+polynomial 0 0
+quadrature 1 0.011085
 ---
+testvmult
+polynomial

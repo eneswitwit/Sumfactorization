@@ -1,4 +1,4 @@
-# Install script for directory: /Users/Witwit/Github/sumfactorization
+# Install script for directory: /Users/eneswitwit/Github/Sumfactorization
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/Witwit/Github/sumfactorization/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/eneswitwit/Github/Sumfactorization/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
