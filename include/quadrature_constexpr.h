@@ -29,13 +29,13 @@ public:
     template<size_t n>
     constexpr y_type JacobiP(y_type x, int alpha, int beta) const
     {
-        constexpr_array < y_type, n+3 > p;
+        constexpr_array < y_type, n+1 > p;
         p[0] = 1.0L;
         if (order == 0) return p[0];
         p[1] = ((alpha + beta + 2) * x + (alpha - beta)) / 2;
         if (order == 1) return p[1];
 
-        for (unsigned int i = 1; i <= (order - 1); ++i)
+        for (unsigned int i = 1; i <= (n - 1); ++i)
         {
             const int v  = 2 * i + alpha + beta;
             const int a1 = 2 * (i + 1) * (i + alpha + beta + 1) * v;
@@ -71,6 +71,39 @@ public:
 
         return knots;
 
+    }
+
+    constexpr constexpr_array<y_type, order + 1> compute_quadrature_weights() const {
+
+        constexpr_array < y_type, order + 1 > weights;
+
+        for (unsigned int j = 0; j < order+1; j++) {
+          weights[j] = inv_transform_kth_entry(j,knots_);
+        }
+
+        y_type s = 0.L;
+
+        const y_type factor = std::pow(2., 1) *
+                                   gamma<order+1>() *
+                                   gamma<order+1>() /
+                                   ((order)*gamma<order+1>()*gamma<order+2>());
+        for (unsigned int i=0; i<order+1; ++i)
+          {
+            s = JacobiP<order>(weights[i], 0, 0);
+            weights[i] = factor/(s*s);
+          }
+
+        return weights;
+    }
+
+    template<size_t n>
+    constexpr y_type gamma() const
+    {
+      constexpr_array < y_type, n-3 > result;
+      result[0] = n - 1;
+      for (int i=2; i<n-1; i++)
+        result[i-1] *= result[i-2]*i;
+      return result[n-3];
     }
 
     constexpr y_type compute_kth_entry(const unsigned int k, const constexpr_array < y_type, order + 1 > & knots) const
@@ -111,6 +144,14 @@ public:
         y_type val = knots[k];
         val *= 0.5L;
         val += 0.5L;
+        return val;
+    }
+
+    constexpr y_type inv_transform_kth_entry(const unsigned int k, const constexpr_array < y_type, order + 1 > & knots) const
+    {
+        y_type val = knots[k];
+        val -= 0.5L;
+        val *= 2.L;
         return val;
     }
 
