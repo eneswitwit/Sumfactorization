@@ -1,12 +1,13 @@
-#include <iostream>
 #include <type_traits>
 #include <cstdlib>
+#include <cmath>
 #include <cstdint>
 #include <array>
 #include <vector>
 #include <limits>
-#include <cmath>
-#include <cassert>
+#include <type_traits>
+#include <iostream>
+
 #include "../include/math_constexpr.h"
 #include "../include/constexpr_array.h"
 #include "../include/quadrature_constexpr.h"
