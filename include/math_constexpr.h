@@ -1,3 +1,6 @@
+#ifndef __MATH_CONSTEXPR_H_
+#define __MATH_CONSTEXPR_H_
+
 namespace math{
 
     // Template constexpr function for calculating fabs as constexpr
@@ -84,3 +87,5 @@ namespace math{
         return result;
     }
 }
+
+#endif
