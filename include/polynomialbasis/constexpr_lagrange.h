@@ -23,7 +23,7 @@ public:
         y_type val = 1.;
         for (int j = 0; j <= order; j++) {
                 if (i != j) {
-                        val *= (x - knots[j]) / (knots[i] - knots[j]);
+                        val *= (*x - knots[j]) / (knots[i] - knots[j]);
                     }
             }
         return val;
@@ -37,7 +37,7 @@ public:
                         y_type product=1;
                         for (unsigned int j=0;j<order+1;j++) {
                                 if ((j!=i) && (j!=m)) {
-                                        product*=(x-knots[j])/(knots[i]-knots[j]);
+                                        product*=(*x-knots[j])/(knots[i]-knots[j]);
                                     }
                             }
                         sum+=product/(knots[i]-knots[m]);
@@ -57,7 +57,7 @@ public:
                                         y_type product=1;
                                         for (unsigned int j=0;j<order+1;j++) {
                                                 if ((j!=i) && (j!=m) && (j!=k)) {
-                                                        product*=(x-knots[j])/(knots[i]-knots[j]);
+                                                        product*=(*x-knots[j])/(knots[i]-knots[j]);
                                                     }
                                             }
                                         sum1+=product/(knots[i]-knots[m]);
