@@ -1,37 +1,35 @@
 #ifndef __VMULT_H__
 #define __VMULT_H__
 
-template <int order, int q_order, int c, typename y_type, template<int, typename> class Polynomial, template<int, typename> class Quadrature >
+template <int order, int q_order, typename y_type, template<int, typename> class Polynomial, template<int, typename> class Quadrature >
 class VMULT {
 public:
 
-    Quadrature <q_order, y_type> quad;
-    Polynomial <order, y_type> poly;
+    constexpr Quadrature <q_order, y_type> quad;
+    constexpr Polynomial <order, y_type> poly;
 
-    constexpr_array < constexpr_array <y_type, q_order>, order + 1 > N_Transposed;
-    constexpr_array < constexpr_array <y_type, order + 1>, q_order > NW;
-    constexpr_array < constexpr_array <y_type, order +1>, order + 1> N_Product;
+    const constexpr_array < constexpr_array <y_type, q_order>, order + 1 > N_Transposed;
+    const constexpr_array < constexpr_array <y_type, order + 1>, q_order > NW;
+    const constexpr_array < constexpr_array <y_type, order +1>, order + 1> N_Product;
 
-    constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndx_Transposed;
-    constexpr_array < constexpr_array <y_type, order + 1>, q_order > NWdx;
-    constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndx_Product;
+    const constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndx_Transposed;
+    const constexpr_array < constexpr_array <y_type, order + 1>, q_order > NWdx;
+    const constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndx_Product;
 
-    constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndxdx_Transposed;
-    constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndxdx_Product;
+    const constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndxdx_Transposed;
+    const constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndxdx_Product;
 
-    VMULT() {
-        if (c>0) {
-                compute_basis_matrix();
-            }
-
-        if ((c==2)||(c>3)) {
-                compute_for_gradient();
-            }
-
-        if (c>2) {
-                compute_for_laplacian();
-            }
-    }
+    constexpr VMULT() : 
+    quad(),
+    poly(),
+    N_Transposed(),
+    NW(),
+    N_Product(),
+    Ndx_Transposed(),
+    NWdx(),
+    Ndx_Product(),
+    Ndxdx_Transposed(),
+    Ndxdx_Product() {}
 
     void compute_basis_matrix() {
         for (unsigned int i = 0; i < q_order; i++) {
