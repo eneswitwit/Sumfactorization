@@ -10,7 +10,7 @@ public:
  
    const constexpr_array <y_type, order+1> knots;
 
-   constexpr  Polynomial() : knots(compute_knots()) {}
+   constexpr  Lagrange() : knots(compute_knots()) {}
 
     constexpr constexpr_array <y_type, order + 1> compute_knots() const {
         constexpr Quadrature<y_type,order> quad;
