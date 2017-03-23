@@ -5,5 +5,6 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 add_test(testvmult "/Users/eneswitwit/Github/Sumfactorization/bin/testvmult")
-add_test(polynomial "/Users/eneswitwit/Github/Sumfactorization/bin/polynomial")
-add_test(quadrature "/Users/eneswitwit/Github/Sumfactorization/bin/quadrature")
+add_test(testpolynomial "/Users/eneswitwit/Github/Sumfactorization/bin/testpolynomial")
+add_test(testquadrature "/Users/eneswitwit/Github/Sumfactorization/bin/testquadrature")
+add_test(testmatrices "/Users/eneswitwit/Github/Sumfactorization/bin/testmatrices")

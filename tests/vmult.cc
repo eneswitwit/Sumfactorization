@@ -80,7 +80,7 @@ int main()
 
   /** TESTING **/
 
-  
+  /*
   // Hardcode solution
   Quadrature<long double,order> quad;
   constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_1, quad.weights_);
@@ -95,7 +95,7 @@ int main()
   // Testing for correct complexity
 
   cout << "Testing was succesful." << endl;
-  
+  */
 
   return 0;
 }

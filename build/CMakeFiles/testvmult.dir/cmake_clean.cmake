@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/testvmult.dir/tests/integrate.cc.o"
+  "CMakeFiles/testvmult.dir/tests/vmult.cc.o"
   "../bin/testvmult.pdb"
   "../bin/testvmult"
 )

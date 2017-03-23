@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/eneswitwit/Github/Sumfactorization/tests/quadrature.cc" "/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/quadrature.dir/tests/quadrature.cc.o"
+  "/Users/eneswitwit/Github/Sumfactorization/tests/polynomial.cc" "/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/testpolynomial.dir/tests/polynomial.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 

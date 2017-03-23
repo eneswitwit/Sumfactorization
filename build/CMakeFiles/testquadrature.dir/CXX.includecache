@@ -8,9 +8,9 @@
 
 /Users/eneswitwit/Github/Sumfactorization/include/constexpr_array.h
 
-/Users/eneswitwit/Github/Sumfactorization/include/math_constexpr.h
+/Users/eneswitwit/Github/Sumfactorization/include/constexpr_math.h
 
-/Users/eneswitwit/Github/Sumfactorization/include/quadrature_constexpr.h
+/Users/eneswitwit/Github/Sumfactorization/include/constexpr_quadrature.h
 
 /Users/eneswitwit/Github/Sumfactorization/tests/quadrature.cc
 type_traits
@@ -27,14 +27,12 @@ vector
 -
 limits
 -
-type_traits
--
 iostream
 -
-../include/math_constexpr.h
-/Users/eneswitwit/Github/Sumfactorization/include/math_constexpr.h
+../include/constexpr_math.h
+/Users/eneswitwit/Github/Sumfactorization/include/constexpr_math.h
 ../include/constexpr_array.h
 /Users/eneswitwit/Github/Sumfactorization/include/constexpr_array.h
-../include/quadrature_constexpr.h
-/Users/eneswitwit/Github/Sumfactorization/include/quadrature_constexpr.h
+../include/constexpr_quadrature.h
+/Users/eneswitwit/Github/Sumfactorization/include/constexpr_quadrature.h
 

@@ -67,17 +67,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/Applications/CMake.app/Contents/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -88,6 +77,17 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/Applications/CMake.app/Contents/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -122,30 +122,43 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named quadrature
+# Target rules for targets named testquadrature
 
 # Build rule for target.
-quadrature: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 quadrature
-.PHONY : quadrature
+testquadrature: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testquadrature
+.PHONY : testquadrature
 
 # fast build rule for target.
-quadrature/fast:
-	$(MAKE) -f CMakeFiles/quadrature.dir/build.make CMakeFiles/quadrature.dir/build
-.PHONY : quadrature/fast
+testquadrature/fast:
+	$(MAKE) -f CMakeFiles/testquadrature.dir/build.make CMakeFiles/testquadrature.dir/build
+.PHONY : testquadrature/fast
 
 #=============================================================================
-# Target rules for targets named polynomial
+# Target rules for targets named testpolynomial
 
 # Build rule for target.
-polynomial: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 polynomial
-.PHONY : polynomial
+testpolynomial: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testpolynomial
+.PHONY : testpolynomial
 
 # fast build rule for target.
-polynomial/fast:
-	$(MAKE) -f CMakeFiles/polynomial.dir/build.make CMakeFiles/polynomial.dir/build
-.PHONY : polynomial/fast
+testpolynomial/fast:
+	$(MAKE) -f CMakeFiles/testpolynomial.dir/build.make CMakeFiles/testpolynomial.dir/build
+.PHONY : testpolynomial/fast
+
+#=============================================================================
+# Target rules for targets named testmatrices
+
+# Build rule for target.
+testmatrices: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testmatrices
+.PHONY : testmatrices
+
+# fast build rule for target.
+testmatrices/fast:
+	$(MAKE) -f CMakeFiles/testmatrices.dir/build.make CMakeFiles/testmatrices.dir/build
+.PHONY : testmatrices/fast
 
 #=============================================================================
 # Target rules for targets named testvmult
@@ -160,32 +173,32 @@ testvmult/fast:
 	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/build
 .PHONY : testvmult/fast
 
-tests/integrate.o: tests/integrate.cc.o
+tests/matrices.o: tests/matrices.cc.o
 
-.PHONY : tests/integrate.o
+.PHONY : tests/matrices.o
 
 # target to build an object file
-tests/integrate.cc.o:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.o
-.PHONY : tests/integrate.cc.o
+tests/matrices.cc.o:
+	$(MAKE) -f CMakeFiles/testmatrices.dir/build.make CMakeFiles/testmatrices.dir/tests/matrices.cc.o
+.PHONY : tests/matrices.cc.o
 
-tests/integrate.i: tests/integrate.cc.i
+tests/matrices.i: tests/matrices.cc.i
 
-.PHONY : tests/integrate.i
+.PHONY : tests/matrices.i
 
 # target to preprocess a source file
-tests/integrate.cc.i:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.i
-.PHONY : tests/integrate.cc.i
+tests/matrices.cc.i:
+	$(MAKE) -f CMakeFiles/testmatrices.dir/build.make CMakeFiles/testmatrices.dir/tests/matrices.cc.i
+.PHONY : tests/matrices.cc.i
 
-tests/integrate.s: tests/integrate.cc.s
+tests/matrices.s: tests/matrices.cc.s
 
-.PHONY : tests/integrate.s
+.PHONY : tests/matrices.s
 
 # target to generate assembly for a file
-tests/integrate.cc.s:
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.s
-.PHONY : tests/integrate.cc.s
+tests/matrices.cc.s:
+	$(MAKE) -f CMakeFiles/testmatrices.dir/build.make CMakeFiles/testmatrices.dir/tests/matrices.cc.s
+.PHONY : tests/matrices.cc.s
 
 tests/polynomial.o: tests/polynomial.cc.o
 
@@ -193,7 +206,7 @@ tests/polynomial.o: tests/polynomial.cc.o
 
 # target to build an object file
 tests/polynomial.cc.o:
-	$(MAKE) -f CMakeFiles/polynomial.dir/build.make CMakeFiles/polynomial.dir/tests/polynomial.cc.o
+	$(MAKE) -f CMakeFiles/testpolynomial.dir/build.make CMakeFiles/testpolynomial.dir/tests/polynomial.cc.o
 .PHONY : tests/polynomial.cc.o
 
 tests/polynomial.i: tests/polynomial.cc.i
@@ -202,7 +215,7 @@ tests/polynomial.i: tests/polynomial.cc.i
 
 # target to preprocess a source file
 tests/polynomial.cc.i:
-	$(MAKE) -f CMakeFiles/polynomial.dir/build.make CMakeFiles/polynomial.dir/tests/polynomial.cc.i
+	$(MAKE) -f CMakeFiles/testpolynomial.dir/build.make CMakeFiles/testpolynomial.dir/tests/polynomial.cc.i
 .PHONY : tests/polynomial.cc.i
 
 tests/polynomial.s: tests/polynomial.cc.s
@@ -211,7 +224,7 @@ tests/polynomial.s: tests/polynomial.cc.s
 
 # target to generate assembly for a file
 tests/polynomial.cc.s:
-	$(MAKE) -f CMakeFiles/polynomial.dir/build.make CMakeFiles/polynomial.dir/tests/polynomial.cc.s
+	$(MAKE) -f CMakeFiles/testpolynomial.dir/build.make CMakeFiles/testpolynomial.dir/tests/polynomial.cc.s
 .PHONY : tests/polynomial.cc.s
 
 tests/quadrature.o: tests/quadrature.cc.o
@@ -220,7 +233,7 @@ tests/quadrature.o: tests/quadrature.cc.o
 
 # target to build an object file
 tests/quadrature.cc.o:
-	$(MAKE) -f CMakeFiles/quadrature.dir/build.make CMakeFiles/quadrature.dir/tests/quadrature.cc.o
+	$(MAKE) -f CMakeFiles/testquadrature.dir/build.make CMakeFiles/testquadrature.dir/tests/quadrature.cc.o
 .PHONY : tests/quadrature.cc.o
 
 tests/quadrature.i: tests/quadrature.cc.i
@@ -229,7 +242,7 @@ tests/quadrature.i: tests/quadrature.cc.i
 
 # target to preprocess a source file
 tests/quadrature.cc.i:
-	$(MAKE) -f CMakeFiles/quadrature.dir/build.make CMakeFiles/quadrature.dir/tests/quadrature.cc.i
+	$(MAKE) -f CMakeFiles/testquadrature.dir/build.make CMakeFiles/testquadrature.dir/tests/quadrature.cc.i
 .PHONY : tests/quadrature.cc.i
 
 tests/quadrature.s: tests/quadrature.cc.s
@@ -238,8 +251,35 @@ tests/quadrature.s: tests/quadrature.cc.s
 
 # target to generate assembly for a file
 tests/quadrature.cc.s:
-	$(MAKE) -f CMakeFiles/quadrature.dir/build.make CMakeFiles/quadrature.dir/tests/quadrature.cc.s
+	$(MAKE) -f CMakeFiles/testquadrature.dir/build.make CMakeFiles/testquadrature.dir/tests/quadrature.cc.s
 .PHONY : tests/quadrature.cc.s
+
+tests/vmult.o: tests/vmult.cc.o
+
+.PHONY : tests/vmult.o
+
+# target to build an object file
+tests/vmult.cc.o:
+	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/vmult.cc.o
+.PHONY : tests/vmult.cc.o
+
+tests/vmult.i: tests/vmult.cc.i
+
+.PHONY : tests/vmult.i
+
+# target to preprocess a source file
+tests/vmult.cc.i:
+	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/vmult.cc.i
+.PHONY : tests/vmult.cc.i
+
+tests/vmult.s: tests/vmult.cc.s
+
+.PHONY : tests/vmult.s
+
+# target to generate assembly for a file
+tests/vmult.cc.s:
+	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/vmult.cc.s
+.PHONY : tests/vmult.cc.s
 
 # Help Target
 help:
@@ -248,20 +288,24 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... quadrature"
+	@echo "... testquadrature"
+	@echo "... testpolynomial"
 	@echo "... test"
-	@echo "... polynomial"
+	@echo "... edit_cache"
+	@echo "... testmatrices"
 	@echo "... testvmult"
-	@echo "... tests/integrate.o"
-	@echo "... tests/integrate.i"
-	@echo "... tests/integrate.s"
+	@echo "... tests/matrices.o"
+	@echo "... tests/matrices.i"
+	@echo "... tests/matrices.s"
 	@echo "... tests/polynomial.o"
 	@echo "... tests/polynomial.i"
 	@echo "... tests/polynomial.s"
 	@echo "... tests/quadrature.o"
 	@echo "... tests/quadrature.i"
 	@echo "... tests/quadrature.s"
+	@echo "... tests/vmult.o"
+	@echo "... tests/vmult.i"
+	@echo "... tests/vmult.s"
 .PHONY : help
 
 

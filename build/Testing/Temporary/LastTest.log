@@ -1,42 +1,42 @@
-Start testing: Mar 21 16:23 CET
+Start testing: Mar 23 15:26 CET
 ----------------------------------------------------------
-1/3 Testing: testvmult
-1/3 Test: testvmult
+1/4 Testing: testvmult
+1/4 Test: testvmult
 Command: "/Users/eneswitwit/Github/Sumfactorization/bin/testvmult"
 Directory: /Users/eneswitwit/Github/Sumfactorization/build
-"testvmult" start time: Mar 21 16:23 CET
+"testvmult" start time: Mar 23 15:26 CET
 Output:
 ----------------------------------------------------------
 /Users/eneswitwit/Github/Sumfactorization/bin/testvmult: /Users/eneswitwit/Github/Sumfactorization/bin/testvmult: cannot execute binary file
 <end of output>
-Test time =   0.02 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Failed.
-"testvmult" end time: Mar 21 16:23 CET
+"testvmult" end time: Mar 23 15:26 CET
 "testvmult" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-Unable to find executable: /Users/eneswitwit/Github/Sumfactorization/bin/polynomial
-2/3 Testing: polynomial
-2/3 Test: polynomial
+Unable to find executable: /Users/eneswitwit/Github/Sumfactorization/bin/testpolynomial
+2/4 Testing: testpolynomial
+2/4 Test: testpolynomial
 Command: ""
 Directory: /Users/eneswitwit/Github/Sumfactorization/build
-"polynomial" start time: 
+"testpolynomial" start time: 
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"polynomial" end time: Mar 21 16:23 CET
-"polynomial" time elapsed: 00:00:00
+"testpolynomial" end time: Mar 23 15:26 CET
+"testpolynomial" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/3 Testing: quadrature
-3/3 Test: quadrature
-Command: "/Users/eneswitwit/Github/Sumfactorization/bin/quadrature"
+3/4 Testing: testquadrature
+3/4 Test: testquadrature
+Command: "/Users/eneswitwit/Github/Sumfactorization/bin/testquadrature"
 Directory: /Users/eneswitwit/Github/Sumfactorization/build
-"quadrature" start time: Mar 21 16:23 CET
+"testquadrature" start time: Mar 23 15:26 CET
 Output:
 ----------------------------------------------------------
 quad[0] = 0              0.05
@@ -48,8 +48,24 @@ quad[4] = 1              0.05
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"quadrature" end time: Mar 21 16:23 CET
-"quadrature" time elapsed: 00:00:00
+"testquadrature" end time: Mar 23 15:26 CET
+"testquadrature" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Mar 21 16:23 CET
+Unable to find executable: /Users/eneswitwit/Github/Sumfactorization/bin/testmatrices
+4/4 Testing: testmatrices
+4/4 Test: testmatrices
+Command: ""
+Directory: /Users/eneswitwit/Github/Sumfactorization/build
+"testmatrices" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"testmatrices" end time: Mar 23 15:26 CET
+"testmatrices" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 23 15:26 CET

@@ -57,38 +57,38 @@ include CMakeFiles/testvmult.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/testvmult.dir/flags.make
 
-CMakeFiles/testvmult.dir/tests/integrate.cc.o: CMakeFiles/testvmult.dir/flags.make
-CMakeFiles/testvmult.dir/tests/integrate.cc.o: ../tests/integrate.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testvmult.dir/tests/integrate.cc.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testvmult.dir/tests/integrate.cc.o -c /Users/eneswitwit/Github/Sumfactorization/tests/integrate.cc
+CMakeFiles/testvmult.dir/tests/vmult.cc.o: CMakeFiles/testvmult.dir/flags.make
+CMakeFiles/testvmult.dir/tests/vmult.cc.o: ../tests/vmult.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testvmult.dir/tests/vmult.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testvmult.dir/tests/vmult.cc.o -c /Users/eneswitwit/Github/Sumfactorization/tests/vmult.cc
 
-CMakeFiles/testvmult.dir/tests/integrate.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testvmult.dir/tests/integrate.cc.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/eneswitwit/Github/Sumfactorization/tests/integrate.cc > CMakeFiles/testvmult.dir/tests/integrate.cc.i
+CMakeFiles/testvmult.dir/tests/vmult.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testvmult.dir/tests/vmult.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/eneswitwit/Github/Sumfactorization/tests/vmult.cc > CMakeFiles/testvmult.dir/tests/vmult.cc.i
 
-CMakeFiles/testvmult.dir/tests/integrate.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testvmult.dir/tests/integrate.cc.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/eneswitwit/Github/Sumfactorization/tests/integrate.cc -o CMakeFiles/testvmult.dir/tests/integrate.cc.s
+CMakeFiles/testvmult.dir/tests/vmult.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testvmult.dir/tests/vmult.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/eneswitwit/Github/Sumfactorization/tests/vmult.cc -o CMakeFiles/testvmult.dir/tests/vmult.cc.s
 
-CMakeFiles/testvmult.dir/tests/integrate.cc.o.requires:
+CMakeFiles/testvmult.dir/tests/vmult.cc.o.requires:
 
-.PHONY : CMakeFiles/testvmult.dir/tests/integrate.cc.o.requires
+.PHONY : CMakeFiles/testvmult.dir/tests/vmult.cc.o.requires
 
-CMakeFiles/testvmult.dir/tests/integrate.cc.o.provides: CMakeFiles/testvmult.dir/tests/integrate.cc.o.requires
-	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/integrate.cc.o.provides.build
-.PHONY : CMakeFiles/testvmult.dir/tests/integrate.cc.o.provides
+CMakeFiles/testvmult.dir/tests/vmult.cc.o.provides: CMakeFiles/testvmult.dir/tests/vmult.cc.o.requires
+	$(MAKE) -f CMakeFiles/testvmult.dir/build.make CMakeFiles/testvmult.dir/tests/vmult.cc.o.provides.build
+.PHONY : CMakeFiles/testvmult.dir/tests/vmult.cc.o.provides
 
-CMakeFiles/testvmult.dir/tests/integrate.cc.o.provides.build: CMakeFiles/testvmult.dir/tests/integrate.cc.o
+CMakeFiles/testvmult.dir/tests/vmult.cc.o.provides.build: CMakeFiles/testvmult.dir/tests/vmult.cc.o
 
 
 # Object files for target testvmult
 testvmult_OBJECTS = \
-"CMakeFiles/testvmult.dir/tests/integrate.cc.o"
+"CMakeFiles/testvmult.dir/tests/vmult.cc.o"
 
 # External object files for target testvmult
 testvmult_EXTERNAL_OBJECTS =
 
-../bin/testvmult: CMakeFiles/testvmult.dir/tests/integrate.cc.o
+../bin/testvmult: CMakeFiles/testvmult.dir/tests/vmult.cc.o
 ../bin/testvmult: CMakeFiles/testvmult.dir/build.make
 ../bin/testvmult: CMakeFiles/testvmult.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/testvmult"
@@ -99,7 +99,7 @@ CMakeFiles/testvmult.dir/build: ../bin/testvmult
 
 .PHONY : CMakeFiles/testvmult.dir/build
 
-CMakeFiles/testvmult.dir/requires: CMakeFiles/testvmult.dir/tests/integrate.cc.o.requires
+CMakeFiles/testvmult.dir/requires: CMakeFiles/testvmult.dir/tests/vmult.cc.o.requires
 
 .PHONY : CMakeFiles/testvmult.dir/requires
 

@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++   -std=c++14 -Wall -Wextra -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/testpolynomial.dir/tests/polynomial.cc.o  -o ../bin/testpolynomial 

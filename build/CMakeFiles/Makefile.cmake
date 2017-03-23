@@ -120,7 +120,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/quadrature.dir/DependInfo.cmake"
-  "CMakeFiles/polynomial.dir/DependInfo.cmake"
+  "CMakeFiles/testquadrature.dir/DependInfo.cmake"
+  "CMakeFiles/testpolynomial.dir/DependInfo.cmake"
+  "CMakeFiles/testmatrices.dir/DependInfo.cmake"
   "CMakeFiles/testvmult.dir/DependInfo.cmake"
   )
