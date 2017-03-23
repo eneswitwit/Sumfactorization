@@ -4,7 +4,7 @@
 
 // A class for handling polynomials with lagrangian basis.
 
-template <size_t order, typename y_type, template<typename, size_t> class Quadrature>
+template <typename y_type, size_t order, template<typename, size_t> class Quadrature>
 class Lagrange {
 public:
  
