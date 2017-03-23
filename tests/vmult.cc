@@ -50,9 +50,9 @@ constexpr_array<constexpr_array<y_type, size>, size> create_array()
 int main()
 {
   // Initialize VMULT
-  constexpr unsigned int order = 3;
-  constexpr unsigned int q_order = order + 1;
-  VMULT<order, q_order, 5, long double, Polynomial , Quadrature> vmult;
+  constexpr size_t order = 3;
+  constexpr size_t q_order = 3;
+  VMULT<double, order,q_order,1, Quadrature , Lagrange > vmult;
 
   // Compute VMULT Mass Matrix
   constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > u_2 = create_array < long double, order + 1 > ();

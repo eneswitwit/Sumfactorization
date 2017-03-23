@@ -1,22 +1,22 @@
 #ifndef __VMULT_H__
 #define __VMULT_H__
 
-template <int order, int q_order, typename y_type, template<int, typename> class Polynomial, template<int, typename> class Quadrature >
+template <typename y_type, size_t order, size_t q_order, int c, template<typename,size_t> class Quadrature, template<typename,size_t,template<typename,size_t> class Quadrature > class Polynomial>
 class VMULT {
 public:
 
-    constexpr Quadrature <q_order, y_type> quad;
-    constexpr Polynomial <order, y_type> poly;
+    const Quadrature <y_type,q_order+1> quad;
+    const Polynomial <y_type,order,Quadrature> poly;
 
-    const constexpr_array < constexpr_array <y_type, q_order>, order + 1 > N_Transposed;
-    const constexpr_array < constexpr_array <y_type, order + 1>, q_order > NW;
+    const constexpr_array < constexpr_array <y_type, q_order+1>, order + 1 > N_Transposed;
+    const constexpr_array < constexpr_array <y_type, order + 1>, q_order+1 > NW;
     const constexpr_array < constexpr_array <y_type, order +1>, order + 1> N_Product;
 
-    const constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndx_Transposed;
-    const constexpr_array < constexpr_array <y_type, order + 1>, q_order > NWdx;
+    const constexpr_array < constexpr_array <y_type, q_order+1>, order + 1 > Ndx_Transposed;
+    const constexpr_array < constexpr_array <y_type, order + 1>, q_order+1 > NWdx;
     const constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndx_Product;
 
-    const constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndxdx_Transposed;
+    const constexpr_array < constexpr_array <y_type, q_order+1>, order + 1 > Ndxdx_Transposed;
     const constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndxdx_Product;
 
     constexpr VMULT() : 
@@ -31,7 +31,7 @@ public:
     Ndxdx_Transposed(),
     Ndxdx_Product() {}
 
-    void compute_basis_matrix() {
+    /*void compute_basis_matrix() {
         for (unsigned int i = 0; i < q_order; i++) {
                 for (unsigned int j = 0; j < order + 1; j++) {
                         N_Transposed[i][j] = poly.eval_lagrange(j, quad.knots[i]);
@@ -123,7 +123,7 @@ public:
         multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sub, Ndxdx_Product, Sum_2, 1);
 
         add_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sum_1, Sum_2, y);
-    }
+    }*/
 
 };
 
