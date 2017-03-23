@@ -1,7 +1,7 @@
 #ifndef __VMULT_H__
 #define __VMULT_H__
 
-template <typename y_type, size_t order, size_t q_order, int c, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature > class Polynomial>
+template <typename y_type, size_t order, size_t q_order, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature > class Polynomial>
 class VMULT {
 public:
 
@@ -30,6 +30,9 @@ public:
         NDXP_(compute_gradient_NDXP()),
         NDXDXT_(compute_laplacian_NDXDXT()),
         NDXDXP_(compute_laplacian_NDXDXP()) {}
+
+
+    /** BASIS MATRICES **/
 
     constexpr constexpr_array < constexpr_array < y_type, q_order + 1 >, order + 1 > compute_basis_matrix_NT() {
         constexpr_array < constexpr_array < y_type, q_order + 1 >, order + 1 > NT;
@@ -98,12 +101,11 @@ public:
 
 
     /** LAPLACIAN **/
-
     constexpr constexpr_array < constexpr_array < y_type, q_order + 1 >, order + 1 > compute_laplacian_NDXDXT() {
         constexpr_array < constexpr_array < y_type, q_order + 1 >, order + 1 > NDXDXT;
         for (unsigned int i = 0; i < q_order; i++) {
             for (unsigned int j = 0; j < order + 1; j++) {
-                NDXDXT[i][j] = poly.eval_2nd_derivative(quad.knots_[i], j);
+                NDXDXT[i][j] = -1. * poly.eval_2nd_derivative(quad.knots_[i], j);
             }
         }
         return NDXDXT;
@@ -115,65 +117,47 @@ public:
         return NDXDXP;
     }
 
-    /*
 
-    void vmult_mass(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) {
-
-        if (c==0) {
-                compute_basis_matrix();
-            }
-
+    constexpr void mass(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &y, constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &u) const {
         // Initialize matrices for calculations
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sub;
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sub;
         // Calculate (N_w * N^T) * U
-        multiply_matrices<order+1,order+1,order+1,order+1,order+1,order+1,y_type>(N_Product,u,Sub);
+        Sub = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type > (NP_, u);
         // Calculate ((N_w * N^T) * U) * (N_w * N^T)^T
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sub, N_Product, y, 1);
+        y = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type , 1 > (Sub, NP_);
 
     }
 
-    void vmult_gradient(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) {
-        if (c==0) {
-                compute_basis_matrix();
-                compute_for_gradient();
-            }
-        if ((c==1)||(c==3)) {
-                compute_for_gradient();
-            }
+    constexpr void gradient(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &y, constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &u) const {
 
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sub;
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sub;
 
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sum_1;
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Ndx_Product, u, Sub);
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sub, N_Product, Sum_1, 1);
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sum_1;
+        Sub = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type > (NDXP_, u);
+        Sum_1 = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type , 1 > (Sub, NP_);
 
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sum_2;
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (N_Product, u, Sub);
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sub, Ndx_Product, Sum_2, 1);
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sum_2;
+        Sub = multiply_matrices < order + 1, order + 1, order + 1, order + 1,  y_type > (NP_, u);
+        Sum_2 = multiply_matrices < order + 1, order + 1, order + 1, order + 1,  y_type > (Sub, NDXP_);
 
-        add_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sum_1, Sum_2, y);
+        y = add_matrices < order + 1, order + 1, order + 1, order + 1,  y_type > (Sum_1, Sum_2);
     }
 
-    constexpr void vmult_laplacian(std::array < std::array < y_type, order + 1 >, order + 1 > &y, std::array < std::array < y_type, order + 1 >, order + 1 > &u) {
-        if (c==0) {
-                compute_basis_matrix();
-            }
-        if (c<3) {
-                compute_for_laplacian();
-            }
 
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sub;
+    constexpr void laplacian(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &y, constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &u) const {
 
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sum_1;
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Ndxdx_Product, u, Sub);
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sub, N_Product, Sum_1, 1);
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sub;
 
-        std::array < std::array < y_type, order + 1 >, order + 1 > Sum_2;
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (N_Product, u, Sub);
-        multiply_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sub, Ndxdx_Product, Sum_2, 1);
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sum_1;
+        Sub = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type > (NDXDXP_, u);
+        Sum_1 = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type, 1 > (Sub, NP_);
 
-        add_matrices < order + 1, order + 1, order + 1, order + 1, order + 1, order + 1, y_type > (Sum_1, Sum_2, y);
-    }*/
+        constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sum_2;
+        Sub = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type > (NP_, u);
+        Sum_2 = multiply_matrices < order + 1, order + 1, order + 1, order + 1, y_type , 1 > (Sub, NDXDXP_);
+
+        y = add_matrices < order + 1, order + 1, order + 1, order + 1 , y_type > (Sum_1, Sum_2);
+    }
 
 };
 
