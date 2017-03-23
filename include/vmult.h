@@ -8,16 +8,16 @@ public:
     Quadrature <q_order, y_type> quad;
     Polynomial <order, y_type> poly;
 
-    std::array < std::array <y_type, q_order>, order + 1 > N_Transposed;
-    std::array < std::array <y_type, order + 1>, q_order > NW;
-    std::array < std::array <y_type, order +1>, order + 1> N_Product;
+    constexpr_array < constexpr_array <y_type, q_order>, order + 1 > N_Transposed;
+    constexpr_array < constexpr_array <y_type, order + 1>, q_order > NW;
+    constexpr_array < constexpr_array <y_type, order +1>, order + 1> N_Product;
 
-    std::array < std::array <y_type, q_order>, order + 1 > Ndx_Transposed;
-    std::array < std::array <y_type, order + 1>, q_order > NWdx;
-    std::array < std::array <y_type, order +1>, order + 1> Ndx_Product;
+    constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndx_Transposed;
+    constexpr_array < constexpr_array <y_type, order + 1>, q_order > NWdx;
+    constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndx_Product;
 
-    std::array < std::array <y_type, q_order>, order + 1 > Ndxdx_Transposed;
-    std::array < std::array <y_type, order +1>, order + 1> Ndxdx_Product;
+    constexpr_array < constexpr_array <y_type, q_order>, order + 1 > Ndxdx_Transposed;
+    constexpr_array < constexpr_array <y_type, order +1>, order + 1> Ndxdx_Product;
 
     VMULT() {
         if (c>0) {
