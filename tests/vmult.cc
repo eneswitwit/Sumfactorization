@@ -52,7 +52,7 @@ int main()
   // Initialize VMULT
   constexpr size_t order = 3;
   constexpr size_t q_order = 3;
-  VMULT<long double, order,q_order,1, Quadrature , Lagrange > vmult;
+  constexpr VMULT<long double, order,q_order,1, Quadrature , Lagrange > vmult;
 
   // Compute VMULT Mass Matrix
   constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > u_2 = create_array < long double, order + 1 > ();
