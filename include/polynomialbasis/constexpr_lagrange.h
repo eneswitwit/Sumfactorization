@@ -8,9 +8,9 @@ template <typename y_type, size_t order, template<typename, size_t> class Quadra
 class Lagrange {
 public:
  
-   const constexpr_array <y_type, order+1> knots;
+   const constexpr_array <y_type, order+1> knots_;
 
-   constexpr  Lagrange() : knots(compute_knots()) {}
+   constexpr  Lagrange() : knots_(compute_knots()) {}
 
     constexpr constexpr_array <y_type, order + 1> compute_knots() const {
         constexpr Quadrature<y_type,order> quad;
@@ -22,7 +22,7 @@ public:
         y_type val = 1.;
         for (int j = 0; j <= order; j++) {
                 if (i != j) {
-                        val *= (x - knots[j]) / (knots[i] - knots[j]);
+                        val *= (x - knots_[j]) / (knots_[i] - knots_[j]);
                     }
             }
         return val;
@@ -35,10 +35,10 @@ public:
                         y_type product=1;
                         for (unsigned int j=0;j<order+1;j++) {
                                 if ((j!=i) && (j!=m)) {
-                                        product*=(x-knots[j])/(knots[i]-knots[j]);
+                                        product*=(x-knots_[j])/(knots_[i]-knots_[j]);
                                     }
                             }
-                        sum+=product/(knots[i]-knots[m]);
+                        sum+=product/(knots_[i]-knots_[m]);
                     }
             }
         return sum;
@@ -54,13 +54,13 @@ public:
                                         y_type product=1;
                                         for (unsigned int j=0;j<order+1;j++) {
                                                 if ((j!=i) && (j!=m) && (j!=k)) {
-                                                        product*=(x-knots[j])/(knots[i]-knots[j]);
+                                                        product*=(x-knots_[j])/(knots_[i]-knots_[j]);
                                                     }
                                             }
-                                        sum1+=product/(knots[i]-knots[m]);
+                                        sum1+=product/(knots_[i]-knots_[m]);
                                     }
                             }
-                        sum+=sum1/(knots[i]-knots[k]);
+                        sum+=sum1/(knots_[i]-knots_[k]);
                     }
             }
         return sum;
