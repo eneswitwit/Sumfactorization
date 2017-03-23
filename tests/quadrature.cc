@@ -5,7 +5,6 @@
 #include <array>
 #include <vector>
 #include <limits>
-#include <type_traits>
 #include <iostream>
 
 #include "../include/constexpr_math.h"
