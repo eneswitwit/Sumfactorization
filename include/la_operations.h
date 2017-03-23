@@ -1,13 +1,14 @@
 #ifndef __LA_OPERATIONS_H__
 #define __LA_OPERATIONS_H__
 
-template <int A_rows, int A_columns,int B_rows, int B_columns,int C_rows, int C_columns,typename y_type>
-void multiply_matrices(std::array<std::array<y_type, A_rows>, A_columns> &A,std::array<std::array<y_type, B_rows>, B_columns> &B,std::array<std::array<y_type, C_rows>, C_columns> &C, bool transpose_B=0) {
-    // Check if matrix dimensions match for multiplication
-    static_assert(A_columns == B_rows, "Matrices not compatible for multiplication!");
+/**
+  * This function implements a basic matrix multiplication with the added option to transpose the right hand side.
+  * This way we don't need to actually transpose a matrix and compute the desired matrix directly.
+  */
+template <int A_rows, int A_columns,int B_rows, int B_columns,typename y_type, bool transpose_B=0>
+constexpr constexpr_array<constexpr_array<y_type, A_rows>, B_columns> multiply_matrices(const constexpr_array<constexpr_array<y_type, A_rows>, A_columns> &A,const constexpr_array<constexpr_array<y_type, B_rows>, B_columns> &B) {
 
-    // Check if reference to solution has the correct dimension
-    static_assert((A_rows==C_rows)&&(B_columns==C_columns), "Matrices not compatible for multiplication!");
+    constexpr_array<constexpr_array<y_type, A_rows>, B_columns> C;
 
     if (transpose_B==0) {
         for (unsigned int i=0;i<B_columns;i++) {
@@ -29,22 +30,26 @@ void multiply_matrices(std::array<std::array<y_type, A_rows>, A_columns> &A,std:
             }
         }
     }
+    return C;
 
 }
-
-template <int A_rows, int A_columns,int B_rows, int B_columns,int C_rows, int C_columns,typename y_type>
-void add_matrices(std::array<std::array<y_type, A_rows>, A_columns> &A,std::array<std::array<y_type, B_rows>, B_columns> &B,std::array<std::array<y_type, C_rows>, C_columns> &C) {
+/**
+ * Basic matrix addition
+ * */
+template <int A_rows, int A_columns,int B_rows, int B_columns,typename y_type>
+constexpr constexpr_array<constexpr_array<y_type, A_rows>, A_columns> add_matrices(const constexpr_array<constexpr_array<y_type, A_rows>, A_columns> &A,const constexpr_array<constexpr_array<y_type, B_rows>, B_columns> &B) {
     // Check if matrix dimensions match for addition
     static_assert ((A_columns==B_columns)&&(A_rows==B_rows), "Matrices not compatible for addition");
 
-    // Check if reference to solution has the correct dimension
-    static_assert ((A_columns==C_columns)&&(A_rows==C_rows), "Dimension of solution doesn't match");
+    constexpr_array<constexpr_array<y_type, A_rows>, A_columns> C;
 
-        for (unsigned int i=0;i<B_columns;i++) {
+        for (unsigned int i=0;i<A_columns;i++) {
             for (unsigned int j=0;j<A_rows;j++) {
                     C[i][j]=A[i][j]+B[i][j];
             }
         }
+
+        return C;
 
 }
 
