@@ -14,7 +14,7 @@
 #include "../include/polynomialbasis/constexpr_lagrange.h"
 
 constexpr unsigned int order = 3;
-Lagrange<order, long double,Quadrature> lagr;
+Lagrange<long double,order,Quadrature> lagr;
 Quadrature<long double,order> quad;
 
 long double *ptr;
