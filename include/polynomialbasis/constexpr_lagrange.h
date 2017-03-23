@@ -4,7 +4,7 @@
 
 // A class for handling polynomials with lagrangian basis.
 
-template <size_t order, typename y_type, template<typename, size_t> class Quadrature>
+template <typename y_type, size_t order, template<typename, size_t> class Quadrature>
 class Lagrange {
 public:
  
@@ -18,26 +18,24 @@ public:
     }
 
 
-    template <y_type * x, unsigned int i>
-    constexpr y_type eval_lagrange() const {
+    constexpr y_type eval_lagrange(const y_type & x, const unsigned int i) const {
         y_type val = 1.;
         for (int j = 0; j <= order; j++) {
                 if (i != j) {
-                        val *= (*x - knots[j]) / (knots[i] - knots[j]);
+                        val *= (x - knots[j]) / (knots[i] - knots[j]);
                     }
             }
         return val;
     }
 
-    template <y_type * x, unsigned int i>
-    constexpr y_type eval_1st_derivative() const {
+    constexpr y_type eval_1st_derivative(const y_type & x, const unsigned int i) const {
         y_type sum=0;
         for (unsigned int m=0;m<order+1;m++) {
                 if (m!=i) {
                         y_type product=1;
                         for (unsigned int j=0;j<order+1;j++) {
                                 if ((j!=i) && (j!=m)) {
-                                        product*=(*x-knots[j])/(knots[i]-knots[j]);
+                                        product*=(x-knots[j])/(knots[i]-knots[j]);
                                     }
                             }
                         sum+=product/(knots[i]-knots[m]);
@@ -46,8 +44,7 @@ public:
         return sum;
     }
 
-    template <y_type * x, unsigned int i>
-    constexpr y_type eval_2nd_derivative() const {
+    constexpr y_type eval_2nd_derivative(const y_type & x, const unsigned int i) const {
         y_type sum=0;
         for (unsigned int k=0;k<order+1;k++) {
                 if (k!=i) {
@@ -57,7 +54,7 @@ public:
                                         y_type product=1;
                                         for (unsigned int j=0;j<order+1;j++) {
                                                 if ((j!=i) && (j!=m) && (j!=k)) {
-                                                        product*=(*x-knots[j])/(knots[i]-knots[j]);
+                                                        product*=(x-knots[j])/(knots[i]-knots[j]);
                                                     }
                                             }
                                         sum1+=product/(knots[i]-knots[m]);
