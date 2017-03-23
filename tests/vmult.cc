@@ -28,18 +28,18 @@ array < array < y_type, order + 1 >, order + 1 > lagrange_nodes(array < array < 
 }
 
 template <typename y_type, size_t size>
-std::array<y_type, size> create_vector()
+constexpr_array<y_type, size> create_vector()
 {
-  std::array<y_type, size> arr{1.};
+  constexpr_array<y_type, size> arr{1.};
   for (unsigned int i = 0; i < size; ++i)
     arr[i] = i;
   return arr;
 }
 
 template <typename y_type, size_t size>
-std::array<std::array<y_type, size>, size> create_array()
+constexpr_array<constexpr_array<y_type, size>, size> create_array()
 {
-  std::array<std::array<y_type, size>, size> arr;
+  constexpr_array<constexpr_array<y_type, size>, size> arr;
   for (unsigned int i = 0; i < size; ++i)
     for (unsigned int j = 0; j < size; ++j)
       arr[i][j] = 1;
@@ -49,19 +49,15 @@ std::array<std::array<y_type, size>, size> create_array()
 
 int main()
 {
-  // Calculate with old method
+  // Initialize VMULT
   constexpr unsigned int order = 3;
   constexpr unsigned int q_order = order + 1;
-  //Integrate<order, long double, Polynomial , Quadrature> lagrange;
-  //std::array < std::array < long double, order + 1 >, order + 1 > u = create_array < long double, order + 1 > ();
-  //std::array < std::array < long double, order + 1 >, order + 1 > y = create_array < long double, order + 1 > ();
-  //unsigned int count = lagrange.vmult_mass(y, u);
-
-  // Calculate with new method
   VMULT<order, q_order, 5, long double, Polynomial , Quadrature> vmult;
-  std::array < std::array < long double, order + 1 >, order + 1 > u_2 = create_array < long double, order + 1 > ();
-  std::array < std::array < long double, order + 1 >, order + 1 > y_2 = create_array < long double, order + 1 > ();
-  vmult.vmult_mass(y_2, u_2);
+
+  // Compute VMULT Mass Matrix
+  constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > u_2 = create_array < long double, order + 1 > ();
+  constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_2 = create_array < long double, order + 1 > ();
+  //vmult.vmult_mass(y_2, u_2);
 
   // Output resulting vector y.
   for (unsigned int i = 0; i < order + 1; i++) {
@@ -70,6 +66,10 @@ int main()
     }
   }
 
+
+  /** TESTING **/
+
+  /*
   // Hardcode solution
   Quadrature<order, long double> quad;
 
@@ -89,6 +89,7 @@ int main()
   // Testing for correct complexity
 
   cout << "Testing was succesful." << endl;
+  */
 
   return 0;
 }
