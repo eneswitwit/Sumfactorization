@@ -3,6 +3,7 @@
 #include <cmath>
 #include <cstdint>
 #include <array>
+#include <cassert>
 #include <vector>
 #include <limits>
 #include <iostream>
@@ -18,7 +19,7 @@ using namespace std;
 
 // Hardcode solution
 template <typename y_type, size_t order>
-array < array < y_type, order + 1 >, order + 1 > lagrange_nodes(array < array < y_type, order + 1 >, order + 1 > u, array < y_type, order + 1 > q_weights) {
+constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > lagrange_nodes(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > u, constexpr_array < y_type, order + 1 > q_weights) {
   for (unsigned int i = 0; i < q_weights.size(); i++) {
     for (unsigned int j = 0; j < q_weights.size(); j++) {
       u[i][j] *= q_weights[i] * q_weights[j];
@@ -72,34 +73,29 @@ int main()
   // Output resulting vector y.
   for (unsigned int i = 0; i < order + 1; i++) {
     for (unsigned int j = 0; j < order + 1; j++) {
-      std::cout << "y[" << i  << "," << j << "] = " << y_2[i][j] << endl;
+      std::cout << "y[" << i  << "," << j << "] = " << y_1[i][j] << endl;
     }
   }
 
 
   /** TESTING **/
 
-  /*
+  
   // Hardcode solution
-  Quadrature<order, long double> quad;
-
-  for (int i = 0; i < order + 1; i++) {
-    std::cout << "quad.knots[" << i << "] = " << quad.knots[i] << std::endl;
-  }
-
-  array < array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_2, quad.weights);
+  Quadrature<long double,order> quad;
+  constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_1, quad.weights_);
 
   // Testing for correctness
   for (unsigned int i = 0; i < order + 1; i++) {
     for (unsigned int j = 0; j < order + 1; j++) {
-      assert(y_2[i][j] == y_hard[i][j]);
+      assert(y_1[i][j] == y_hard[i][j]);
     }
   }
 
   // Testing for correct complexity
 
   cout << "Testing was succesful." << endl;
-  */
+  
 
   return 0;
 }
