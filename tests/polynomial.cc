@@ -13,16 +13,18 @@
 #include "../include/constexpr_quadrature.h"
 #include "../include/polynomialbasis/constexpr_lagrange.h"
 
+constexpr unsigned int order = 3;
+Lagrange<order, long double,Quadrature> lagr;
+Quadrature<long double,order> quad;
+
+long double *ptr;
+long double knot = quad.knots_[1];
+
 int main() {
-    constexpr unsigned int order = 3;
-    Lagrange<order, long double,Quadrature> lagr;
-   /* Quadrature<order, long double> quad;
-    quad.compute_quadrature_points(order+1,1,1);
-    quad.compute_quadrature_weights(quad.knots,0,0);
 
-    std::cout << quad.knots[0] << "    " << quad.knots[1] << "    " << quad.knots[2] << "    " << quad.knots[3] << "    " << std::endl << std::endl;
+    std::cout << lagr.eval_lagrange<&knot,0>();
 
-    for (int i=0;i<order+1;i++) {
+    /*for (int i=0;i<order+1;i++) {
             std::cout << poly.eval_lagrange(0,quad.knots[i],quad.knots) << "       " << poly.eval_lagrange(1,quad.knots[i],quad.knots) << "       "
                       << poly.eval_lagrange(2,quad.knots[i],quad.knots) << "       " << poly.eval_lagrange(3,quad.knots[i],quad.knots) << std::endl;
         }
