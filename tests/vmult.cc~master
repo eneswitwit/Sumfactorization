@@ -1,15 +1,18 @@
-#include <iostream>
+#include <type_traits>
+#include <cstdlib>
+#include <cmath>
+#include <cstdint>
 #include <array>
 #include <vector>
 #include <limits>
-#include <cmath>
-#include <cassert>
+#include <iostream>
+
+#include "../include/constexpr_math.h"
+#include "../include/constexpr_array.h"
 #include "../include/la_operations.h"
-#include "../include/quadrature.h"
-//#include "../include/quadrature_nonclass.h"
-#include "../include/polynomial.h"
+#include "../include/constexpr_quadrature.h"
+#include "../include/polynomialbasis/constexpr_lagrange.h"
 #include "../include/vmult.h"
-#include "../include/integrate.h"
 
 using namespace std;
 
