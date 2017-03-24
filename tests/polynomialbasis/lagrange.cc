@@ -28,9 +28,6 @@ int main() {
     constexpr Lagrange<long double, order, Quadrature> lagr;
     /** lagr object is known at compile time **/
 
-    for (int i = 0; i < order + 1; i++) {
-        std::cout << std::endl << lagr.knots_[i] << std::endl;
-    }
 
     /** TEST EVAL LAGRANGE **/
 
@@ -49,6 +46,8 @@ int main() {
             }
         }
     }
+
+    /** TEST EVAL GRADIENT LAGRANGE **/
 
 
     return 0;

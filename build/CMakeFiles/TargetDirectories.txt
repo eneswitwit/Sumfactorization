@@ -1,7 +1,0 @@
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/rebuild_cache.dir
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/testquadrature.dir
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/testpolynomial.dir
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/test.dir
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/edit_cache.dir
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/testmatrices.dir
-/Users/eneswitwit/Github/Sumfactorization/build/CMakeFiles/testvmult.dir
