@@ -1,5 +1,5 @@
-#ifndef __LA_OPERATIONS_H__
-#define __LA_OPERATIONS_H__
+#ifndef __CONSTEXPR_MATRIX_H__
+#define __CONSTEXPR_MATRIX_H__
 
 /**
   * This function implements a basic matrix multiplication with the added option to transpose the right hand side.

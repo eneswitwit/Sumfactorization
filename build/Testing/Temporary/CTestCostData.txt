@@ -1,8 +1,0 @@
-testvmult 0 0
-testpolynomial 0 0
-testquadrature 1 0.00524783
-testmatrices 0 0
----
-testvmult
-testpolynomial
-testmatrices

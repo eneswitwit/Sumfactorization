@@ -10,7 +10,7 @@
 
 #include "../include/constexpr_math.h"
 #include "../include/constexpr_array.h"
-#include "../include/la_operations.h"
+#include "../include/constexpr_matrix.h"
 #include "../include/constexpr_quadrature.h"
 #include "../include/polynomialbasis/constexpr_lagrange.h"
 #include "../include/vmult.h"

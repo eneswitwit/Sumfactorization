@@ -10,7 +10,7 @@
 
 #include "../include/constexpr_math.h"
 #include "../include/constexpr_array.h"
-#include "../include/la_operations.h"
+#include "../include/constexpr_matrix.h"
 
 int main() {
     constexpr int n=2;
