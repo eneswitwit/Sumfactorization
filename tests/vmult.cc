@@ -10,7 +10,7 @@
 
 #include "../include/constexpr_math.h"
 #include "../include/constexpr_array.h"
-#include "../include/la_operations.h"
+#include "../include/constexpr_matrix.h"
 #include "../include/constexpr_quadrature.h"
 #include "../include/polynomialbasis/constexpr_lagrange.h"
 #include "../include/vmult.h"
@@ -196,11 +196,18 @@ int main()
         }
     }
 
+<<<<<<< HEAD
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
             //std::cout << y_laplace[i][j] << "     " <<  y_laplace_hard[i][j] << std::endl;
         }
     }
+=======
+  /*
+  // Hardcode solution
+  Quadrature<long double,order> quad;
+  constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_hard = lagrange_nodes<long double, order>(u_1, quad.weights_);
+>>>>>>> master
 
     // Test vmult.mass
     for (unsigned int i = 0; i < order + 1; i++) {
@@ -218,6 +225,7 @@ int main()
     }
     std::cout << "VMULT.gradient test successful" << std::endl;
 
+<<<<<<< HEAD
     // Test vmult.laplace
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
@@ -225,6 +233,10 @@ int main()
         }
     }
     std::cout << "VMULT.laplace  test successful" << std::endl;
+=======
+  cout << "Testing was succesful." << endl;
+  */
+>>>>>>> master
 
     return 0;
 }

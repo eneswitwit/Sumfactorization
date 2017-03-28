@@ -27,9 +27,10 @@ ENDIF()
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 # add executable
-add_executable(testvmult ${PROJECT_SOURCE_DIR}/tests/integrate.cc)
-add_executable(polynomial ${PROJECT_SOURCE_DIR}/tests/polynomial.cc)
-add_executable(quadrature ${PROJECT_SOURCE_DIR}/tests/quadrature.cc)
+add_executable(testvmult ${PROJECT_SOURCE_DIR}/tests/vmult.cc)
+add_executable(testmatrices ${PROJECT_SOURCE_DIR}/tests/matrices.cc)
+add_executable(testpolynomial ${PROJECT_SOURCE_DIR}/tests/polynomialbasis/lagrange.cc)
+add_executable(testquadrature ${PROJECT_SOURCE_DIR}/tests/quadrature.cc)
 
 # Put all tests in the test directory, where the sources also are
 set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
@@ -40,8 +41,10 @@ enable_testing()
 
 # check if test runs and exits without error
 add_test(testvmult ${PROJECT_SOURCE_DIR}/bin/testvmult)
-add_test(polynomial ${PROJECT_SOURCE_DIR}/bin/polynomial)
-add_test(quadrature ${PROJECT_SOURCE_DIR}/bin/quadrature)
+add_test(testlagrange ${PROJECT_SOURCE_DIR}/bin/testlagrange)
+add_test(testquadrature ${PROJECT_SOURCE_DIR}/bin/testquadrature)
+add_test(testmatrices ${PROJECT_SOURCE_DIR}/bin/testmatrices)
+
 
 
 

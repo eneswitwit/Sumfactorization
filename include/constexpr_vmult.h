@@ -118,6 +118,7 @@ public:
     }
 
 
+    /** MASS MATRIX **/
     constexpr void mass(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &y, constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &u) const {
         // Initialize matrices for calculations
         constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sub;
@@ -128,6 +129,7 @@ public:
 
     }
 
+    /** GRADIENT MATRIX **/
     constexpr void gradient(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &y, constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &u) const {
 
         constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sub;
@@ -143,7 +145,7 @@ public:
         y = add_matrices < order + 1, order + 1, order + 1, order + 1,  y_type > (Sum_1, Sum_2);
     }
 
-
+    /** LAPLACIAN MATRIX**/
     constexpr void laplacian(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &y, constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > &u) const {
 
         constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > Sub;
