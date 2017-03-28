@@ -14,8 +14,8 @@
 
 int main() {
     constexpr int n=2;
-    constexpr_array <constexpr_array <long double , n+1 >,n> B;
-    constexpr_array <constexpr_array <long double , n >,n+1> A;
+    constexpr_array <constexpr_array <long double , n >,n+1> B;
+    constexpr_array <constexpr_array <long double , n+1 >,n> A;
     constexpr_array <constexpr_array <long double , n >,n> C;
 
     for (int i=0;i<n;i++) {

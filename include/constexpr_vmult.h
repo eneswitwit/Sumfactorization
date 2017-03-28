@@ -1,7 +1,7 @@
 #ifndef __VMULT_H__
 #define __VMULT_H__
 
-template <typename y_type, size_t order, size_t q_order, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature > class Polynomial>
+template <typename y_type, size_t order, size_t q_order, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
 class VMULT {
 public:
 
