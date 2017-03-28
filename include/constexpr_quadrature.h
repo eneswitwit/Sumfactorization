@@ -101,7 +101,7 @@ public:
     {
       constexpr_array < y_type, n-2 > result;
       result[0] = n - 1;
-      for (int i=2; i<n-1; i++)
+      for (unsigned int i=2; i<n-1; i++)
         result[i-1] = result[i-2]*i;
       return result[n-3];
     }

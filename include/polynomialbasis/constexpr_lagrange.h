@@ -20,7 +20,7 @@ public:
 
     constexpr y_type eval_lagrange(const y_type & x, const unsigned int i) const {
         y_type val = 1.;
-        for (int j = 0; j <= order; j++) {
+        for (unsigned int j = 0; j <= order; j++) {
                 if (i != j) {
                         val *= (x - knots_[j]) / (knots_[i] - knots_[j]);
                     }
