@@ -14,12 +14,12 @@
 
 int main() {
     constexpr int n=2;
-    constexpr_array <constexpr_array <long double , n+1 >,n> B;
-    constexpr_array <constexpr_array <long double , n >,n+1> A;
+    constexpr_array <constexpr_array <long double , n >,n+1> B;
+    constexpr_array <constexpr_array <long double , n+1 >,n> A;
     constexpr_array <constexpr_array <long double , n >,n> C;
 
     for (int i=0;i<n;i++) {
-        for (int j=0;j<n+3;j++) {
+        for (int j=0;j<n+1;j++) {
             A[i][j]=i+j;
             B[j][i]=i-2-j;
         }

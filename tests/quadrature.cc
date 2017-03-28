@@ -13,7 +13,7 @@
 
 
 
-constexpr static int order = 4;
+constexpr static int order = 3;
 
 
 int main() {
