@@ -6,9 +6,9 @@
   * This way we don't need to actually transpose a matrix and compute the desired matrix directly.
   */
 template <int A_rows, int A_columns,int B_rows, int B_columns,typename y_type, bool transpose_B=0>
-constexpr constexpr_array<constexpr_array<y_type, B_columns>, A_rows> multiply_matrices(const constexpr_array<constexpr_array<y_type, A_columns>, A_rows> &A,const constexpr_array<constexpr_array<y_type, B_columns>, B_rows> &B) {
+constexpr constexpr_array<constexpr_array<y_type, A_rows>, B_columns> multiply_matrices(const constexpr_array<constexpr_array<y_type, A_rows>, A_columns> &A,const constexpr_array<constexpr_array<y_type, B_rows>, B_columns> &B) {
 
-    constexpr_array<constexpr_array<y_type, B_columns>, A_rows> C;
+    constexpr_array<constexpr_array<y_type, A_rows>, B_columns> C;
 
     if (transpose_B==0) {
         for (unsigned int i=0;i<B_columns;i++) {
