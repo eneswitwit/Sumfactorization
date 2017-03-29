@@ -9,9 +9,9 @@
 #include <iostream>
 #include <cassert>
 
-#include "../include/constexpr_math.h"
-#include "../include/constexpr_array.h"
-#include "../include/constexpr_matrix.h"
+#include <constexpr_math.h>
+#include <constexpr_array.h>
+#include <constexpr_matrix.h>
 
 int main() {
     constexpr int n=2;

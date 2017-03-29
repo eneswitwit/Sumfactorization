@@ -8,12 +8,12 @@
 #include <limits>
 #include <iostream>
 
-#include "../include/constexpr_math.h"
-#include "../include/constexpr_array.h"
-#include "../include/constexpr_matrix.h"
-#include "../include/constexpr_quadrature.h"
-#include "../include/polynomialbasis/constexpr_lagrange.h"
-#include "../include/constexpr_vmult.h"
+#include <constexpr_math.h>
+#include <constexpr_array.h>
+#include <constexpr_matrix.h>
+#include <constexpr_quadrature.h>
+#include <polynomialbasis/constexpr_lagrange.h>
+#include <constexpr_vmult.h>
 
 using namespace std;
 

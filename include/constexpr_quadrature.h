@@ -58,7 +58,7 @@ public:
         constexpr unsigned int m = order - 1;
         for (unsigned int i = 0; i < m; ++i)
         {
-            knots[i + 1] = -math::sin( sin_input(i, m) ) ;
+            knots[i + 1] = - sin( sin_input(i, m) ) ;
         }
         for (unsigned int k = 0; k < m; ++k)
         {
@@ -135,7 +135,7 @@ public:
             delta = f / (f * s - J_x);
             r += delta;
         }
-        while (math::fabs<Number>(delta) >= tolerance);
+        while (fabs<Number>(delta) >= tolerance);
         return r;
     }
 

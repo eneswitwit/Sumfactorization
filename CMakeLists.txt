@@ -7,8 +7,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 # add the binary tree to the search path for include files
-include_directories("${PROJECT_SOURCE_DIR}")
-include_directories("${PROJECT_SORUCE_DIR}/include")
+include_directories("${PROJECT_SOURCE_DIR}/include")
 
 # check for a sufficiently recent compiler
 INCLUDE(CheckCXXCompilerFlag)
