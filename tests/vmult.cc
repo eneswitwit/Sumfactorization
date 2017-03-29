@@ -18,13 +18,13 @@
 using namespace std;
 
 // Hardcode solution
-template <typename y_type, size_t order, size_t q_order>
-constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_mass(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > u) {
+template <typename Number, size_t order, size_t q_order>
+constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_mass(constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > u) {
 
     Lagrange<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
 
-    constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > y;
+    constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y;
 
     for (unsigned int l = 0; l < order+1; l++) {
         for (unsigned int k = 0; k < order+1; k++) {
@@ -32,12 +32,12 @@ constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_mass(c
             for (unsigned int i = 0; i < order+1; i++) {
                 for (unsigned int j = 0; j < order+1; j++) {
 
-                    y_type sumx=0;
+                    Number sumx=0;
                     for (unsigned int qx=0;qx<q_order+1;qx++) {
                         sumx+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
                     }
 
-                    y_type sumy=0;
+                    Number sumy=0;
                     for (unsigned int qy=0;qy<q_order+1;qy++) {
                         sumy+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
                     }
@@ -52,14 +52,14 @@ constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_mass(c
     return y;
 }
 
-template <typename y_type, size_t order, size_t q_order>
-constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_gradient(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > u) {
+template <typename Number, size_t order, size_t q_order>
+constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradient(constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > u) {
 
     Lagrange<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
 
-    constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > y1;
-    constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > y2;
+    constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y1;
+    constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y2;
 
     for (unsigned int l = 0; l < order+1; l++) {
         for (unsigned int k = 0; k < order+1; k++) {
@@ -68,15 +68,15 @@ constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_gradie
             for (unsigned int i = 0; i < order+1; i++) {
                 for (unsigned int j = 0; j < order+1; j++) {
 
-                    y_type sumx1=0;
-                    y_type sumx2=0;
+                    Number sumx1=0;
+                    Number sumx2=0;
                     for (unsigned int qx=0;qx<q_order+1;qx++) {
                         sumx1+=quad.weights_[qx]*poly.eval_1st_derivative(quad.knots_[qx],i)*poly.eval_1st_derivative(quad.knots_[qx],k);
                         sumx2+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
                     }
 
-                    y_type sumy1=0;
-                    y_type sumy2=0;
+                    Number sumy1=0;
+                    Number sumy2=0;
                     for (unsigned int qy=0;qy<q_order+1;qy++) {
                         sumy1+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
                         sumy2+=quad.weights_[qy]*poly.eval_1st_derivative(quad.knots_[qy],j)*poly.eval_1st_derivative(quad.knots_[qy],l);
@@ -90,17 +90,17 @@ constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_gradie
 
         }
     }
-    return add_matrices<order+1,order+1,order+1,order+1,y_type>(y1,y2);
+    return add_matrices<order+1,order+1,order+1,order+1,Number>(y1,y2);
 }
 
-template <typename y_type, size_t order, size_t q_order>
-constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_laplace(constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > u) {
+template <typename Number, size_t order, size_t q_order>
+constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_laplace(constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > u) {
 
     Lagrange<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
 
-    constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > y1;
-    constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > y2;
+    constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y1;
+    constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y2;
 
     for (unsigned int l = 0; l < order+1; l++) {
         for (unsigned int k = 0; k < order+1; k++) {
@@ -109,15 +109,15 @@ constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_laplac
             for (unsigned int i = 0; i < order+1; i++) {
                 for (unsigned int j = 0; j < order+1; j++) {
 
-                    y_type sumx1=0;
-                    y_type sumx2=0;
+                    Number sumx1=0;
+                    Number sumx2=0;
                     for (unsigned int qx=0;qx<q_order+1;qx++) {
                         sumx1-=quad.weights_[qx]*poly.eval_2nd_derivative(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
                         sumx2+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
                     }
 
-                    y_type sumy1=0;
-                    y_type sumy2=0;
+                    Number sumy1=0;
+                    Number sumy2=0;
                     for (unsigned int qy=0;qy<q_order+1;qy++) {
                         sumy1+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
                         sumy2-=quad.weights_[qy]*poly.eval_2nd_derivative(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
@@ -131,22 +131,22 @@ constexpr_array < constexpr_array < y_type, order + 1 >, order + 1 > test_laplac
 
         }
     }
-    return add_matrices<order+1,order+1,order+1,order+1,y_type>(y1,y2);
+    return add_matrices<order+1,order+1,order+1,order+1,Number>(y1,y2);
 }
 
-template <typename y_type, size_t size>
-constexpr_array<y_type, size> create_vector()
+template <typename Number, size_t size>
+constexpr_array<Number, size> create_vector()
 {
-    constexpr_array<y_type, size> arr{1.};
+    constexpr_array<Number, size> arr{1.};
     for (unsigned int i = 0; i < size; ++i)
         arr[i] = i;
     return arr;
 }
 
-template <typename y_type, size_t size>
-constexpr_array<constexpr_array<y_type, size>, size> create_array()
+template <typename Number, size_t size>
+constexpr_array<constexpr_array<Number, size>, size> create_array()
 {
-    constexpr_array<constexpr_array<y_type, size>, size> arr;
+    constexpr_array<constexpr_array<Number, size>, size> arr;
     for (unsigned int i = 0; i < size; ++i)
         for (unsigned int j = 0; j < size; ++j)
             arr[i][j] = 10^i;
@@ -192,7 +192,7 @@ int main()
 
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
-            //std::cout << y_gradient[i][j] << "     " <<  y_gradient_hard[i][j] << std::endl;
+            std::cout << y_gradient[i][j] << "     " <<  y_gradient_hard[i][j] << std::endl;
         }
     }
 

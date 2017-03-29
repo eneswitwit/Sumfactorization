@@ -1,23 +1,23 @@
 #ifndef __CONSTEXPR_ARRAY_H__
 #define __CONSTEXPR_ARRAY_H__
 
-template<typename T, size_t N>
+template<typename Number, size_t N>
 class constexpr_array{
 private:
     constexpr static size_t size_ = N;
-    T data_[N] {}; // T default constructor is essential!
+    Number data_[N] {}; // Number default constructor is essential!
 public:
     constexpr size_t size() const { return N;};
 
-    constexpr T& operator[](size_t n){
+    constexpr Number& operator[](size_t n){
         return data_[n];
     }
 
-    constexpr const T& operator[](size_t n) const {
+    constexpr const Number& operator[](size_t n) const {
         return data_[n];
     }
 
-    using iterator = T*;
+    using iterator = Number*;
 
     constexpr iterator begin() { return &data_[0];};
     constexpr iterator end() { return &data_[N];};

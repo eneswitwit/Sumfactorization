@@ -4,8 +4,8 @@
 namespace math{
 
     // Template constexpr function for calculating fabs as constexpr
-    template<typename y_type>
-    constexpr y_type fabs(y_type val) {
+    template<typename Number>
+    constexpr Number fabs(Number val) {
         if (val < 0) {
             return -val;
         }

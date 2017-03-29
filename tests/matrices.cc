@@ -29,26 +29,6 @@ int main() {
 
     C=multiply_matrices<n,n+1,n+1,n,long double>(A,B);
 
-    for (int i=0;i<n;i++) {
-        for (int j=0;j<n+1;j++) {
-            std::cout << A[i][j] << "  ";
-        }
-        std::cout << std::endl;
-    } std::cout << std::endl;
-
-    for (int i=0;i<n+1;i++) {
-        for (int j=0;j<n;j++) {
-            std::cout << B[i][j] << "  ";
-        }
-        std::cout << std::endl;
-    } std::cout << std::endl;
-
-    for (int i=0;i<n;i++) {
-        for (int j=0;j<n;j++) {
-            std::cout << C[i][j] << "  ";
-        }
-        std::cout << std::endl;
-    } std::cout << std::endl;
 
     C_hard[0][0]=-11;
     C_hard[0][1]=-8;
