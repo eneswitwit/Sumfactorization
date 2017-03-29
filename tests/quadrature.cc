@@ -1,15 +1,5 @@
-#include <type_traits>
-#include <cstdlib>
-#include <cmath>
-#include <cstdint>
-#include <array>
-#include <vector>
-#include <limits>
+#include <constexpr_quadrature.h>
 #include <iostream>
-
-#include "../include/constexpr_math.h"
-#include "../include/constexpr_array.h"
-#include "../include/constexpr_quadrature.h"
 
 
 

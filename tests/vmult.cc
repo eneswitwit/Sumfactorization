@@ -1,19 +1,9 @@
-#include <type_traits>
-#include <cstdlib>
-#include <cmath>
-#include <cstdint>
 #include <array>
 #include <cassert>
-#include <vector>
-#include <limits>
 #include <iostream>
-
-#include <constexpr_math.h>
-#include <constexpr_array.h>
-#include <constexpr_matrix.h>
+#include <constexpr_vmult.h>
 #include <constexpr_quadrature.h>
 #include <polynomialbasis/constexpr_lagrange.h>
-#include <constexpr_vmult.h>
 
 using namespace std;
 

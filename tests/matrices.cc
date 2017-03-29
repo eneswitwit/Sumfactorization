@@ -1,16 +1,5 @@
-#include <type_traits>
-#include <cstdlib>
-#include <cmath>
-#include <cstdint>
-#include <array>
-#include <vector>
-#include <limits>
-#include <type_traits>
-#include <iostream>
 #include <cassert>
-
-#include <constexpr_math.h>
-#include <constexpr_array.h>
+#include <cmath>
 #include <constexpr_matrix.h>
 
 int main() {

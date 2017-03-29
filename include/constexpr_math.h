@@ -1,6 +1,9 @@
 #ifndef __CONSTEXPR_MATH_H_
 #define __CONSTEXPR_MATH_H_
 
+#include <array>
+#include <cstdint>
+
 
 // Template constexpr function for calculating fabs as constexpr
 template<typename Number>

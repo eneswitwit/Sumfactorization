@@ -1,17 +1,4 @@
-#include <type_traits>
-#include <cstdlib>
-#include <cmath>
-#include <cstdint>
-#include <array>
-#include <vector>
-#include <limits>
-#include <cassert>
-#include <type_traits>
-#include <iostream>
-
-#include <constexpr_math.h>
-#include <constexpr_array.h>
-#include <constexpr_quadrature.h>
+#include <cassert> 
 #include <polynomialbasis/constexpr_lagrange.h>
 
 

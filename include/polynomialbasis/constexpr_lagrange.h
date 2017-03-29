@@ -1,10 +1,12 @@
 #ifndef __CONSTEXPR_LAGRANGE_H__
 #define __CONSTEXPR_LAGRANGE_H__
 
+#include <cstdint>
+#include "../constexpr_quadrature.h"
 
 // A class for handling polynomials with lagrangian basis.
 
-template <typename Number, size_t order, template<typename, size_t> class Quadrature>
+template <typename Number, std::size_t order, template<typename, std::size_t> class Quadrature>
 class Lagrange {
 public:
  

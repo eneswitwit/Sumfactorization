@@ -1,6 +1,8 @@
 #ifndef __LA_OPERATIONS_H__
 #define __LA_OPERATIONS_H__
 
+#include "constexpr_array.h"
+
 /**
   * This function implements a basic matrix multiplication with the added option to transpose the right hand side.
   * This way we don't need to actually transpose a matrix and compute the desired matrix directly.

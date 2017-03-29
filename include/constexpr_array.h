@@ -1,19 +1,21 @@
 #ifndef __CONSTEXPR_ARRAY_H__
 #define __CONSTEXPR_ARRAY_H__
 
-template<typename Number, size_t N>
+#include <cstddef>
+
+template<typename Number, std::size_t N>
 class constexpr_array{
 private:
-    constexpr static size_t size_ = N;
+    constexpr static std::size_t size_ = N;
     Number data_[N] {}; // Number default constructor is essential!
 public:
-    constexpr size_t size() const { return N;};
+    constexpr std::size_t size() const { return N;};
 
-    constexpr Number& operator[](size_t n){
+    constexpr Number& operator[](std::size_t n){
         return data_[n];
     }
 
-    constexpr const Number& operator[](size_t n) const {
+    constexpr const Number& operator[](std::size_t n) const {
         return data_[n];
     }
 

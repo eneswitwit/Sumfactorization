@@ -1,10 +1,15 @@
 #ifndef __CONSTEXPR_QUADRATURE_H__
 #define __CONSTEXPR_QUADRATURE_H__
 
+#include <limits>
+#include <cmath>
+#include <array>
 
+#include "constexpr_array.h"
+#include "constexpr_math.h"
 
 // Template class Quadrature for computing knots and weights of the quadrature.
-template<typename Number, size_t order >
+template<typename Number, std::size_t order >
 class Quadrature {
 private:
 
@@ -15,7 +20,7 @@ public:
         knots_ ( compute_quadrature_points()),
         weights_ ( compute_quadrature_weights()){}
 
-    constexpr const Number & operator[](size_t n) const {
+    constexpr const Number & operator[](std::size_t n) const {
         return knots_[n];
     }
 
@@ -29,7 +34,7 @@ public:
 
 
     // Template constexpr function for computing the Jacobi Polynomial
-    template<size_t n>
+    template<std::size_t n>
     constexpr Number JacobiP(Number x, int alpha, int beta) const
     {
         constexpr_array < Number, n+1 > p;
@@ -96,7 +101,7 @@ public:
         return weights;
     }
 
-    template<size_t n>
+    template<std::size_t n>
     constexpr Number gamma() const
     {
       constexpr_array < Number, n-2 > result;
