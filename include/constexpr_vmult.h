@@ -4,6 +4,15 @@
 #include "constexpr_matrix.h"
 #include "constexpr_quadrature.h"
 
+/**
+ * The methods used in this class are further explained in the document "Sumfactorization". The general principle is to exploit the tensor-product structure.
+ * Our implementation is directly derived from the teachlet "Efficient evaluation of weak forms in discontinuous Galerkin methods"
+ *
+ * The template parameter 'order' and 'q_order' correspond to the order of the polynomials and the order of the quadrature rule.
+ * We want to utilize two classes for evaluating polynomials and quadrature rules.
+ */
+
+
 template <typename Number, size_t order, size_t q_order, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
 class VMULT {
 public:

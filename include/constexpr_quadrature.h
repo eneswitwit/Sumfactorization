@@ -56,6 +56,10 @@ public:
         return p[n];
     }
 
+    /**
+     * The following functions are taken directly from the Deal.II library. We had to modify them slightly as we want them to work as constexpr functions.
+     */
+
 
     constexpr constexpr_array < Number, order + 1 > compute_quadrature_points() const
     {
@@ -143,6 +147,11 @@ public:
         while (fabs<Number>(delta) >= tolerance);
         return r;
     }
+
+    /**
+     * The following functions will transform the entries of a quadrature point. The points are computed for the interval [-1,1] but we want to use the interval [0,1].
+     * The inverse transformation is needed for the computation of the quadrature weights.
+     */
 
     constexpr Number transform_kth_entry(const unsigned int k, const constexpr_array < Number, order + 1 > & knots) const
     {
