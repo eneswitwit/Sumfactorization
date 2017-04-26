@@ -1,9 +1,10 @@
 #include <cassert> 
 #include <polynomialbasis/constexpr_lagrange.h>
+#include <iostream>
 
 
 // Epsilon for asserting
-constexpr long double eps = 0.000001;
+constexpr long double eps = 0.001;
 
 // Order for Interpolation
 constexpr static size_t order = 3;
