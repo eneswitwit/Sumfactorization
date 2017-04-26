@@ -1,15 +1,4 @@
-\documentclass[a4paper,12pt]{report}
-\usepackage{amsmath}
-\usepackage{bm}
-\usepackage[mathscr]{euscript}
-\usepackage{framed}
-\usepackage{graphicx}
-\usepackage{titlesec}
-\usepackage{amssymb}
 
-
-\begin{document}
-In 2-D\\
 Assume we have a solution $u \in V$ in the following form:
 \begin{equation}
 u(x,y)=\sum_{h=1}^{n^2} \psi_h (x,y) u_h,\ u_h \in \mathbb{R} \ \forall h =1,...\ ,n^2=:N
@@ -96,4 +85,3 @@ We will introduce the two matrices $\mathcal{W}'$ and $\mathcal{N}'$. These matr
 Consider $(-\Delta u, v)=-(\partial_{xx} u,v) + -(\partial_{yy} u,v)$.\\
 We introduce $\mathcal{N}''$, which evaluates the second derivatives of the ansatz-functions at the quadrature points. Note that the matrix $\mathcal{W}$ is not modified here. As a result we get 
 \[\mathcal{V}=-\mathcal{W} \mathcal{N}''^T \mathcal{U} (\mathcal{W} \mathcal{N}^T)^T -\mathcal{W} \mathcal{N}^T \mathcal{U} (\mathcal{W} \mathcal{N}''^T)^T\]
-\end{document}
