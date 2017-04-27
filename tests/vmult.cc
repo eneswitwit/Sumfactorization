@@ -43,7 +43,7 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_mass(c
 }
 
 template <typename Number, size_t order, size_t q_order>
-constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradient(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> u) {
+constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradient(constexpr_array < constexpr_array < Number, order + 1 >, order + 1> u) {
 
     Lagrange<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
@@ -84,7 +84,7 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradie
 }
 
 template <typename Number, size_t order, size_t q_order>
-constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_laplace(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> u) {
+constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_laplace(constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > u) {
 
     Lagrange<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
