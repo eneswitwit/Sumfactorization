@@ -27,6 +27,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 # add executable
 add_executable(testvmult ${PROJECT_SOURCE_DIR}/tests/vmult.cc)
+add_executable(testvmult3D ${PROJECT_SOURCE_DIR}/tests/vmult_3D.cc)
 add_executable(testmatrices ${PROJECT_SOURCE_DIR}/tests/matrices.cc)
 add_executable(testlagrange ${PROJECT_SOURCE_DIR}/tests/polynomialbasis/lagrange.cc)
 add_executable(testquadrature ${PROJECT_SOURCE_DIR}/tests/quadrature.cc)
@@ -38,6 +39,7 @@ add_executable(constexprMath ${PROJECT_SOURCE_DIR}/tests/header/constexpr_math.c
 add_executable(constexprMatrix ${PROJECT_SOURCE_DIR}/tests/header/constexpr_matrix.cc)
 add_executable(constexprQuadrature ${PROJECT_SOURCE_DIR}/tests/header/constexpr_quadrature.cc)
 add_executable(constexprVmult ${PROJECT_SOURCE_DIR}/tests/header/constexpr_vmult.cc)
+add_executable(constexprVmult3D ${PROJECT_SOURCE_DIR}/tests/header/constexpr_vmult_3D.cc)
 
 
 # Put all tests in the test directory, where the sources also are
@@ -49,6 +51,7 @@ enable_testing()
 
 # check if test runs and exits without error
 add_test(testvmult ${PROJECT_SOURCE_DIR}/bin/testvmult)
+add_test(testvmult3D ${PROJECT_SOURCE_DIR}/bin/testvmult3D)
 add_test(testlagrange ${PROJECT_SOURCE_DIR}/bin/testlagrange)
 add_test(testquadrature ${PROJECT_SOURCE_DIR}/bin/testquadrature)
 add_test(testmatrices ${PROJECT_SOURCE_DIR}/bin/testmatrices)
@@ -59,6 +62,7 @@ add_test(constexprMath ${PROJECT_SOURCE_DIR}/bin/constexprMath)
 add_test(constexprMatrix ${PROJECT_SOURCE_DIR}/bin/constexprMatrix)
 add_test(constexprQuadrature ${PROJECT_SOURCE_DIR}/bin/constexprQuadrature)
 add_test(constexprVmult ${PROJECT_SOURCE_DIR}/bin/constexprVmult)
+add_test(constexprVmult3D ${PROJECT_SOURCE_DIR}/bin/constexprVmult3D)
 
 
 
