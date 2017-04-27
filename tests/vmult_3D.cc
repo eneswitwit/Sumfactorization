@@ -173,9 +173,7 @@ int main()
     // Compute VMULT Mass Matrix
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> u_1 = create_array < long double, order + 1 > ();
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass = create_array < long double, order + 1 > ();
-    //for (unsigned int yolo;yolo<1000000;yolo++) {
     vmult.mass(y_mass, u_1);
-    //}
 
     // Compute VMULT Gradient
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_gradient = create_array < long double, order + 1 > ();
@@ -189,9 +187,6 @@ int main()
 
 
     /** TESTING **/
-    for (unsigned int yolo;yolo<1000000;yolo++) {
-        constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass_hard = test_mass<long double, order,q_order>(u_1);
-    }
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass_hard = test_mass<long double, order,q_order>(u_1);
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_gradient_hard = test_gradient<long double, order,q_order>(u_1);
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_laplace_hard = test_laplace<long double, order,q_order>(u_1);
