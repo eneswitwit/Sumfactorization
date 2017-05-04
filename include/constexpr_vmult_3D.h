@@ -10,16 +10,23 @@
  *
  * The template parameter 'order' and 'q_order' correspond to the order of the polynomials and the order of the quadrature rule.
  * We want to utilize two classes for evaluating polynomials and quadrature rules.
+ *
+ * The boolean template parameter 'usememory' will determine whether we precompute the shape functions at the quadrature points and store them or compute the values from scratch when needed.
+ * The default value is 1, this means we will precompute and store the values by default.
  */
 
 
-template <typename Number, size_t order, size_t q_order, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
+template <typename Number, size_t order, size_t q_order, template<typename, size_t> class Quadrature, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial, bool usememory=1>
 class VMULT {
 public:
 
     const Quadrature < Number, q_order > quad;
     const Polynomial <Number, order, Quadrature> poly;
+    Number mass_counter_;
 
+    /**
+     * The following matrices are the same as in 2D, since the matrices themselves correspond to only one dimension.
+     */
     const constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > NT_;
     const constexpr_array < constexpr_array < Number, q_order + 1 >, order + 1 > NW_;
     const constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > NP_;
@@ -41,16 +48,23 @@ public:
         NWDX_(compute_gradient_NWDX()),
         NDXP_(compute_gradient_NDXP()),
         NDXDXT_(compute_laplacian_NDXDXT()),
-        NDXDXP_(compute_laplacian_NDXDXP()) {}
+        NDXDXP_(compute_laplacian_NDXDXP()),
+        mass_counter_(){}
 
 
     /** BASIS MATRICES **/
 
+    /**
+     * The documentation explains why the matrices are defined the way they are.
+     */
+
     constexpr constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > compute_basis_matrix_NT() {
         constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > NT;
-        for (unsigned int i = 0; i < q_order + 1 ; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                NT[i][j] = poly.eval_lagrange(quad.knots_[i], j);
+        if (usememory==1) {
+            for (unsigned int i = 0; i < q_order + 1 ; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                    NT[i][j] = poly.eval_lagrange(quad.knots_[i], j);
+                }
             }
         }
         return NT;
@@ -60,18 +74,21 @@ public:
 
     constexpr constexpr_array < constexpr_array < Number, q_order + 1 >, order + 1 > compute_basis_matrix_NW() {
         constexpr_array < constexpr_array < Number, q_order + 1 >, order + 1 > NW;
-        for (unsigned int i = 0; i < q_order +1 ; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                NW[j][i] = quad.weights_[i] * NT_[i][j];
+        if (usememory==1) {
+            for (unsigned int i = 0; i < q_order +1 ; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                    NW[j][i] = quad.weights_[i] * NT_[i][j];
+                }
             }
         }
-
         return NW;
     }
 
     constexpr constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > compute_basis_matrix_NP() {
         constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > NP;
-        NP = multiply_matrices < order + 1, q_order + 1, q_order + 1, order + 1, Number > (NW_, NT_);
+        if (usememory==1) {
+            NP = multiply_matrices < order + 1, q_order + 1, q_order + 1, order + 1, Number > (NW_, NT_);
+        }
         return NP;
     }
 
@@ -82,9 +99,11 @@ public:
     /** GRADIENT **/
     constexpr constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > compute_gradient_NDXT() {
         constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > NDXT;
-        for (unsigned int i = 0; i < q_order + 1 ; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                NDXT[i][j] = poly.eval_1st_derivative(quad.knots_[i], j);
+        if (usememory==1) {
+            for (unsigned int i = 0; i < q_order + 1 ; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                    NDXT[i][j] = poly.eval_1st_derivative(quad.knots_[i], j);
+                }
             }
         }
         return NDXT;
@@ -94,18 +113,21 @@ public:
 
     constexpr constexpr_array < constexpr_array < Number, q_order + 1 >, order + 1 > compute_gradient_NWDX() {
         constexpr_array < constexpr_array < Number, q_order + 1 >, order + 1 > NWDX;
-        for (unsigned int i = 0; i < q_order + 1; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                NWDX[j][i] = quad.weights_[i] * NDXT_[i][j];
+        if (usememory==1) {
+            for (unsigned int i = 0; i < q_order + 1; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                    NWDX[j][i] = quad.weights_[i] * NDXT_[i][j];
+                }
             }
         }
-
         return NWDX;
     }
 
     constexpr constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > compute_gradient_NDXP() {
         constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > NDXP;
-        NDXP = multiply_matrices < order + 1, q_order + 1, q_order + 1, order + 1, Number > (NWDX_, NDXT_);
+        if (usememory==1) {
+            NDXP = multiply_matrices < order + 1, q_order + 1, q_order + 1, order + 1, Number > (NWDX_, NDXT_);
+        }
         return NDXP;
     }
 
@@ -115,9 +137,11 @@ public:
     /** LAPLACIAN **/
     constexpr constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > compute_laplacian_NDXDXT() {
         constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > NDXDXT;
-        for (unsigned int i = 0; i < q_order + 1; i++) {
-            for (unsigned int j = 0; j < order + 1; j++) {
-                NDXDXT[i][j] = -1. * poly.eval_2nd_derivative(quad.knots_[i], j);
+        if (usememory==1) {
+            for (unsigned int i = 0; i < q_order + 1; i++) {
+                for (unsigned int j = 0; j < order + 1; j++) {
+                    NDXDXT[i][j] = -1. * poly.eval_2nd_derivative(quad.knots_[i], j);
+                }
             }
         }
         return NDXDXT;
@@ -125,29 +149,44 @@ public:
 
     constexpr constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > compute_laplacian_NDXDXP() {
         constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > NDXDXP;
-        NDXDXP = multiply_matrices < order + 1, q_order + 1, q_order + 1, order + 1, Number > (NW_, NDXDXT_);
+        if (usememory==1) {
+            NDXDXP = multiply_matrices < order + 1, q_order + 1, q_order + 1, order + 1, Number > (NW_, NDXDXT_);
+        }
         return NDXDXP;
     }
 
+    /**
+     * The function has two inputs: a refference to the solution y and a refference to the coefficient vector u.
+     *
+     * The explanation on the formulas can be seen in a document.
+     *
+     * In each loop (consisting of 4 for-loops) we have an additional if-statement.
+     * It depends of the boolean template parameter 'usememory', and will either use the precomputed values or compute them from scratch.
+     */
 
-    constexpr void mass(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &y, constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &u, bool usememory=1) const {
+    constexpr void mass(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &y, constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &u) const {
         constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> W;
         constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> M;
         constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> Z;
+        unsigned int mass_counter=0;
 
         for (unsigned int k=0; k < order+1; k++) {
             for (unsigned int i=0 ;i < order+1; i++) {
                 for (unsigned int j=0 ;j < order+1; j++) {
                     W[k][i][j]=0;
                     for (unsigned int l=0;l < order+1; l++) {
-                        if (usememory==1)
-                            W[k][i][j]+=u[i][j][l]*NP_[l][k];
+                        if (usememory==1) {
+                            mass_counter++;
+                            W[k][i][j]+=u[i][j][l]*NP_[k][l];
+                        }
                         else {
                             Number NP_lk = 0;
-                            for (unsigned int q=0; q<qorder+1;q++) {
+                            for (unsigned int q=0; q<q_order+1;q++) {
                                 NP_lk+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k);
+                                mass_counter+=2;
                             }
                             W[k][i][j]+=u[i][j][l]*NP_lk;
+                            mass_counter++;
                         }
                     }
                 }
@@ -158,13 +197,17 @@ public:
                 for (unsigned int j=0 ;j < order+1; j++) {
                     M[j][k][i]=0;
                     for (unsigned int l=0;l < order+1; l++) {
-                        if (usememory==1)
-                            M[j][k][i]+=W[k][i][l]*NP_[l][j];
+                        if (usememory==1) {
+                            mass_counter++;
+                            M[j][k][i]+=W[k][i][l]*NP_[j][l];
+                        }
                         else {
                             Number NP_lj = 0;
-                            for (unsigned int q=0; q<qorder+1;q++) {
+                            for (unsigned int q=0; q<q_order+1;q++) {
                                 NP_lj+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j);
+                                mass_counter+=2;
                             }
+                            mass_counter++;
                             M[j][k][i]+=W[k][i][l]*NP_lj;
                         }
                     }
@@ -176,101 +219,158 @@ public:
                 for (unsigned int j=0 ;j < order+1; j++) {
                     Z[i][j][k]=0;
                     for (unsigned int l=0;l < order+1; l++) {
-                        if (usememory==1)
-                            Z[i][j][k]+=M[j][k][l]*NP_[l][i];
+                        if (usememory==1) {
+                            mass_counter++;
+                            Z[i][j][k]+=M[j][k][l]*NP_[i][l];
+                        }
                         else {
                             Number NP_li = 0;
-                            for (unsigned int q=0; q<qorder+1;q++) {
-                                NP_li+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],i);
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                mass_counter+=2;
+                                NP_li+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],i)*poly.eval_lagrange(quad.knots_[q],l);
                             }
+                            mass_counter++;
                             Z[i][j][k]+=M[j][k][l]*NP_li;
                         }
                     }
                 }
             }
         }
+        y=Z;
     }
-    y=Z;
-}
 
-constexpr void gradient(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &y, constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &u) const {
+    constexpr void gradient(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &y, constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &u) const {
 
-    constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> W;
-    constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> M;
-    constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> Z;
+        constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> W;
+        constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> M;
+        constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> Z;
 
-    for (unsigned int k=0; k < order+1; k++) {
-        for (unsigned int i=0 ;i < order+1; i++) {
-            for (unsigned int j=0 ;j < order+1; j++) {
-                W[k][i][j]=0;
-                for (unsigned int l=0;l < order+1; l++) {
-                    W[k][i][j]+=u[i][j][l]*(NP_[l][k]+NP_[l][k]+NDXP_[l][k]);
+        for (unsigned int k=0; k < order+1; k++) {
+            for (unsigned int i=0 ;i < order+1; i++) {
+                for (unsigned int j=0 ;j < order+1; j++) {
+                    W[k][i][j]=0;
+                    for (unsigned int l=0;l < order+1; l++) {
+                        if (usememory==1)
+                            W[k][i][j]+=u[i][j][l]*(NP_[k][l]+NP_[k][l]+NDXP_[k][l]);
+                        else {
+                            Number N_lk = 0;
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                N_lk+=quad.weights_[q]*(2*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k)
+                                                        +poly.eval_1st_derivative(quad.knots_[q],l)*poly.eval_1st_derivative(quad.knots_[q],k));
+                            }
+                            W[k][i][j]+=u[i][j][l]*N_lk;
+                        }
+                    }
                 }
             }
         }
-    }
-    for (unsigned int k=0; k < order+1; k++) {
-        for (unsigned int i=0 ;i < order+1; i++) {
-            for (unsigned int j=0 ;j < order+1; j++) {
-                M[j][k][i]=0;
-                for (unsigned int l=0;l < order+1; l++) {
-                    M[j][k][i]+=W[k][i][l]*(NP_[l][j]+NP_[l][j]+NDXP_[l][j]);
+        for (unsigned int k=0; k < order+1; k++) {
+            for (unsigned int i=0 ;i < order+1; i++) {
+                for (unsigned int j=0 ;j < order+1; j++) {
+                    M[j][k][i]=0;
+                    for (unsigned int l=0;l < order+1; l++) {
+                        if (usememory==1)
+                            M[j][k][i]+=W[k][i][l]*(NP_[j][l]+NP_[j][l]+NDXP_[j][l]);
+                        else {
+                            Number N_lj = 0;
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                N_lj+=quad.weights_[q]*(2*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j)
+                                                        +poly.eval_1st_derivative(quad.knots_[q],l)*poly.eval_1st_derivative(quad.knots_[q],j));
+                            }
+                            M[j][k][i]+=W[k][i][l]*N_lj;
+                        }
+                    }
                 }
             }
         }
-    }
-    for (unsigned int k=0; k < order+1; k++) {
-        for (unsigned int i=0 ;i < order+1; i++) {
-            for (unsigned int j=0 ;j < order+1; j++) {
-                Z[i][j][k]=0;
-                for (unsigned int l=0;l < order+1; l++) {
-                    Z[i][j][k]+=M[j][k][l]*(NP_[l][i]+NP_[l][i]+NDXP_[l][i]);
+        for (unsigned int k=0; k < order+1; k++) {
+            for (unsigned int i=0 ;i < order+1; i++) {
+                for (unsigned int j=0 ;j < order+1; j++) {
+                    Z[i][j][k]=0;
+                    for (unsigned int l=0;l < order+1; l++) {
+                        if (usememory==1)
+                            Z[i][j][k]+=M[j][k][l]*(NP_[i][l]+NP_[i][l]+NDXP_[i][l]);
+                        else {
+                            Number N_li = 0;
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                N_li+=quad.weights_[q]*(2*poly.eval_lagrange(quad.knots_[q],i)*poly.eval_lagrange(quad.knots_[q],l)
+                                                        +poly.eval_1st_derivative(quad.knots_[q],l)*poly.eval_1st_derivative(quad.knots_[q],i));
+                            }
+                            Z[i][j][k]+=M[j][k][l]*N_li;
+                        }
+                    }
                 }
             }
         }
+        y=Z;
     }
-    y=Z;
-}
 
 
-constexpr void laplacian(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &y, constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &u) const {
+    constexpr void laplacian(constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &y, constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> &u) const {
 
-    constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> W;
-    constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> M;
-    constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> Z;
+        constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> W;
+        constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> M;
+        constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> Z;
 
-    for (unsigned int k=0; k < order+1; k++) {
-        for (unsigned int i=0 ;i < order+1; i++) {
-            for (unsigned int j=0 ;j < order+1; j++) {
-                W[k][i][j]=0;
-                for (unsigned int l=0;l < order+1; l++) {
-                    W[k][i][j]+=u[i][j][l]*(-NP_[l][k]-NP_[l][k]+NDXDXP_[k][l]);
+        for (unsigned int k=0; k < order+1; k++) {
+            for (unsigned int i=0 ;i < order+1; i++) {
+                for (unsigned int j=0 ;j < order+1; j++) {
+                    W[k][i][j]=0;
+                    for (unsigned int l=0;l < order+1; l++) {
+                        if (usememory==1)
+                            W[k][i][j]+=u[i][j][l]*(-NP_[k][l]-NP_[k][l]+NDXDXP_[k][l]);
+                        else {
+                            Number N_lk = 0;
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                N_lk+=quad.weights_[q]*(-2*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k)
+                                                        -poly.eval_lagrange(quad.knots_[q],k)*poly.eval_2nd_derivative(quad.knots_[q],l));
+                            }
+                            W[k][i][j]+=u[i][j][l]*N_lk;
+                        }
+                    }
                 }
             }
         }
-    }
-    for (unsigned int k=0; k < order+1; k++) {
-        for (unsigned int i=0 ;i < order+1; i++) {
-            for (unsigned int j=0 ;j < order+1; j++) {
-                M[j][k][i]=0;
-                for (unsigned int l=0;l < order+1; l++) {
-                    M[j][k][i]+=W[k][i][l]*(-NP_[l][j]-NP_[l][j]+NDXDXP_[j][l]);
+        for (unsigned int k=0; k < order+1; k++) {
+            for (unsigned int i=0 ;i < order+1; i++) {
+                for (unsigned int j=0 ;j < order+1; j++) {
+                    M[j][k][i]=0;
+                    for (unsigned int l=0;l < order+1; l++) {
+                        if (usememory==1)
+                            M[j][k][i]+=W[k][i][l]*(-NP_[j][l]-NP_[j][l]+NDXDXP_[j][l]);
+                        else {
+                            Number N_lj = 0;
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                N_lj+=quad.weights_[q]*(-2*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j)
+                                                        -poly.eval_lagrange(quad.knots_[q],k)*poly.eval_2nd_derivative(quad.knots_[q],l));
+                            }
+                            M[j][k][i]+=W[k][i][l]*N_lj;
+                        }
+                    }
                 }
             }
         }
-    }
-    for (unsigned int k=0; k < order+1; k++) {
-        for (unsigned int i=0 ;i < order+1; i++) {
-            for (unsigned int j=0 ;j < order+1; j++) {
-                Z[i][j][k]=0;
-                for (unsigned int l=0;l < order+1; l++) {
-                    Z[i][j][k]+=M[j][k][l]*(-NP_[l][i]-NP_[l][i]+NDXDXP_[i][l]);
+        for (unsigned int k=0; k < order+1; k++) {
+            for (unsigned int i=0 ;i < order+1; i++) {
+                for (unsigned int j=0 ;j < order+1; j++) {
+                    Z[i][j][k]=0;
+                    for (unsigned int l=0;l < order+1; l++) {
+                        if (usememory==1)
+                            Z[i][j][k]+=M[j][k][l]*(-NP_[i][l]-NP_[i][l]+NDXDXP_[i][l]);
+                        else {
+                            Number N_li = 0;
+                            for (unsigned int q=0; q<q_order+1;q++) {
+                                N_li+=quad.weights_[q]*(-2*poly.eval_lagrange(quad.knots_[q],i)*poly.eval_lagrange(quad.knots_[q],l)
+                                                        -poly.eval_lagrange(quad.knots_[q],i)*poly.eval_2nd_derivative(quad.knots_[q],l));
+                            }
+                            Z[i][j][k]+=M[j][k][l]*N_li;
+                        }
+                    }
                 }
             }
         }
+        y=Z;
     }
-    y=Z;
-}
 
 };
 

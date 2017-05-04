@@ -168,20 +168,27 @@ int main()
     // Initialize VMULT
     constexpr size_t order = 3;
     constexpr size_t q_order = 3;
-    constexpr VMULT<long double, order, q_order, Quadrature , Lagrange > vmult;
+    constexpr VMULT<long double, order, q_order, Quadrature , Lagrange> vmult_usememory;
+    constexpr VMULT<long double, order, q_order, Quadrature , Lagrange, 0 > vmult_nomemory;
 
     // Compute VMULT Mass Matrix
     constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> u_1 = create_array < long double, order + 1 > ();
-    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass = create_array < long double, order + 1 > ();
-    vmult.mass(y_mass, u_1);
+    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass_usememory = create_array < long double, order + 1 > ();
+    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass_nomemory = create_array < long double, order + 1 > ();
+    vmult_usememory.mass(y_mass_usememory, u_1);
+    vmult_nomemory.mass(y_mass_nomemory, u_1);
 
     // Compute VMULT Gradient
-    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_gradient = create_array < long double, order + 1 > ();
-    vmult.gradient(y_gradient, u_1);
+    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_gradient_usememory = create_array < long double, order + 1 > ();
+    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_gradient_nomemory = create_array < long double, order + 1 > ();
+    vmult_usememory.gradient(y_gradient_usememory, u_1);
+    vmult_nomemory.gradient(y_gradient_nomemory, u_1);
 
     // Compute VMULT Laplacian
-    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_laplace = create_array < long double, order + 1 > ();
-    vmult.laplacian(y_laplace, u_1);
+    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_laplace_usememory = create_array < long double, order + 1 > ();
+    constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_laplace_nomemory = create_array < long double, order + 1 > ();
+    vmult_usememory.laplacian(y_laplace_usememory, u_1);
+    vmult_nomemory.laplacian(y_laplace_nomemory, u_1);
 
 
 
@@ -215,7 +222,8 @@ int main()
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
             for (unsigned int k = 0; k < order + 1; k++) {
-                assert(abs(y_mass[i][j][k]-y_mass_hard[i][j][k])<=eps);
+                assert(abs(y_mass_nomemory[i][j][k]-y_mass_hard[i][j][k])<=eps);
+                assert(abs(y_mass_usememory[i][j][k]-y_mass_hard[i][j][k])<=eps);
             }
         }
     }
@@ -225,7 +233,8 @@ int main()
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
             for (unsigned int k = 0; k < order + 1; k++) {
-                assert(abs(y_gradient[i][j][k]-y_gradient_hard[i][j][k])<=eps);
+                assert(abs(y_gradient_usememory[i][j][k]-y_gradient_hard[i][j][k])<=eps);
+                assert(abs(y_gradient_nomemory[i][j][k]-y_gradient_hard[i][j][k])<=eps);
             }
         }
     }
@@ -235,7 +244,8 @@ int main()
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
             for (unsigned int k = 0; k < order + 1; k++) {
-                assert(abs(y_laplace[i][j][k]-y_laplace_hard[i][j][k])<=eps);
+                assert(abs(y_laplace_nomemory[i][j][k]-y_laplace_hard[i][j][k])<=eps);
+                assert(abs(y_laplace_usememory[i][j][k]-y_laplace_hard[i][j][k])<=eps);
             }
         }
     }
