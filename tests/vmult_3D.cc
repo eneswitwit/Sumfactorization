@@ -65,28 +65,28 @@ constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order
                 for (unsigned int i = 0; i < order+1; i++) {
                     for (unsigned int j = 0; j < order+1; j++) {
                         for (unsigned int k = 0; k < order+1; k++) {
+                            Number sumdx=0;
                             Number sumx=0;
                             for (unsigned int qx=0;qx<q_order+1;qx++) {
-                                sumx+=quad.weights_[qx]*(poly.eval_1st_derivative(quad.knots_[qx],i)*poly.eval_1st_derivative(quad.knots_[qx],l)
-                                                         +poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l)
-                                                         +poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l));
+                                sumdx+=quad.weights_[qx]*poly.eval_1st_derivative(quad.knots_[qx],i)*poly.eval_1st_derivative(quad.knots_[qx],l);
+                                sumx+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l);
                             }
 
+                            Number sumdy=0;
                             Number sumy=0;
                             for (unsigned int qy=0;qy<q_order+1;qy++) {
-                                sumy+=quad.weights_[qy]*(poly.eval_1st_derivative(quad.knots_[qy],j)*poly.eval_1st_derivative(quad.knots_[qy],m)
-                                                         +poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m)
-                                                         +poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m));
+                                sumdy+=quad.weights_[qy]*poly.eval_1st_derivative(quad.knots_[qy],j)*poly.eval_1st_derivative(quad.knots_[qy],m);
+                                sumy+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m);
                             }
 
+                            Number sumdz=0;
                             Number sumz=0;
                             for (unsigned int qz=0;qz<q_order+1;qz++) {
-                                sumz+=quad.weights_[qz]*(poly.eval_1st_derivative(quad.knots_[qz],k)*poly.eval_1st_derivative(quad.knots_[qz],n)
-                                                         +poly.eval_lagrange(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n)
-                                                         +poly.eval_lagrange(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n));
+                                sumdz+=quad.weights_[qz]*poly.eval_1st_derivative(quad.knots_[qz],k)*poly.eval_1st_derivative(quad.knots_[qz],n);
+                                sumz+=quad.weights_[qz]*poly.eval_lagrange(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n);
                             }
 
-                            y[l][m][n]+=u[i][j][k]*sumy*sumx*sumz;
+                            y[l][m][n]+=u[i][j][k]*(sumdx*sumy*sumz+sumx*sumdy*sumz+sumx*sumy*sumdz);
                         }
                     }
                 }
@@ -112,27 +112,27 @@ constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order
                     for (unsigned int j = 0; j < order+1; j++) {
                         for (unsigned int k = 0; k < order+1; k++) {
                             Number sumx=0;
+                            Number sumdx=0;
                             for (unsigned int qx=0;qx<q_order+1;qx++) {
-                                sumx+=quad.weights_[qx]*(+poly.eval_2nd_derivative(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l)
-                                                         +poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l)
-                                                         +poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l));
+                                sumdx+=quad.weights_[qx]*poly.eval_2nd_derivative(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l);
+                                sumx+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],l);
                             }
 
                             Number sumy=0;
+                            Number sumdy=0;
                             for (unsigned int qy=0;qy<q_order+1;qy++) {
-                                sumy+=quad.weights_[qy]*(+poly.eval_2nd_derivative(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m)
-                                                         +poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m)
-                                                         +poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m));
+                                sumdy+=quad.weights_[qy]*poly.eval_2nd_derivative(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m);
+                                sumy+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],m);
                             }
 
                             Number sumz=0;
+                            Number sumdz=0;
                             for (unsigned int qz=0;qz<q_order+1;qz++) {
-                                sumz+=quad.weights_[qz]*(+poly.eval_2nd_derivative(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n)
-                                                         +poly.eval_lagrange(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n)
-                                                         +poly.eval_lagrange(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n));
+                                sumdz+=quad.weights_[qz]*poly.eval_2nd_derivative(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n);
+                                sumz+=quad.weights_[qz]*poly.eval_lagrange(quad.knots_[qz],k)*poly.eval_lagrange(quad.knots_[qz],n);
                             }
 
-                            y[l][m][n]-=u[i][j][k]*sumy*sumx*sumz;
+                            y[l][m][n]-=u[i][j][k]*(sumdx*sumy*sumz+sumx*sumdy*sumz+sumx*sumy*sumdz);;
                         }
                     }
                 }
@@ -214,7 +214,9 @@ int main()
 
     for (unsigned int i = 0; i < order + 1; i++) {
         for (unsigned int j = 0; j < order + 1; j++) {
-            //std::cout << y_laplace[i][j] << "     " <<  y_laplace_hard[i][j] << std::endl;
+            for (unsigned int k = 0; k < order + 1; k++) {
+                //std::cout << y_laplace_nomemory[i][j][k] << "     " <<  y_laplace_hard[i][j][k] << std::endl;
+            }
         }
     }
 
