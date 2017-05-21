@@ -31,7 +31,7 @@ public:
     /**
      * The i-th lagrange-polynomial is evaluated using the standard formula L_i(x)= \prod_{j\neq i} \frac{x-x_j}{x_i-x_j}
      */
-    constexpr Number eval_lagrange(const Number & x, const unsigned int i) const {
+    constexpr Number eval(const Number & x, const unsigned int i) const {
         Number val = 1.;
         for (unsigned int j = 0; j <= order; j++) {
                 if (i != j) {

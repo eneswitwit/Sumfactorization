@@ -4,14 +4,16 @@
 #include <constexpr_vmult.h>
 #include <constexpr_quadrature.h>
 #include <polynomialbasis/constexpr_lagrange.h>
+#include <polynomialbasis/constexpr_newton.h>
+#include <polynomialbasis/constexpr_bernstein.h>
 
 using namespace std;
 
 // Hardcode solution
-template <typename Number, size_t order, size_t q_order>
+template <typename Number, size_t order, size_t q_order, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
 constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_mass(constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > u) {
 
-    Lagrange<long double,order,Quadrature> poly;
+    Polynomial<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
 
     constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y;
@@ -24,12 +26,12 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_mass(c
 
                     Number sumx=0;
                     for (unsigned int qx=0;qx<q_order+1;qx++) {
-                        sumx+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
+                        sumx+=quad.weights_[qx]*poly.eval(quad.knots_[qx],i)*poly.eval(quad.knots_[qx],k);
                     }
 
                     Number sumy=0;
                     for (unsigned int qy=0;qy<q_order+1;qy++) {
-                        sumy+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
+                        sumy+=quad.weights_[qy]*poly.eval(quad.knots_[qy],j)*poly.eval(quad.knots_[qy],l);
                     }
 
                     y[k][l]+=u[i][j]*sumy*sumx;
@@ -42,10 +44,10 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_mass(c
     return y;
 }
 
-template <typename Number, size_t order, size_t q_order>
+template <typename Number, size_t order, size_t q_order, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
 constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradient(constexpr_array < constexpr_array < Number, order + 1 >, order + 1> u) {
 
-    Lagrange<long double,order,Quadrature> poly;
+    Polynomial<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
 
     constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y1;
@@ -62,13 +64,13 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradie
                     Number sumx2=0;
                     for (unsigned int qx=0;qx<q_order+1;qx++) {
                         sumx1+=quad.weights_[qx]*poly.eval_1st_derivative(quad.knots_[qx],i)*poly.eval_1st_derivative(quad.knots_[qx],k);
-                        sumx2+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
+                        sumx2+=quad.weights_[qx]*poly.eval(quad.knots_[qx],i)*poly.eval(quad.knots_[qx],k);
                     }
 
                     Number sumy1=0;
                     Number sumy2=0;
                     for (unsigned int qy=0;qy<q_order+1;qy++) {
-                        sumy1+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
+                        sumy1+=quad.weights_[qy]*poly.eval(quad.knots_[qy],j)*poly.eval(quad.knots_[qy],l);
                         sumy2+=quad.weights_[qy]*poly.eval_1st_derivative(quad.knots_[qy],j)*poly.eval_1st_derivative(quad.knots_[qy],l);
                     }
 
@@ -83,10 +85,10 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_gradie
     return add_matrices<order+1,order+1,order+1,order+1,Number>(y1,y2);
 }
 
-template <typename Number, size_t order, size_t q_order>
+template <typename Number, size_t order, size_t q_order, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
 constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_laplace(constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > u) {
 
-    Lagrange<long double,order,Quadrature> poly;
+    Polynomial<long double,order,Quadrature> poly;
     Quadrature<long double,q_order> quad;
 
     constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > y1;
@@ -102,15 +104,15 @@ constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > test_laplac
                     Number sumx1=0;
                     Number sumx2=0;
                     for (unsigned int qx=0;qx<q_order+1;qx++) {
-                        sumx1-=quad.weights_[qx]*poly.eval_2nd_derivative(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
-                        sumx2+=quad.weights_[qx]*poly.eval_lagrange(quad.knots_[qx],i)*poly.eval_lagrange(quad.knots_[qx],k);
+                        sumx1-=quad.weights_[qx]*poly.eval_2nd_derivative(quad.knots_[qx],i)*poly.eval(quad.knots_[qx],k);
+                        sumx2+=quad.weights_[qx]*poly.eval(quad.knots_[qx],i)*poly.eval(quad.knots_[qx],k);
                     }
 
                     Number sumy1=0;
                     Number sumy2=0;
                     for (unsigned int qy=0;qy<q_order+1;qy++) {
-                        sumy1+=quad.weights_[qy]*poly.eval_lagrange(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
-                        sumy2-=quad.weights_[qy]*poly.eval_2nd_derivative(quad.knots_[qy],j)*poly.eval_lagrange(quad.knots_[qy],l);
+                        sumy1+=quad.weights_[qy]*poly.eval(quad.knots_[qy],j)*poly.eval(quad.knots_[qy],l);
+                        sumy2-=quad.weights_[qy]*poly.eval_2nd_derivative(quad.knots_[qy],j)*poly.eval(quad.knots_[qy],l);
                     }
 
                     y1[k][l]+=u[i][j]*sumy1*sumx1;
@@ -139,17 +141,15 @@ constexpr_array<constexpr_array<Number, size>, size> create_array()
     constexpr_array<constexpr_array<Number, size>, size> arr;
     for (unsigned int i = 0; i < size; ++i)
         for (unsigned int j = 0; j < size; ++j)
-            arr[i][j] = 10^i;
+            arr[i][j] = 10^((i+j)/2);
     return arr;
 }
 
+template <size_t order, size_t q_order, template<typename, size_t, template<typename, size_t> class Quadrature_ > class Polynomial>
+void test_polynomial_class() {
 
-int main()
-{
     // Initialize VMULT
-    constexpr size_t order = 3;
-    constexpr size_t q_order = 3;
-    constexpr VMULT<long double, order, q_order, Quadrature , Lagrange > vmult;
+    constexpr VMULT<long double, order, q_order, Quadrature , Polynomial > vmult;
 
     // Compute VMULT Mass Matrix
     constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > u_1 = create_array < long double, order + 1 > ();
@@ -168,9 +168,9 @@ int main()
 
 
     /** TESTING **/
-    constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_mass_hard = test_mass<long double, order,q_order>(u_1);
-    constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_gradient_hard = test_gradient<long double, order,q_order>(u_1);
-    constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_laplace_hard = test_laplace<long double, order,q_order>(u_1);
+    constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_mass_hard = test_mass<long double, order,q_order,Polynomial>(u_1);
+    constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_gradient_hard = test_gradient<long double, order,q_order,Polynomial>(u_1);
+    constexpr_array < constexpr_array < long double, order + 1 >, order + 1 > y_laplace_hard = test_laplace<long double, order,q_order,Polynomial>(u_1);
 
     const long double eps=0.00000000001;
 
@@ -198,7 +198,6 @@ int main()
             assert(abs(y_mass[i][j]-y_mass_hard[i][j])<=eps);
         }
     }
-    std::cout << "VMULT.mass     test successful" << std::endl;
 
     // Test vmult.gradient
     for (unsigned int i = 0; i < order + 1; i++) {
@@ -206,7 +205,6 @@ int main()
             assert(abs(y_gradient[i][j]-y_gradient_hard[i][j])<=eps);
         }
     }
-    std::cout << "VMULT.gradient test successful" << std::endl;
 
     // Test vmult.laplace
     for (unsigned int i = 0; i < order + 1; i++) {
@@ -214,7 +212,18 @@ int main()
             assert(abs(y_laplace[i][j]-y_laplace_hard[i][j])<=eps);
         }
     }
-    std::cout << "VMULT.laplace  test successful" << std::endl;
+}
 
+int main()
+{
+    constexpr unsigned int order=6;
+    constexpr unsigned int q_order=9;
+
+    test_polynomial_class<order,q_order,Lagrange>();
+    std::cout << "VMULT lagrange polynomials    test successful" << std::endl;
+    test_polynomial_class<order,q_order,Newton>();
+    std::cout << "VMULT newton polynomials      test successful" << std::endl;
+    test_polynomial_class<order,q_order,Bernstein>();
+    std::cout << "VMULT bernstein polynomials   test successful" << std::endl;
     return 0;
 }

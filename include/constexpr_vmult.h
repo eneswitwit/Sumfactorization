@@ -50,7 +50,7 @@ public:
         constexpr_array < constexpr_array < Number, order + 1 >, q_order + 1 > NT;
         for (unsigned int i = 0; i < q_order + 1 ; i++) {
             for (unsigned int j = 0; j < order + 1; j++) {
-                NT[i][j] = poly.eval_lagrange(quad.knots_[i], j);
+                NT[i][j] = poly.eval(quad.knots_[i], j);
             }
         }
         return NT;
@@ -150,7 +150,7 @@ public:
 
         constexpr_array < constexpr_array < Number, order + 1 >, order + 1 > Sum_2;
         Sub = multiply_matrices < order + 1, order + 1, order + 1, order + 1,  Number > (NP_, u);
-        Sum_2 = multiply_matrices < order + 1, order + 1, order + 1, order + 1,  Number > (Sub, NDXP_);
+        Sum_2 = multiply_matrices < order + 1, order + 1, order + 1, order + 1,  Number , 1 > (Sub, NDXP_);
 
         y = add_matrices < order + 1, order + 1, order + 1, order + 1,  Number > (Sum_1, Sum_2);
     }

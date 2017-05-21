@@ -32,8 +32,8 @@ constexpr_array<constexpr_array<constexpr_array<Number, size>, size>,size> creat
 int main()
 {
     //for (unsigned int i=3;i<10;i++) {
-        constexpr size_t order = 16;
-        constexpr size_t q_order = 16;
+        constexpr size_t order = 10;
+        constexpr size_t q_order = 10;
 
         constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> u_1 = create_array < long double, order + 1 > ();
         constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass_usememory = create_array < long double, order + 1 > ();

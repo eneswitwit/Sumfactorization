@@ -20,14 +20,14 @@ int main() {
     /** TEST EVAL LAGRANGE **/
     // If we evaluate at node points we expect 1
     for (unsigned int i = 0; i < order + 1; i++) {
-        assert( abs(lagr.eval_lagrange(lagr.knots_[i], i)-1) <= eps);
+        assert( abs(lagr.eval(lagr.knots_[i], i)-1) <= eps);
     }
 
-    // If we evalute the i-th lagrange polynomial at node j-th node point we except 0
+    // If we evalute the i-th lagrange polynomial at node j-th node point we expect 0
     for (unsigned int j = 0; j < order + 1 ; j++) {
         for (unsigned int i = 0; i < order + 1; i++) {
             if ( i != j ) {
-                assert( abs(lagr.eval_lagrange(lagr.knots_[i], j)) <= eps);
+                assert( abs(lagr.eval(lagr.knots_[i], j)) <= eps);
             }
         }
     }

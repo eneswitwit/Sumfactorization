@@ -2,6 +2,10 @@
 #include <cmath>
 #include <constexpr_matrix.h>
 
+/**
+ * This test will compare a computed multiplication with a hard coded solution calculated from hand.
+ */
+
 int main() {
     constexpr int n=2;
     constexpr_array <constexpr_array <long double , n >,n+1> B;

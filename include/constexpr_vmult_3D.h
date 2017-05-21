@@ -22,7 +22,7 @@ public:
 
     const Quadrature < Number, q_order > quad;
     const Polynomial <Number, order, Quadrature> poly;
-    Number mass_counter_;
+    //Number mass_counter_;
 
     /**
      * The following matrices are the same as in 2D, since the matrices themselves correspond to only one dimension.
@@ -48,8 +48,7 @@ public:
         NWDX_(compute_gradient_NWDX()),
         NDXP_(compute_gradient_NDXP()),
         NDXDXT_(compute_laplacian_NDXDXT()),
-        NDXDXP_(compute_laplacian_NDXDXP()),
-        mass_counter_(){}
+        NDXDXP_(compute_laplacian_NDXDXP()){}
 
 
     /** BASIS MATRICES **/
@@ -63,7 +62,7 @@ public:
         if (usememory==1) {
             for (unsigned int i = 0; i < q_order + 1 ; i++) {
                 for (unsigned int j = 0; j < order + 1; j++) {
-                    NT[i][j] = poly.eval_lagrange(quad.knots_[i], j);
+                    NT[i][j] = poly.eval(quad.knots_[i], j);
                 }
             }
         }
@@ -168,7 +167,7 @@ public:
         constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> W;
         constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> M;
         constexpr_array < constexpr_array < constexpr_array < Number, order + 1 >, order + 1 >, order + 1> Z;
-        unsigned int mass_counter=0;
+        //unsigned int mass_counter=0;
 
         for (unsigned int k=0; k < order+1; k++) {
             for (unsigned int i=0 ;i < order+1; i++) {
@@ -176,17 +175,17 @@ public:
                     W[k][i][j]=0;
                     for (unsigned int l=0;l < order+1; l++) {
                         if (usememory==1) {
-                            mass_counter++;
+          //                  mass_counter++;
                             W[k][i][j]+=u[i][j][l]*NP_[k][l];
                         }
                         else {
                             Number NP_lk = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                NP_lk+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k);
-                                mass_counter+=2;
+                                NP_lk+=quad.weights_[q]*poly.eval(quad.knots_[q],l)*poly.eval(quad.knots_[q],k);
+            //                    mass_counter+=2;
                             }
                             W[k][i][j]+=u[i][j][l]*NP_lk;
-                            mass_counter++;
+              //              mass_counter++;
                         }
                     }
                 }
@@ -198,16 +197,16 @@ public:
                     M[j][k][i]=0;
                     for (unsigned int l=0;l < order+1; l++) {
                         if (usememory==1) {
-                            mass_counter++;
+                //            mass_counter++;
                             M[j][k][i]+=W[k][i][l]*NP_[j][l];
                         }
                         else {
                             Number NP_lj = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                NP_lj+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j);
-                                mass_counter+=2;
+                                NP_lj+=quad.weights_[q]*poly.eval(quad.knots_[q],l)*poly.eval(quad.knots_[q],j);
+                  //              mass_counter+=2;
                             }
-                            mass_counter++;
+                    //        mass_counter++;
                             M[j][k][i]+=W[k][i][l]*NP_lj;
                         }
                     }
@@ -220,16 +219,16 @@ public:
                     Z[i][j][k]=0;
                     for (unsigned int l=0;l < order+1; l++) {
                         if (usememory==1) {
-                            mass_counter++;
+                      //      mass_counter++;
                             Z[i][j][k]+=M[j][k][l]*NP_[i][l];
                         }
                         else {
                             Number NP_li = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                mass_counter+=2;
-                                NP_li+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],i)*poly.eval_lagrange(quad.knots_[q],l);
+                        //        mass_counter+=2;
+                                NP_li+=quad.weights_[q]*poly.eval(quad.knots_[q],i)*poly.eval(quad.knots_[q],l);
                             }
-                            mass_counter++;
+                          //  mass_counter++;
                             Z[i][j][k]+=M[j][k][l]*NP_li;
                         }
                     }
@@ -261,7 +260,7 @@ public:
                             Number N_lk = 0;
                             Number Ndx_lk = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                N_lk+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k);
+                                N_lk+=quad.weights_[q]*poly.eval(quad.knots_[q],l)*poly.eval(quad.knots_[q],k);
                                 Ndx_lk+=quad.weights_[q]*poly.eval_1st_derivative(quad.knots_[q],l)*poly.eval_1st_derivative(quad.knots_[q],k);
                             }
                             W[k][i][j]+=u[i][j][l]*N_lk;
@@ -285,7 +284,7 @@ public:
                             Number N_lj = 0;
                             Number Ndx_lj = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                N_lj+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j);
+                                N_lj+=quad.weights_[q]*poly.eval(quad.knots_[q],l)*poly.eval(quad.knots_[q],j);
                                 Ndx_lj+=quad.weights_[q]*poly.eval_1st_derivative(quad.knots_[q],l)*poly.eval_1st_derivative(quad.knots_[q],j);
                             }
                             M[j][k][i]+=W[k][i][l]*N_lj;
@@ -307,7 +306,7 @@ public:
                             Number N_li = 0;
                             Number Ndx_li = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                N_li+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],i)*poly.eval_lagrange(quad.knots_[q],l);
+                                N_li+=quad.weights_[q]*poly.eval(quad.knots_[q],i)*poly.eval(quad.knots_[q],l);
                                 Ndx_li+=quad.weights_[q]*poly.eval_1st_derivative(quad.knots_[q],l)*poly.eval_1st_derivative(quad.knots_[q],i);
                             }
                             Z[i][j][k]+=(M[j][k][l]*Ndx_li + Md1[j][k][l]*N_li + Md2[j][k][l]*N_li);
@@ -342,8 +341,8 @@ public:
                             Number N_lk = 0;
                             Number Ndxdx_lk = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                N_lk+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k);
-                                Ndxdx_lk+=quad.weights_[q]*poly.eval_2nd_derivative(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],k);
+                                N_lk+=quad.weights_[q]*poly.eval(quad.knots_[q],l)*poly.eval(quad.knots_[q],k);
+                                Ndxdx_lk+=quad.weights_[q]*poly.eval_2nd_derivative(quad.knots_[q],l)*poly.eval(quad.knots_[q],k);
                             }
                             W[k][i][j]+=u[i][j][l]*N_lk;
                             Wd[k][i][j]+=u[i][j][l]*Ndxdx_lk;
@@ -366,8 +365,8 @@ public:
                             Number N_lj = 0;
                             Number Ndxdx_lj = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                N_lj+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j);
-                                Ndxdx_lj+=quad.weights_[q]*poly.eval_2nd_derivative(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],j);
+                                N_lj+=quad.weights_[q]*poly.eval(quad.knots_[q],l)*poly.eval(quad.knots_[q],j);
+                                Ndxdx_lj+=quad.weights_[q]*poly.eval_2nd_derivative(quad.knots_[q],l)*poly.eval(quad.knots_[q],j);
                             }
                             M[j][k][i]+=W[k][i][l]*N_lj;
                             Md1[j][k][i]+=W[k][i][l]*Ndxdx_lj;
@@ -388,8 +387,8 @@ public:
                             Number N_li = 0;
                             Number Ndxdx_li = 0;
                             for (unsigned int q=0; q<q_order+1;q++) {
-                                N_li+=quad.weights_[q]*poly.eval_lagrange(quad.knots_[q],i)*poly.eval_lagrange(quad.knots_[q],l);
-                                Ndxdx_li+=quad.weights_[q]*poly.eval_2nd_derivative(quad.knots_[q],l)*poly.eval_lagrange(quad.knots_[q],i);
+                                N_li+=quad.weights_[q]*poly.eval(quad.knots_[q],i)*poly.eval(quad.knots_[q],l);
+                                Ndxdx_li+=quad.weights_[q]*poly.eval_2nd_derivative(quad.knots_[q],l)*poly.eval(quad.knots_[q],i);
                             }
                             Z[i][j][k]-=(M[j][k][l]*Ndxdx_li + Md1[j][k][l]*N_li + Md2[j][k][l]*N_li);
                         }
