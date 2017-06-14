@@ -40,14 +40,14 @@ int main()
         constexpr_array < constexpr_array < constexpr_array < long double, order + 1 >, order + 1 >, order + 1> y_mass_nomemory = create_array < long double, order + 1 > ();
 
         std::chrono::steady_clock::time_point begin_usememory = std::chrono::steady_clock::now();
-        constexpr VMULT<long double, order, q_order, Quadrature , Lagrange> vmult_usememory;
+        VMULT<long double, order, q_order, Quadrature , Lagrange> vmult_usememory;
         vmult_usememory.mass(y_mass_usememory, u_1);
         vmult_usememory.gradient(y_mass_nomemory, u_1);
         vmult_usememory.laplacian(y_mass_nomemory, u_1);
         std::chrono::steady_clock::time_point end_usememory= std::chrono::steady_clock::now();
 
         std::chrono::steady_clock::time_point begin_nomemory = std::chrono::steady_clock::now();
-        constexpr VMULT<long double, order, q_order, Quadrature , Lagrange, 0 > vmult_nomemory;
+        VMULT<long double, order, q_order, Quadrature , Lagrange, 0 > vmult_nomemory;
         vmult_nomemory.mass(y_mass_nomemory, u_1);
         vmult_nomemory.gradient(y_mass_nomemory, u_1);
         vmult_nomemory.laplacian(y_mass_nomemory, u_1);
